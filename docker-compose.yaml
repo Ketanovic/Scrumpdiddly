@@ -2,12 +2,12 @@
 services:
   fastapi:
     build:
-      context: sample_service
+      context: api
       dockerfile: Dockerfile.dev
     ports:
       - 8000:8000
     volumes:
-      - ./sample_service:/app
+      - ./api:/app
 
   ghi:
     image: node:lts-bullseye
@@ -22,4 +22,4 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      REACT_APP_SAMPLE_SERVICE_API_HOST: ${REACT_APP_SAMPLE_SERVICE_API_HOST}
+      REACT_APP_API_HOST: ${REACT_APP_API_HOST}

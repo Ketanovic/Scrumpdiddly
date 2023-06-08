@@ -37,15 +37,14 @@ about your project that you create and to put your
 project-journal entries. See the _README.md_ file in each
 directory for more info.
 
-The other directories, `ghi` and `sample_service`, are
-sample services, that you can start building off of or use
-as a reference point.
+The other directories, `ghi` and `api`, are services, that
+you can start building off of.
 
 Inside of `ghi` is a minimal React app that has an "under
 construction" page. It is setup similarly to all of the
 other React projects that you have worked on.
 
-Inside of `sample_service` is a minimal FastAPI application.
+Inside of `api` is a minimal FastAPI application.
 "Where are all the files?" you might ask? Well, the
 `main.py` file is the whole thing, and go take look inside
 of it... There's not even much in there..., hmm? That is
@@ -53,7 +52,7 @@ FastAPI, we'll learn more about it in the coming days. Can
 you figure out what this little web-application does even
 though you haven't learned about FastAPI yet?
 
-Also in `sample_service` is a directory for your migrations.
+Also in `api` is a directory for your migrations.
 If you choose to use PostgreSQL, then you'll want to use
 migrations to control your database. Unlike Django, where
 migrations were automatically created for you, you'll write
@@ -62,7 +61,7 @@ DDL means; we have you covered. There's a sample migration
 in there that creates two tables so you can see what they
 look like.
 
-The sample Dockerfile and Dockerfile.dev run your migrations
+The Dockerfile and Dockerfile.dev run your migrations
 for you automatically.
 
 ### Other files
@@ -109,7 +108,7 @@ deployment, but it just consists of these steps:
 
 - add these GitLab CI/CD variables:
   - PUBLIC_URL : this is your gitlab pages URL
-  - SAMPLE_SERVICE_API_HOST: enter "blank" for now
+  - REACT_APP_API_HOST: enter "blank" for now
 
 #### Your GitLab pages URL
 
@@ -132,7 +131,7 @@ https://GROUP_NAME.gitlab.io/PROJECT_NAME
 ### Update GitLab CI/CD variables
 
 Copy the service URL for your CapRover service and then paste
-that into the value for the SAMPLE_SERVICE_API_HOST CI/CD variable
+that into the value for the REACT_APP_API_HOST CI/CD variable
 in GitLab.
 
 ### Deploy it
