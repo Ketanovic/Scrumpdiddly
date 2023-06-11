@@ -1,6 +1,8 @@
 # volumes:
 services:
   fastapi:
+    environment:
+      CORS_HOST: http://localhost:3000
     build:
       context: api
       dockerfile: Dockerfile.dev
