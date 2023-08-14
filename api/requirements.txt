@@ -1,3 +1,5 @@
-fastapi[all]==0.78.0
+fastapi[all]>=0.78.0
 uvicorn[standard]==0.17.6
 pytest
+jwtdown-fastapi>=0.5.0
+psycopg[pool, binary]==3.1.10
