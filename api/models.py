@@ -1,9 +1,6 @@
 from pydantic import BaseModel
-
-
-
-class DuplicateAccountError(ValueError):
-    pass
+from typing import List
+from jwtdown_fastapi.authentication import Token
 
 
 class AccountIn(BaseModel):
@@ -22,11 +19,10 @@ class AccountOutWithPassword(AccountOut):
     hashed_password: str
 
 
-class AccountQueries():
-    # region properties
+class RecipesID(BaseModel):
+    name: str
+    url: str
 
-    def get(self, email: str) -> AccountOut:
-        pass
 
-    def create(self, info: AccountIn, hashed_password: str) -> AccountOut:
-        pass
+class AccountToken(Token):
+    account: AccountOut
