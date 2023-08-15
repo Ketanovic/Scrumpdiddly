@@ -1,4 +1,6 @@
-# volumes:
+volumes:
+    mongo-data:
+        external: true
 services:
   mongo:
     image: mongo
