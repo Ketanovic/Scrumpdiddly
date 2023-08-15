@@ -13,7 +13,7 @@ services:
     environment:
       CORS_HOST: http://localhost:3000
       SIGNING_KEY: ${SIGNING_KEY}
-      DATABASE_URL: postgresql://example_user:secret@db/example
+      DATABASE_URL: mongodb://root:example@mongo
     build:
       context: api
       dockerfile: Dockerfile.dev
