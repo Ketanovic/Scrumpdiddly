@@ -13,6 +13,4 @@ def create_account(
     queries: AccountQueries = Depends(),
 ):
     hashed_password = authenticator.hash_password(info.password),
-    account = queries.create(info)
-    
-    
+    account_in = queries.create(info)

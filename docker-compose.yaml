@@ -13,27 +13,26 @@ services:
   mongo-express:
     image: mongo-express
     environment:
-      ME_CONFIG_MONGOBD_ADMINUSERNAME: example_user
-      ME_CONFIG_MONGOBD_ADMINPASSWORD: secret
-      ME_CONFIG_MONGOBD_SERVER: mongo
+      ME_CONFIG_MONGODB_ADMINUSERNAME: example_user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: secret
+      ME_CONFIG_MONGODB_SERVER: mongo
     ports:
       - "8081:8081"
     depends_on:
       - mongo
     restart: always
-  # fastapi:
-  #   environment:
-  #     CORS_HOST: http://localhost:3000
-  #     SIGNING_KEY: ${SIGNING_KEY}
-  #     DATABASE_URL: mongodb://example_user:secret@mongo
-  #   build:
-  #     context: api
-  #     dockerfile: Dockerfile.dev
-  #   ports:
-  #     - 8000:8000
-  #   volumes:
-  #     - ./api:/app
-
+  fastapi:
+    environment:
+      CORS_HOST: http://localhost:3000
+      SIGNING_KEY: ${SIGNING_KEY}
+      DATABASE_URL: mongodb://example_user:secret@mongo
+    build:
+      context: api
+      dockerfile: Dockerfile.dev
+    ports:
+      - 8000:8000
+    volumes:
+      - ./api:/app
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
@@ -47,4 +46,4 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      # REACT_APP_API_HOST: ${REACT_APP_API_HOST}
+      REACT_APP_API_HOST: ${REACT_APP_API_HOST}
