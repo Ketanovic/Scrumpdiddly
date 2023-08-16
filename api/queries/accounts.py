@@ -16,21 +16,24 @@ class DuplicateAccountError(ValueError):
 class AccountQueries:
     @property
     def collection(self):
-        return db["accoutns"]
+        return db["accounts"]
 
     def get(self, username: str):
         account = self.collection.find_one({"username": username})
         if account is None:
             return None
-        account['id'] = str(account['_id'])
-        return account
+        account["id"] = str(account["_id"])
+        return AccountOutWithHashedPassword(**account)
 
     def create(self, info: AccountIn, hashed_password: str):
         account = info.dict()
-        if self.get(account['username']) is not None:
+        if self.get(account["username"]) is not None:
             raise DuplicateAccountError
-        account['hashed_password'] = hashed_password
-        del account['password']
+        account["hashed_password"] = hashed_password
+        print("hhhhhhhheree", account, type(account["hashed_password"]))
+        del account["password"]
         self.collection.insert_one(account)
-        account['id'] = str(account['_id'])
+        print(account)
+        print(type(account["hashed_password"]))
+        account["id"] = str(account["_id"])
         return account

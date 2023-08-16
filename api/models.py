@@ -7,7 +7,7 @@ class AccountForm(BaseModel):
     username: str
     password: str
 
-    
+
 class AccountIn(BaseModel):
     username: str
     password: str
