@@ -29,6 +29,7 @@ class AccountToken(Token):
 
 
 class Recipe(BaseModel):
+    id: str
     name: str
     category: str
     area: str
@@ -47,6 +48,7 @@ class RecipeForm(BaseModel):
 
 
 class RecipeIn(BaseModel):
+    id: str
     name: str
     category: str
     area: str
