@@ -18,7 +18,7 @@ def list_pantry_items(
     queries: PantryItemQueries = Depends()
 ):
     return {
-        "pantry items": queries.find_all()
+        "pantry_items": queries.find_all()
     }
 
 @router.post("/api/pantry_item", response_model=PantryItemOut)
