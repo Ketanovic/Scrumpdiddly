@@ -26,3 +26,40 @@ class AccountOutWithHashedPassword(BaseModel):
 
 class AccountToken(Token):
     account: AccountOut
+
+
+class Recipe(BaseModel):
+    name: str
+    category: str
+    area: str
+    instructions: str
+    ingredients: dict
+    thumbnail: str
+
+
+class RecipeForm(BaseModel):
+    name: str
+    category: str
+    area: str
+    instructions: str
+    ingredients: dict
+    thumbnail: str
+
+
+class RecipeIn(BaseModel):
+    name: str
+    category: str
+    area: str
+    instructions: str
+    ingredients: dict
+    thumbnail: str
+
+
+class RecipeOut(BaseModel):
+    id: str
+    name: str
+    category: str
+    area: str
+    instructions: str
+    ingredients: dict
+    thumbnail: str
