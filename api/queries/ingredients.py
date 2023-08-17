@@ -13,9 +13,16 @@ class IngredientQueries:
     @property
     def collection(self):
         return db["ingredients"]
-    
+
     def create(self, ingredient_in: IngredientIn):
         ingredient = ingredient_in.dict()
         self.collection.insertMany(ingredient)
         ingredient["id"] = str(ingredient["_id"])
         return ingredient
+
+    def find_all(self):
+        results = []
+        for ingredient in self.collection.find():
+            ingredient['id'] = str(ingredient['id'])
+            results.append(ingredient)
+        return results
