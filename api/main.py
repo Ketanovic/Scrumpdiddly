@@ -1,4 +1,5 @@
 from authenticator import authenticator
+from routers import pantry_item
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -6,6 +7,7 @@ from routers import accounts
 
 app = FastAPI()
 app.include_router(authenticator.router)
+app.include_router(pantry_item.router, tags=["pantry_items"])
 
 app.add_middleware(
     CORSMiddleware,

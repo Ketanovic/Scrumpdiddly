@@ -3,6 +3,7 @@ from typing import List
 from jwtdown_fastapi.authentication import Token
 
 
+
 class AccountForm(BaseModel):
     username: str
     password: str
@@ -26,3 +27,17 @@ class AccountOutWithHashedPassword(BaseModel):
 
 class AccountToken(Token):
     account: AccountOut
+
+
+class PantryItemIn(BaseModel):
+    name: str
+
+
+class PantryItemOut(PantryItemIn):
+    id: str
+    
+
+class PantryItems(BaseModel):
+    pantry_items: List[PantryItemOut]
+
+
