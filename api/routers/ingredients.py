@@ -12,26 +12,28 @@ import requests
 
 router = APIRouter()
 
-
-async def get_ingredients():
+@router.post("/api/ingredients", response_model=IngredientOut)
+async def create_ingredients(
+    # info: IngredientIn,
+    queries: IngredientQueries = Depends(),
+):
     api_url = 'https://www.themealdb.com/api/json/v1/1/random.php'
     response = requests.get(api_url)
     data = response.json()
     print(data)
     ing_list = []
+    ing_dict = {}
     for i in range(1, 21):
-        if data["meals"][0]['strIngredient'+str(i)] != "":
-            ing_list.append(data["meals"][0]['strIngredient'+str(i)])
+        if data["meals"][0]['strIngredient'+str(i)] != "" and data["meals"][0]['strIngredient'+str(i)] != None:
+            ing_dict["name"] = (data["meals"][0]['strIngredient'+str(i)])
+            ing_list.append(ing_dict)
+            ing_dict = {}
+    
     print(ing_list)
-    return ing_list
-
-@router.post("/api/ingredients", response_model=IngredientOut)
-def create_ingredient()
-    #call get_ingredients func here.
-#return list_ingredients funct.
-
-
-@router.get("api/ingredients/", response_model=Ingredients)
+    # return queries.create(info=info)
+    return queries.create(ing_list)
+    
+@router.get("/api/ingredients", response_model=Ingredients)
 def list_ingredients(
     q: str | None = None,
     queries: IngredientQueries = Depends()

@@ -15,9 +15,9 @@ class IngredientQueries:
         return db["ingredients"]
 
     def create(self, ingredient_in: IngredientIn):
-        ingredient = ingredient_in.dict()
-        self.collection.insertMany(ingredient)
-        ingredient["id"] = str(ingredient["_id"])
+        ingredient = ingredient_in
+        self.collection.insert_many(ingredient)
+        # ingredient["id"] = str(ingredient["_id"])
         return ingredient
 
     def find_all(self):

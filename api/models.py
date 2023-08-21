@@ -48,7 +48,6 @@ class IngredientIn(BaseModel):
 
 class IngredientOut(IngredientIn):
     name: str
-    id: str
 
 
 class Ingredients(BaseModel):
