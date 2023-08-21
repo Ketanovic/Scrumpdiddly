@@ -24,7 +24,6 @@ class IngredientQueries:
         for ingredient in ingredients:
             print(ingredient)
             dup = self.collection.find_one({"name": ingredient["name"]})
-            print(dup)
             if dup is None:
                 self.collection.insert_one(ingredient)
             else:
