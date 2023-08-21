@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from pymongo import MongoClient
 import os
-from models import RecipeIn
+from models import RecipeIn, RecipeName
 import requests
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -18,11 +18,13 @@ class RecipeQueries:
     def collection(self):
         return db["recipes"]
 
-    def get(self, name: str):
-        recipe = self.collection.find_one({"name": name})
+    def get(self, info: RecipeName) -> str:
+        recipe = self.collection.find_one({"name": info})
         if recipe is None:
             return None
         recipe["id"] = str(recipe["_id"])
+        print("**************************************************")
+        print(type(recipe))
         return recipe
 
     def create(self, info: RecipeIn) -> dict:
@@ -33,6 +35,7 @@ class RecipeQueries:
         self.collection.insert_one(recipe)
         recipe["id"] = str(recipe["_id"])
         return recipe
+
 
 
     # async def get_api_recipe(self, info: RecipeOut):

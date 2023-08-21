@@ -6,7 +6,7 @@ from fastapi import (
     HTTPException,
     status,
 )
-from models import RecipeForm, RecipeIn, RecipeOut
+from models import RecipeForm, RecipeIn, RecipeOut, RecipeNameForm, RecipeName
 from queries.recipes import RecipeQueries
 import requests
 
@@ -15,11 +15,17 @@ router = APIRouter()
 
 @router.get("/api/recipes", response_model=RecipeOut)
 async def show_recipes(
+    info: RecipeName,
+    request: Request,
     response: Response,
     queries: RecipeQueries = Depends()
 ):
-    recipes = queries.list_all
+    form = RecipeNameForm(
+        name=info.name
+    )
+    recipes = queries.find_one(info.name)
     print("aaaaaaaaaaaaaaaaaa", type(recipes))
+    print(recipes)
     return recipes
 
 

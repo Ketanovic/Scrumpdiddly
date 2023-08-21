@@ -54,3 +54,9 @@ class RecipeOut(BaseModel):
     instructions: str
     ingredients: dict
     thumbnail: str
+
+class RecipeName(BaseModel):
+    name: str
+
+class RecipeNameForm(BaseModel):
+    name: str
