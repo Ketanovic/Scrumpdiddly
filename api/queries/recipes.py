@@ -27,6 +27,13 @@ class RecipeQueries:
         print(type(recipe))
         return recipe
 
+    def find_all(self):
+        results = []
+        for recipe in self.collection.find(RecipeIn):
+            results.append(recipe)
+        print(results)
+        return results
+
     def create(self, info: RecipeIn) -> dict:
         print(db["recipes"])
         recipe = info.dict()
@@ -35,23 +42,3 @@ class RecipeQueries:
         self.collection.insert_one(recipe)
         recipe["id"] = str(recipe["_id"])
         return recipe
-
-
-
-    # async def get_api_recipe(self, info: RecipeOut):
-    #     api_url = "http://www.themealdb.com/api/json/v1/1/search.php?f=a"
-    #     response = requests.get(api_url)
-    #     data = response.json()
-    #     print(data)
-    #     self.collection.insert_one(data)
-    #     pass
-
-    # @app.get("/fetch-data/")
-    # async def fetch_data(self):
-    #     api_url = "www.themealdb.com/api/json/v1/1/search.php?f=a"
-    #     response = requests.get(api_url)
-    #     data = response.json()
-    #     print("thats sum data", data, type(data))
-    #     self.collection.insert_all(data)
-    #     print("OMG OMOGM OGM OMG", data)
-    #     return {"message": f"{len(data.id)} recipes inserted"}

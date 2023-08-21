@@ -6,7 +6,7 @@ from fastapi import (
     HTTPException,
     status,
 )
-from models import RecipeForm, RecipeIn, RecipeOut, RecipeNameForm, RecipeName
+from models import Recipes, RecipeForm, RecipeIn, RecipeOut, RecipeNameForm, RecipeName
 from queries.recipes import RecipeQueries
 import requests
 
@@ -14,7 +14,7 @@ router = APIRouter()
 
 
 @router.get("/api/recipes", response_model=RecipeOut)
-async def show_recipes(
+async def get_recipe(
     info: RecipeName,
     request: Request,
     response: Response,
@@ -29,15 +29,14 @@ async def show_recipes(
     return recipes
 
 
-# @router.get("/api/recipes/", response_model=RecipeOut)
-# async def get_recipe(
-#     info: RecipeOut,
-#     request: Request,
-#     response: Response,
-#     queries: RecipeQueries = Depends(),
-# ):
-#     recipe = queries.get(info)
-#     return recipe
+@router.get("/api/recipes", response_model=Recipes)
+async def list_recipe(
+    q: str | None = None,
+    queries: RecipeQueries = Depends()
+):
+    return print(queries.find_all()), {
+        "recipes": queries.find_all()
+    }
 
 
 @router.post("/api/recipes", response_model=RecipeIn)

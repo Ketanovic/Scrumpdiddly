@@ -46,8 +46,7 @@ class RecipeIn(BaseModel):
     thumbnail: str
 
 
-class RecipeOut(BaseModel):
-    id: str
+class RecipeOut(RecipeIn):
     name: str
     category: str
     area: str
@@ -55,8 +54,14 @@ class RecipeOut(BaseModel):
     ingredients: dict
     thumbnail: str
 
+
+class Recipes(BaseModel):
+    recipes: List[RecipeOut]
+
+
 class RecipeName(BaseModel):
     name: str
+
 
 class RecipeNameForm(BaseModel):
     name: str
