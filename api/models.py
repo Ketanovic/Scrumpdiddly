@@ -31,13 +31,13 @@ class AccountToken(Token):
 
 class PantryItemIn(BaseModel):
     name: str
-    
+
 
 class PantryItemOut(PantryItemIn):
     name: str
     id: str
-    
-        
+
+
 class PantryItems(BaseModel):
     pantry_items: List[PantryItemOut]
 

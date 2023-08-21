@@ -7,7 +7,7 @@ from fastapi import (
     status,
 )
 from models import IngredientIn, IngredientOut, Ingredients
-from queries.ingredients import IngredientQueries
+from queries.ingredients import IngredientQueries, DuplicateIngredientError
 import requests
 
 router = APIRouter()
@@ -17,10 +17,9 @@ async def create_ingredients(
     # info: IngredientIn,
     queries: IngredientQueries = Depends(),
 ):
-    api_url = 'https://www.themealdb.com/api/json/v1/1/random.php'
+    api_url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata'
     response = requests.get(api_url)
     data = response.json()
-    print(data)
     ing_list = []
     ing_dict = {}
     for i in range(1, 21):
@@ -28,11 +27,11 @@ async def create_ingredients(
             ing_dict["name"] = (data["meals"][0]['strIngredient'+str(i)])
             ing_list.append(ing_dict)
             ing_dict = {}
-    
-    print(ing_list)
-    # return queries.create(info=info)
-    return queries.create(ing_list)
-    
+    try:
+        return queries.create(ing_list)
+    except DuplicateIngredientError:
+        pass
+
 @router.get("/api/ingredients", response_model=Ingredients)
 def list_ingredients(
     q: str | None = None,
