@@ -61,7 +61,7 @@ async def create_recipe(
     return recipe
 
 
-@router.post("/api/api")
+@router.post("/api/api", response_model=Recipes)
 async def list_all_recipes(
     queries: RecipeQueries = Depends(),
 ):
@@ -90,15 +90,12 @@ async def list_all_recipes(
         "y",
     ]
     recipe_list = []
-    for letter in letters:
-        api_url = (
-            "https://www.themealdb.com/api/json/v2/9973533/latest.php" + letter
-        )
-        response = requests.get(api_url)
-        data = response.json()
-        recipe_dict = {}
-        for j in data["meals"]:
-            recipe_list.append(recipe_dict)
-            recipe_dict = {}
-    print(data["meals"])
-    return queries.create(recipe_list)
+    api_url = "https://www.themealdb.com/api/json/v2/9973533/latest.php"
+    response = requests.get(api_url)
+    data = response.json()
+    print(data)
+    for j in data["meals"]:
+        recipe_list.append(j)
+    for recipe in recipe_list:
+        queries.create(recipe)
+    return queries.find_all

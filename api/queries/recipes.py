@@ -19,9 +19,7 @@ class RecipeQueries:
         return db["recipes"]
 
     def get(self, info: RecipeName) -> str:
-        recipe = self.collection.find_one(
-            {"name": info.name}
-        )
+        recipe = self.collection.find_one({"name": info.name})
         if recipe is None:
             return None
         recipe["id"] = str(recipe["_id"])
