@@ -27,6 +27,13 @@ class RecipeQueries:
         print(type(recipe))
         return recipe
 
+    def find_all(self):
+        results = []
+        for recipe in self.collection.find(RecipeIn):
+            results.append(recipe)
+        print(results)
+        return results
+
     def create(self, info: RecipeIn) -> dict:
         print(db["recipes"])
         recipe = info.dict()
