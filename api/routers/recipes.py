@@ -23,15 +23,6 @@ def get_recipe(
     )
     recipe = queries.get(info)
 
-        # return {
-        #     "name": recipe,
-        #     "category": "",
-        #     "area": "",
-        #     "instructions": "",
-        #     "ingredients": "",
-        #     "thumbnail": "",
-        # }
-
     return {
         "name": recipe["name"],
         "category": recipe["category"],
@@ -40,7 +31,6 @@ def get_recipe(
         "ingredients": recipe["ingredients"],
         "thumbnail": recipe["thumbnail"],
     }
-
 
 
 @router.get("/api/recipes", response_model=Recipes)
@@ -55,8 +45,6 @@ def list_recipe(
 @router.post("/api/recipes", response_model=RecipeIn)
 async def create_recipe(
     info: RecipeIn,
-    request: Request,
-    response: Response,
     queries: RecipeQueries = Depends(),
 ):
     recipe = queries.create(info)

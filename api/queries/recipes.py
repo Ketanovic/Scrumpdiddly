@@ -12,6 +12,7 @@ db = client["recipe-db"]
 class DuplicateAccountError(ValueError):
     pass
 
+
 class RecipeQueries:
     @property
     def collection(self):
@@ -24,14 +25,11 @@ class RecipeQueries:
         if recipe is None:
             return None
         recipe["id"] = str(recipe["_id"])
-        print("**************************************************")
-        print(recipe)
         return recipe
 
     def create(self, info: RecipeIn) -> dict:
-        print(db["recipes"])
         recipe = info.dict()
-        if self.get(recipe["name"]) is not None:
+        if self.collection.find_one({"name": info.name}) is not None:
             raise DuplicateAccountError
         self.collection.insert_one(recipe)
         recipe["id"] = str(recipe["_id"])
