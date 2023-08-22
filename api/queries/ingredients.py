@@ -1,7 +1,5 @@
-from pydantic import BaseModel
 from pymongo import MongoClient
 import os
-import pymongo
 from models import IngredientIn, IngredientOut, Ingredients
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -22,7 +20,6 @@ class IngredientQueries:
     def create(self, ingredient_in: IngredientIn):
         ingredients = ingredient_in
         for ingredient in ingredients:
-            print(ingredient)
             dup = self.collection.find_one({"name": ingredient["name"]})
             if dup is None:
                 self.collection.insert_one(ingredient)

@@ -15,7 +15,6 @@ router = APIRouter()
 
 @router.post("/api/ingredients", response_model=IngredientOut)
 async def create_ingredients(
-    # info: IngredientIn,
     queries: IngredientQueries = Depends(),
 ):
     letters = [
@@ -40,17 +39,15 @@ async def create_ingredients(
         "t",
         "v",
         "w",
-        "y",      
+        "y", 
     ]
     ing_list = []
     for letter in letters:
         api_url = "https://www.themealdb.com/api/json/v1/1/search.php?f=" + letter
         response = requests.get(api_url)
-        print("response", response)
         data = response.json()
         ing_dict = {}
         for j in range(len(data["meals"])):
-            print(j)
             for i in range(1, 21):
                 if (
                     data["meals"][j]["strIngredient" + str(i)] != ""
@@ -62,7 +59,6 @@ async def create_ingredients(
                 else:
                     continue
     try:
-        print("ing list", ing_list)
         return queries.create(ing_list)
     except DuplicateIngredientError:
         pass
