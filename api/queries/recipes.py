@@ -12,27 +12,21 @@ db = client["recipe-db"]
 class DuplicateAccountError(ValueError):
     pass
 
-
 class RecipeQueries:
     @property
     def collection(self):
         return db["recipes"]
 
     def get(self, info: RecipeName) -> str:
-        recipe = self.collection.find_one({"name": info})
+        recipe = self.collection.find_one(
+            {"name": info.name}
+        )
         if recipe is None:
             return None
         recipe["id"] = str(recipe["_id"])
         print("**************************************************")
-        print(type(recipe))
+        print(recipe)
         return recipe
-
-    def find_all(self):
-        results = []
-        for recipe in self.collection.find(RecipeIn):
-            results.append(recipe)
-        print(results)
-        return results
 
     def create(self, info: RecipeIn) -> dict:
         print(db["recipes"])
@@ -48,6 +42,3 @@ class RecipeQueries:
         for recipe in self.collection.find():
             results.append(recipe)
         return results
-
-
-

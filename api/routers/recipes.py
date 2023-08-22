@@ -6,35 +6,48 @@ from fastapi import (
     HTTPException,
     status,
 )
-from models import RecipeForm, RecipeIn, RecipeOut, RecipeNameForm, RecipeName, Recipes
+from models import Recipes, RecipeForm, RecipeIn, RecipeOut, RecipeNameForm, RecipeName
 from queries.recipes import RecipeQueries
 import requests
 
 router = APIRouter()
 
 
-@router.get("/api/recipes", response_model=RecipeOut)
-async def get_recipe(
+@router.post("/api/recipes/one")
+def get_recipe(
     info: RecipeName,
-    request: Request,
-    response: Response,
-    queries: RecipeQueries = Depends()
+    queries: RecipeQueries = Depends(),
 ):
     form = RecipeNameForm(
         name=info.name
     )
-    recipes = queries.find_one(info.name)
-    print("aaaaaaaaaaaaaaaaaa", type(recipes))
-    print(recipes)
-    return recipes
+    recipe = queries.get(info)
+
+        # return {
+        #     "name": recipe,
+        #     "category": "",
+        #     "area": "",
+        #     "instructions": "",
+        #     "ingredients": "",
+        #     "thumbnail": "",
+        # }
+
+    return {
+        "name": recipe["name"],
+        "category": recipe["category"],
+        "area": recipe["area"],
+        "instructions": recipe["instructions"],
+        "ingredients": recipe["ingredients"],
+        "thumbnail": recipe["thumbnail"],
+    }
+
 
 
 @router.get("/api/recipes", response_model=Recipes)
-async def list_recipe(
-    q: str | None = None,
+def list_recipe(
     queries: RecipeQueries = Depends()
 ):
-    return print(queries.find_all()), {
+    return {
         "recipes": queries.find_all()
     }
 
@@ -56,7 +69,3 @@ async def create_recipe(
         thumbnail=info.thumbnail,
     )
     return recipe
-
-@router.post("/api/recipes", response_model=Recipes)
-def list_recipe(queries: RecipeQueries = Depends()):
-    return {"recipes": queries.find_all()}
