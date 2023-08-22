@@ -14,13 +14,11 @@ import requests
 router = APIRouter()
 
 queries = IngredientQueries
-print("ehllo")
 # @router.post("/api/ingredients", response_model=IngredientOut)
 
 def create_ingredients(
     # queries: IngredientQueries = Depends(),
-):
-    print("checkcheck")
+):    
     queries = IngredientQueries()
     letters = [
         "a",
@@ -56,20 +54,20 @@ def create_ingredients(
             for i in range(1, 21):
                 if (
                     data["meals"][j]["strIngredient" + str(i)] != ""
-                    and data["meals"][j]["strIngredient" + str(i)] is not None
+                    and data["meals"][j]["strIngredient" + str(i)] != None
                 ):
-                    ing_dict["name"] = data["meals"][j]["strIngredient" + str(i)]
+                    ing_dict["name"] = data["meals"][j]["strIngredient" + str(i)].upper()
                     #call queries.create on single ingredient
                     queries.create(ing_dict)
                     #ing_list.append(ing_dict)
                     ing_dict = {}
                 else:
                     continue
-    try:
-        print(ing_list)
-        return queries.create(ing_list)
-    except DuplicateIngredientError:
-        pass
+    # try:
+    #     print(ing_list)
+    #     return queries.create(ing_list)
+    # except DuplicateIngredientError:
+    #     pass
 
 
 create_ingredients()

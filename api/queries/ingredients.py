@@ -18,12 +18,11 @@ class IngredientQueries:
         return db["ingredients"]
 
     def create(self, ingredient_in: IngredientIn):
-        ingredients = ingredient_in
-        print("*********", ingredients)
-        dup = self.collection.find_one({"name": {ingredients["name"]}})
+        ingredients = ingredient_in        
+        dup = self.collection.find_one({"name": ingredients["name"]})
         if dup is None:
-            self.collection.insert_one(dict(ingredients))
-        return ingredients
+            self.collection.insert_one(ingredients)
+        # return ingredients
 
     def find_all(self):
         results = []

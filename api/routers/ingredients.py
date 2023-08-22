@@ -20,26 +20,26 @@ async def create_ingredients(
     letters = [
         "a",
         "b",
-        "c",
-        "d",
-        "e",
-        "f",
-        "g",
-        "h",
-        "i",
-        "j",
-        "k",
-        "l",
-        "m",
-        "n",
-        "o",
-        "p",
-        "r",
-        "s",
-        "t",
-        "v",
-        "w",
-        "y",
+        # "c",
+        # "d",
+        # "e",
+        # "f",
+        # "g",
+        # "h",
+        # "i",
+        # "j",
+        # "k",
+        # "l",
+        # "m",
+        # "n",
+        # "o",
+        # "p",
+        # "r",
+        # "s",
+        # "t",
+        # "v",
+        # "w",
+        # "y",
     ]
     ing_list = []
     for letter in letters:
@@ -58,10 +58,10 @@ async def create_ingredients(
                     ing_dict = {}
                 else:
                     continue
-    try:
-        return queries.create(ing_list)
-    except DuplicateIngredientError:
-        pass
+    # try:
+    #     return queries.create(ing_list)
+    # except DuplicateIngredientError:
+    #     pass
 
 
 @router.get("/api/ingredients", response_model=Ingredients)
