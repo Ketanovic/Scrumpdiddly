@@ -44,7 +44,7 @@ def create_ingredients(
         "t",
         "v",
         "w",
-        "y", 
+        "y",
     ]
     ing_list = []
     for letter in letters:
@@ -60,7 +60,8 @@ def create_ingredients(
                 ):
                     ing_dict["name"] = data["meals"][j]["strIngredient" + str(i)]
                     #call queries.create on single ingredient
-                    ing_list.append(ing_dict)
+                    queries.create(ing_dict)
+                    #ing_list.append(ing_dict)
                     ing_dict = {}
                 else:
                     continue

@@ -19,13 +19,11 @@ class IngredientQueries:
 
     def create(self, ingredient_in: IngredientIn):
         ingredients = ingredient_in
-        for ingredient in ingredients:
-            dup = self.collection.find_one({"name": ingredient["name"]})
-            if dup is None:
-                self.collection.insert_one(ingredient)
-            else:
-                continue
-        return ingredient            
+        print("*********", ingredients)
+        dup = self.collection.find_one({"name": {ingredients["name"]}})
+        if dup is None:
+            self.collection.insert_one(dict(ingredients))
+        return ingredients
 
     def find_all(self):
         results = []

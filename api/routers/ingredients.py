@@ -39,7 +39,7 @@ async def create_ingredients(
         "t",
         "v",
         "w",
-        "y", 
+        "y",
     ]
     ing_list = []
     for letter in letters:
@@ -54,7 +54,7 @@ async def create_ingredients(
                     and data["meals"][j]["strIngredient" + str(i)] != None
                 ):
                     ing_dict["name"] = data["meals"][j]["strIngredient" + str(i)]
-                    ing_list.append(ing_dict)
+                    queries.create(ing_dict)
                     ing_dict = {}
                 else:
                     continue
