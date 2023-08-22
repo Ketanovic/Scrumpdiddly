@@ -6,7 +6,14 @@ from fastapi import (
     HTTPException,
     status,
 )
-from models import Recipes, RecipeForm, RecipeIn, RecipeOut, RecipeNameForm, RecipeName
+from models import (
+    Recipes,
+    RecipeForm,
+    RecipeIn,
+    RecipeOut,
+    RecipeNameForm,
+    RecipeName,
+)
 from queries.recipes import RecipeQueries
 import requests
 
@@ -18,9 +25,7 @@ def get_recipe(
     info: RecipeName,
     queries: RecipeQueries = Depends(),
 ):
-    form = RecipeNameForm(
-        name=info.name
-    )
+    form = RecipeNameForm(name=info.name)
     recipe = queries.get(info)
 
     return {
@@ -34,12 +39,9 @@ def get_recipe(
 
 
 @router.get("/api/recipes", response_model=Recipes)
-def list_recipe(
-    queries: RecipeQueries = Depends()
-):
-    return {
-        "recipes": queries.find_all()
-    }
+def list_recipe(queries: RecipeQueries = Depends()):
+    api_url = "https://www.themealdb.com/api/json/v2/9973533/latest.php"
+    return {"recipes": queries.find_all()}
 
 
 @router.post("/api/recipes", response_model=RecipeIn)
@@ -57,3 +59,46 @@ async def create_recipe(
         thumbnail=info.thumbnail,
     )
     return recipe
+
+
+@router.post("/api/api")
+async def list_all_recipes(
+    queries: RecipeQueries = Depends(),
+):
+    letters = [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "r",
+        "s",
+        "t",
+        "v",
+        "w",
+        "y",
+    ]
+    recipe_list = []
+    for letter in letters:
+        api_url = (
+            "https://www.themealdb.com/api/json/v2/9973533/latest.php" + letter
+        )
+        response = requests.get(api_url)
+        data = response.json()
+        recipe_dict = {}
+        for j in data["meals"]:
+            recipe_list.append(recipe_dict)
+            recipe_dict = {}
+    print(data["meals"])
+    return queries.create(recipe_list)
