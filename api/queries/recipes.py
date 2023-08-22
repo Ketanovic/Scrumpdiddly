@@ -19,20 +19,16 @@ class RecipeQueries:
         return db["recipes"]
 
     def get(self, info: RecipeName) -> str:
-        recipe = self.collection.find_one({"name": info})
-        if recipe is None:
-            return None
-        recipe["id"] = str(recipe["_id"])
-        print("**************************************************")
-        print(type(recipe))
-        return recipe
-
-    def find_all(self):
-        results = []
-        for recipe in self.collection.find(RecipeIn):
-            results.append(recipe)
-        print(results)
-        return results
+        name = info
+        for recipe in self.collection.find():
+            if recipe.name == name.name:
+                recipe["id"] = str(recipe["_id"])
+                print({"name": recipe})
+                print(type(recipe))
+                recipe["recipe"] = recipe
+                return recipe
+            else:
+                return None
 
     def create(self, info: RecipeIn) -> dict:
         print(db["recipes"])
@@ -48,6 +44,3 @@ class RecipeQueries:
         for recipe in self.collection.find():
             results.append(recipe)
         return results
-
-
-
