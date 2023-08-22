@@ -60,3 +60,7 @@ class RecipeName(BaseModel):
 
 class RecipeNameForm(BaseModel):
     name: str
+
+
+class Recipes(BaseModel):
+    recipes: List[RecipeOut]
