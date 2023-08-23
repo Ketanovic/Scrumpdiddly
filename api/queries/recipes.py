@@ -26,9 +26,13 @@ class RecipeQueries:
         return recipe
 
     def create(self, info: RecipeIn) -> dict:
-        recipe = info.dict()
-        if self.collection.find_one({"name": info.name}) is not None:
-            raise DuplicateAccountError
+        if type(info) is not dict:
+            recipe = info.dict()
+        else:
+            recipe = info
+        print(info)
+        # if self.collection.find_one({"name": info["name"]}) is not None:
+        #     raise DuplicateAccountError
         self.collection.insert_one(recipe)
         recipe["id"] = str(recipe["_id"])
         return recipe

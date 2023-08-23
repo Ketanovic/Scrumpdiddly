@@ -33,14 +33,13 @@ def get_recipe(
         "category": recipe["category"],
         "area": recipe["area"],
         "instructions": recipe["instructions"],
-        "ingredients": recipe["ingredients"],
-        "thumbnail": recipe["thumbnail"],
+        # "ingredients": recipe["ingredients"],
+        # "thumbnail": recipe["thumbnail"],
     }
 
 
 @router.get("/api/recipes", response_model=Recipes)
 def list_recipe(queries: RecipeQueries = Depends()):
-    api_url = "https://www.themealdb.com/api/json/v2/9973533/latest.php"
     return {"recipes": queries.find_all()}
 
 
@@ -55,13 +54,13 @@ async def create_recipe(
         category=info.category,
         area=info.area,
         instructions=info.instructions,
-        ingredients=info.ingredients,
-        thumbnail=info.thumbnail,
+        # ingredients=info.ingredients,
+        # thumbnail=info.thumbnail,
     )
     return recipe
 
 
-@router.post("/api/api", response_model=Recipes)
+@router.post("/api/api")
 async def list_all_recipes(
     queries: RecipeQueries = Depends(),
 ):
@@ -97,5 +96,14 @@ async def list_all_recipes(
     for j in data["meals"]:
         recipe_list.append(j)
     for recipe in recipe_list:
-        queries.create(recipe)
-    return queries.find_all
+        print(recipe)
+        encoder = {
+            "name": recipe["strMeal"],
+            "category": recipe["strCategory"],
+            "area": recipe["strArea"],
+            "instructions": recipe["strInstructions"],
+            # "ingredients": recipe["strIngredient1"],
+            # "thumbnail": recipe["strImageSource"],
+        }
+        print("eeeeeeeeeecondeeeeeeeeeeerrrr", encoder)
+        queries.create(encoder)
