@@ -50,4 +50,3 @@ class RecipeQueries:
         return results
 
 
-

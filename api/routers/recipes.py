@@ -57,6 +57,6 @@ async def create_recipe(
     )
     return recipe
 
-@router.post("/api/recipes", response_model=Recipes)
+@router.get("/api/recipes", response_model=Recipes)
 def list_recipe(queries: RecipeQueries = Depends()):
     return {"recipes": queries.find_all()}
