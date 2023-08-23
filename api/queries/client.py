@@ -2,9 +2,10 @@ from pymongo import MongoClient
 from pymongo.collection import Collection
 import os
 
-DATABASE_URL = os.enviorn.get("DATABASE_URL")
+DATABASE_URL = os.environ.get("DATABASE_URL")
 client = MongoClient(DATABASE_URL)
-db = client["mongo-express"]
+db = client["account-db"]
+
 
 class MongoQueries:
     @property
