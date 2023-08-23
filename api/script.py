@@ -72,13 +72,20 @@ def create_ingredients(
                             ing_dict["recipe"].append(data["meals"][j]["strMeal"].upper())
                             # call queries.create on single ingredient
                             queries.create(ing_dict)
-                    # elif "CHICKEN" in checker:
-                    #     ing_dict["name"] = "CHICKEN"
-                    #     ing_dict["recipe"] = []
-                    #     if data["meals"][j]["strMeal"] != None:
-                    #         ing_dict["recipe"].append(data["meals"][j]["strMeal"].upper())
-                    #         # call queries.create on single ingredient
-                    #         queries.create(ing_dict)
+                    elif "CHICKEN" in checker:
+                        ing_dict["name"] = "CHICKEN"
+                        ing_dict["recipe"] = []
+                        if data["meals"][j]["strMeal"] != None:
+                            ing_dict["recipe"].append(data["meals"][j]["strMeal"].upper())
+                            # call queries.create on single ingredient
+                            queries.create(ing_dict)
+                    elif "ONION" in checker:
+                        ing_dict["name"] = "ONION"
+                        ing_dict["recipe"] = []
+                        if data["meals"][j]["strMeal"] != None:
+                            ing_dict["recipe"].append(data["meals"][j]["strMeal"].upper())
+                            # call queries.create on single ingredient
+                            queries.create(ing_dict)
                     
                     else:
                         ing_dict["name"] = data["meals"][j]["strIngredient" + str(i)].upper()
