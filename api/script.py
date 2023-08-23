@@ -1,0 +1,68 @@
+from fastapi import (
+    APIRouter,
+    Depends,
+    Request,
+    Response,
+    HTTPException,
+    status,
+)
+from models import (
+    Recipes,
+    RecipeForm,
+    RecipeIn,
+    RecipeOut,
+    RecipeNameForm,
+    RecipeName,
+)
+from queries.recipes import RecipeQueries
+import requests
+
+router = APIRouter()
+
+
+def list_all_recipes():
+    queries = RecipeQueries()
+    letters = [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "r",
+        "s",
+        "t",
+        "v",
+        "w",
+        "y",
+    ]
+    recipe_list = []
+    for letter in letters:
+        api_url = "http://www.themealdb.com/api/json/v1/1/search.php?f=" + letter
+        response = requests.get(api_url)
+        data = response.json()
+        for j in data["meals"]:
+            recipe_list.append(j)
+        for recipe in recipe_list:
+            encoder = {
+                "name": recipe["strMeal"],
+                "category": recipe["strCategory"],
+                "area": recipe["strArea"],
+                "instructions": recipe["strInstructions"],
+                # "ingredients": recipe["strIngredient1"],
+                # "thumbnail": recipe["strImageSource"],
+            }
+            queries.create(encoder)
+
+
+list_all_recipes()
