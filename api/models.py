@@ -33,8 +33,8 @@ class RecipeForm(BaseModel):
     category: str
     area: str
     instructions: str
-    ingredients: dict
-    thumbnail: str
+    # ingredients: dict
+    # thumbnail: str
 
 
 class RecipeIn(BaseModel):
@@ -42,8 +42,8 @@ class RecipeIn(BaseModel):
     category: str
     area: str
     instructions: str
-    ingredients: dict
-    thumbnail: str
+    # ingredients: dict
+    # thumbnail: str
 
 
 class RecipeOut(RecipeIn):
@@ -51,8 +51,8 @@ class RecipeOut(RecipeIn):
     category: str
     area: str
     instructions: str
-    ingredients: dict
-    thumbnail: str
+    # ingredients: dict
+    # thumbnail: str
 
 
 class Recipes(BaseModel):
@@ -65,7 +65,3 @@ class RecipeName(BaseModel):
 
 class RecipeNameForm(BaseModel):
     name: str
-
-
-class Recipes(BaseModel):
-    recipes: List[RecipeOut]
