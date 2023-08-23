@@ -21,16 +21,15 @@ class IngredientQueries:
         return db["ingredients"]
 
     def create(self, ingredient_in: IngredientIn):
-        ingredients = ingredient_in        
+        ingredients = ingredient_in
         dup = self.collection.find_one({"name": ingredients["name"]})
         if dup is None:
-            try:            
+            try:
                 self.collection.insert_one(ingredients)
             except DuplicateKeyError:
                 print("duplicate key error caught")
                 pass
-                
-            
+     
         else:
             if ingredients["recipe"][0] not in dup["recipe"]:
                 self.collection.update_one(
@@ -38,7 +37,7 @@ class IngredientQueries:
                     {'$push': {"recipe": ingredients["recipe"][0]}},
                     # {"upsert": True}
                     )
-            
+
 
 
     def find_all(self):
