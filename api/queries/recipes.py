@@ -42,5 +42,3 @@ class RecipeQueries:
         for recipe in self.collection.find():
             results.append(recipe)
         return results
-
-
