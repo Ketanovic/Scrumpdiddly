@@ -16,9 +16,10 @@ router = APIRouter()
 queries = IngredientQueries
 # @router.post("/api/ingredients", response_model=IngredientOut)
 
+
 def create_ingredients(
     # queries: IngredientQueries = Depends(),
-):    
+):
     queries = IngredientQueries()
     letters = [
         "a",
@@ -44,7 +45,7 @@ def create_ingredients(
         "w",
         "y",
     ]
-    ing_list = []
+    
     for letter in letters:
         api_url = "https://www.themealdb.com/api/json/v1/1/search.php?f=" + letter
         response = requests.get(api_url)
@@ -56,13 +57,40 @@ def create_ingredients(
                     data["meals"][j]["strIngredient" + str(i)] != ""
                     and data["meals"][j]["strIngredient" + str(i)] != None
                 ):
-                    ing_dict["name"] = data["meals"][j]["strIngredient" + str(i)].upper()
-                    #call queries.create on single ingredient
-                    queries.create(ing_dict)
-                    #ing_list.append(ing_dict)
-                    ing_dict = {}
-                else:
-                    continue
+                    checker = data["meals"][j]["strIngredient" + str(i)].upper()
+                    if "EGG" in checker and checker != "EGG PLANTS":
+                        ing_dict["name"] = "EGG"
+                        ing_dict["recipe"] = []
+                        if data["meals"][j]["strMeal"] != None:
+                            ing_dict["recipe"].append(data["meals"][j]["strMeal"].upper())
+                            # call queries.create on single ingredient
+                            queries.create(ing_dict)
+                    elif "FLOUR" in checker:
+                        ing_dict["name"] = "FLOUR"
+                        ing_dict["recipe"] = []
+                        if data["meals"][j]["strMeal"] != None:
+                            ing_dict["recipe"].append(data["meals"][j]["strMeal"].upper())
+                            # call queries.create on single ingredient
+                            queries.create(ing_dict)
+                    # elif "CHICKEN" in checker:
+                    #     ing_dict["name"] = "CHICKEN"
+                    #     ing_dict["recipe"] = []
+                    #     if data["meals"][j]["strMeal"] != None:
+                    #         ing_dict["recipe"].append(data["meals"][j]["strMeal"].upper())
+                    #         # call queries.create on single ingredient
+                    #         queries.create(ing_dict)
+                    
+                    else:
+                        ing_dict["name"] = data["meals"][j]["strIngredient" + str(i)].upper()
+                        ing_dict["recipe"] = []
+                        if data["meals"][j]["strMeal"] != None:
+                            ing_dict["recipe"].append(data["meals"][j]["strMeal"].upper())
+                            # call queries.create on single ingredient
+                            queries.create(ing_dict)
+                            # ing_list.append(ing_dict)
+                            ing_dict = {}
+                        else:
+                            continue
     # try:
     #     print(ing_list)
     #     return queries.create(ing_list)

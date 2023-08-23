@@ -22,7 +22,14 @@ class IngredientQueries:
         dup = self.collection.find_one({"name": ingredients["name"]})
         if dup is None:
             self.collection.insert_one(ingredients)
-        # return ingredients
+        else:
+            if ingredients["recipe"][0] not in dup["recipe"]:
+                self.collection.update_one(
+                    {"name": ingredients["name"]},
+                    {'$push': {"recipe": ingredients["recipe"][0]}}
+                    )
+            
+
 
     def find_all(self):
         results = []

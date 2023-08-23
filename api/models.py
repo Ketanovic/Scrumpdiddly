@@ -44,6 +44,7 @@ class PantryItems(BaseModel):
 
 class IngredientIn(BaseModel):
     name: str
+    recipe: List
 
 
 class IngredientOut(IngredientIn):
