@@ -130,7 +130,7 @@ function PantryForm() {
               <table>
                 <thead>
                   <tr>
-                    <th>Name</th>
+                    <th>Name of Ingredient</th>
                   </tr>
                 </thead>
                 <tbody>

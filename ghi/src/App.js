@@ -4,6 +4,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import PantryForm from "./PantryItem";
+import RecipeSearch from "./RecipeSearch.js";
 
 function App() {
   // const [currentForm, setCurrentForm] = useState('login');
@@ -15,6 +16,9 @@ function App() {
     <Routes>
     <Route path="/pantry">
       <Route index element={<PantryForm />} />
+    </Route>
+    <Route path="/recipe">
+      <Route index element={<RecipeSearch />} />
     </Route>
     </Routes>
   </div>
