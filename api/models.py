@@ -3,7 +3,6 @@ from typing import List
 from jwtdown_fastapi.authentication import Token
 
 
-
 class AccountForm(BaseModel):
     username: str
     password: str
@@ -67,7 +66,7 @@ class RecipeName(BaseModel):
 class RecipeNameForm(BaseModel):
     name: str
 
-    
+
 class PantryItemIn(BaseModel):
     name: str
 
