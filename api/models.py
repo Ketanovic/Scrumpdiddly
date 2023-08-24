@@ -31,6 +31,7 @@ class AccountToken(Token):
 
 class PantryItemIn(BaseModel):
     name: str
+    recipes: List
 
 
 class PantryItemOut(PantryItemIn):

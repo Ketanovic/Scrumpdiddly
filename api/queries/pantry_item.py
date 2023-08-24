@@ -27,7 +27,7 @@ class PantryItemQueries:
     def find_all(self):
         results = []
         for pantry in self.collection.find():
-            pantry['id'] = str(pantry['_id'])            
+            pantry['id'] = str(pantry['_id'])
             results.append(pantry)
         return results
 

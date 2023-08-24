@@ -14,7 +14,6 @@ router = APIRouter()
 
 @router.get("/api/pantry_item", response_model=PantryItems)
 def list_pantry_items(
-    q: str | None = None,
     queries: PantryItemQueries = Depends()
 ):
     return {
