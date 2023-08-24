@@ -17,9 +17,7 @@ queries = IngredientQueries
 # @router.post("/api/ingredients", response_model=IngredientOut)
 
 
-def create_ingredients(
-    # queries: IngredientQueries = Depends(),
-):
+def create_ingredients():
     queries = IngredientQueries()
     letters = [
         "a",
