@@ -37,7 +37,7 @@ def get_recipe(
         "category": recipe["category"],
         "area": recipe["area"],
         "instructions": recipe["instructions"],
-        # "ingredients": recipe["ingredients"],
+        "ingredients": recipe["ingredients"],
         # "thumbnail": recipe["thumbnail"],
     }
 
@@ -58,65 +58,63 @@ async def create_recipe(
         category=info.category,
         area=info.area,
         instructions=info.instructions,
-        # ingredients=info.ingredients,
+        ingredients=info.ingredients,
         # thumbnail=info.thumbnail,
     )
     return recipe
 
 
-@router.post("/all_recipes")
+# @router.post("/all_recipes")
+# async def list_all_recipes():
+#     queries = RecipeQueries()
+#     letters = [
+#         "a",
+#         # "b",
+#         # "c",
+#         # "d",
+#         # "e",
+#         # "f",
+#         # "g",
+#         # "h",
+#         # "i",
+#         # "j",
+#         # "k",
+#         # "l",
+#         # "m",
+#         # "n",
+#         # "o",
+#         # "p",
+#         # "r",
+#         # "s",
+#         # "t",
+#         # "v",
+#         # "w",
+#         # "y",
+#     ]
+#     recipe_list = []
+#     for letter in letters:
+#         api_url = (
+#             "http://www.themealdb.com/api/json/v1/1/search.php?f=" + letter
+#         )
+#         response = requests.get(api_url)
+#         data = response.json()
+#         for j in data["meals"]:
+#             recipe_list.append(j)
+#         for recipe in recipe_list:
+#             encoder = {
+#                 "name": recipe["strMeal"],
+#                 "category": recipe["strCategory"],
+#                 "area": recipe["strArea"],
+#                 "instructions": recipe["strInstructions"],
+#                 # "ingredients": recipe["strIngredient1"],
+#                 # "thumbnail": recipe["strImageSource"],
+#             }
+#             queries.create(encoder)
+
+
+@router.get('/all_recipes')
 async def list_all_recipes():
     queries = RecipeQueries()
-    letters = [
-        "a",
-        # "b",
-        # "c",
-        # "d",
-        # "e",
-        # "f",
-        # "g",
-        # "h",
-        # "i",
-        # "j",
-        # "k",
-        # "l",
-        # "m",
-        # "n",
-        # "o",
-        # "p",
-        # "r",
-        # "s",
-        # "t",
-        # "v",
-        # "w",
-        # "y",
-    ]
-    recipe_list = []
-    for letter in letters:
-        api_url = (
-            "http://www.themealdb.com/api/json/v1/1/search.php?f=" + letter
-        )
-        response = requests.get(api_url)
-        data = response.json()
-        for j in data["meals"]:
-            recipe_list.append(j)
-        for recipe in recipe_list:
-            encoder = {
-                "name": recipe["strMeal"],
-                "category": recipe["strCategory"],
-                "area": recipe["strArea"],
-                "instructions": recipe["strInstructions"],
-                # "ingredients": recipe["strIngredient1"],
-                # "thumbnail": recipe["strImageSource"],
-            }
-            queries.create(encoder)
-
-
-list_all_recipes()
-
-
-def create_ingredients():
-    queries = IngredientQueries()
     letters = [
         "a",
         "b",
@@ -148,8 +146,10 @@ def create_ingredients():
         )
         response = requests.get(api_url)
         data = response.json()
-        ing_dict = {}
+
         for j in range(len(data["meals"])):
+            ing_list = []
+            measure_list = []
             for i in range(1, 21):
                 recipe = data["meals"][j]
                 if (
@@ -159,17 +159,29 @@ def create_ingredients():
                     recipe_ingredients = data["meals"][j][
                         "strIngredient" + str(i)
                     ]
+                    ing_list.append(recipe_ingredients)
                 if (
-                    data["meals"][j]["strMeal"] != ""
-                    and data["meals"][j]["strMeal"] != None
+                    data["meals"][j]["strMeasure" + str(i)] != ""
+                    and data["meals"][j]["strMeasure" + str(i)] != None
                 ):
-                    recipe_quantity = data["strMeal"][j]["strMeal" + str(i)]
+                    recipe_measurements = data["meals"][j][
+                        "strMeasure" + str(i)
+                    ]
+                    measure_list.append(recipe_measurements)
+            ing_dict = {ing_list: measure_list for ing_list, measure_list in zip(ing_list, measure_list)}
 
-                    ing_dict[recipe_ingredients] = recipe_quantity
-                    ing_dict["ingredients_w_quantity"] = []
-                    if data["meals"][j]["strMeal"] != None:
-                        ing_dict["ingredients_w_quantity"].append(
-                            data["meals"][j]["strMeal"].upper()
-                        )
-                        # call queries.create on single ingredient
-                        queries.create(ing_dict)
+        recipe_list = []
+        for k in data["meals"]:
+            recipe_list.append(k)
+        for recipe in recipe_list:
+            encoder = {
+                "name": recipe["strMeal"],
+                "category": recipe["strCategory"],
+                "area": recipe["strArea"],
+                "instructions": recipe["strInstructions"],
+                "ingredients": ing_dict,
+                # "thumbnail": recipe["strImageSource"],
+            }
+            queries.create(encoder)
+
+
