@@ -9,7 +9,7 @@ client = MongoClient(DATABASE_URL)
 db = client["recipe-db"]
 
 
-class DuplicateAccountError(ValueError):
+class DuplicateRecipeError(ValueError):
     pass
 
 
@@ -30,11 +30,12 @@ class RecipeQueries:
             recipe = info.dict()
         else:
             recipe = info
-        print(info)
-        # if self.collection.find_one({"name": info["name"]}) is not None:
-        #     raise DuplicateAccountError
-        self.collection.insert_one(recipe)
-        recipe["id"] = str(recipe["_id"])
+        if self.collection.find_one({"name": info["name"]}) is None:
+            try:
+                self.collection.insert_one(recipe)
+            except DuplicateRecipeError:
+                print("Recipe Already Exists")
+                return recipe
         return recipe
 
     def find_all(self):

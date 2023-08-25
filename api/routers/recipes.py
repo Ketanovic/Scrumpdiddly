@@ -44,7 +44,8 @@ def get_recipe(
 
 @router.get("/api/recipes", response_model=Recipes)
 def list_recipe(queries: RecipeQueries = Depends()):
-    return {"recipes": queries.find_all()}
+    sort = queries.find_all()
+    return {"recipes": sort}
 
 
 @router.post("/api/recipes", response_model=RecipeIn)
@@ -62,5 +63,3 @@ async def create_recipe(
         # thumbnail=info.thumbnail,
     )
     return recipe
-
-

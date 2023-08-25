@@ -65,9 +65,7 @@ def list_all_recipes():
                 for ing_list, measure_list in zip(ing_list, measure_list)
             }
 
-        recipe_list = []
-        for k in data["meals"]:
-            recipe_list.append(k)
+        recipe_list = data["meals"]
         for recipe in recipe_list:
             encoder = {
                 "name": recipe["strMeal"],

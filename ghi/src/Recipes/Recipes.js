@@ -17,7 +17,6 @@ export default function ListRecipes() {
     fetchRecipes();
   }, []);
 
-  console.log("aaaaaaaaaaaaaaaaaaaaaadsfdsafasdfdsadfas", recipes)
   return (
     <div>
       <h1>Recipes</h1>
@@ -32,14 +31,14 @@ export default function ListRecipes() {
           </tr>
         </thead>
         <tbody>
-          {recipes.map((rec) => {
+          {recipes.map((rec) => { console.log("aaaaaaaaaaaaaaaaaaaaaa", rec, rec.ingredients["ingredients"])
               return (
-                <tr key={rec.id}>
+                <tr key={rec.name}>
                   <td>{rec.name}</td>
                   <td>{rec.category}</td>
                   <td>{rec.area}</td>
                   <td>{rec.instructions}</td>
-                  <td>{rec.ingredients}</td>
+                  <td>{rec.ingredients.ingredients}</td>
                   {/* <td>{rec.technician.first_name}</td> */}
                   <td>
                     {/* <FinishAppointmentButton id={rec.id} />

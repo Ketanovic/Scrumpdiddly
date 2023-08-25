@@ -47,7 +47,7 @@ class RecipeIn(BaseModel):
 
 
 class RecipeOut(RecipeIn):
-    id: str
+    # id: str
     name: str
     category: str
     area: str
