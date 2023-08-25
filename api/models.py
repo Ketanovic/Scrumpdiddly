@@ -35,8 +35,9 @@ class PantryItemIn(BaseModel):
 
 
 class PantryItemOut(PantryItemIn):
-    name: str
     id: str
+    name: str
+    recipes: List
 
 
 class PantryItems(BaseModel):
