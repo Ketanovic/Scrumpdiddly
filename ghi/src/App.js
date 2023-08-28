@@ -7,6 +7,7 @@ import PantryForm from "./PantryItem";
 import ListRecipes from "./Recipes/Recipes.js";
 import Nav from "./Nav.js";
 import MainPage from "./MainPage.js";
+import RecipeSearch from "./RecipeSearch.js";
 
 
 
@@ -26,6 +27,10 @@ function App() {
             <Route index element={<PantryForm />} />
           </Route>
           <Route path="/recipes">
+            <Route index element={<ListRecipes />} />
+            <Route path="search" element={<RecipeSearch />} />
+          </Route>
+          <Route path="/recipe_search">
             <Route index element={<ListRecipes />} />
           </Route>
         </Routes>
