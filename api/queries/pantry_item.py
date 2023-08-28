@@ -1,7 +1,7 @@
-from pydantic import BaseModel
+
 from pymongo import MongoClient
 import os
-from models import PantryItemIn, PantryItemOut, PantryItems
+from models import PantryItemIn
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 client = MongoClient(DATABASE_URL)
@@ -13,7 +13,7 @@ class DuplicatePantryItem(ValueError):
 
 
 class PantryItemQueries:
-    
+
     @property
     def collection(self):
         return db["pantry items"]
@@ -23,12 +23,10 @@ class PantryItemQueries:
         self.collection.insert_one(pantry)
         pantry["id"] = str(pantry["_id"])
         return pantry
-    
+
     def find_all(self):
         results = []
         for pantry in self.collection.find():
-            pantry['id'] = str(pantry['_id'])            
+            pantry['id'] = str(pantry['_id'])
             results.append(pantry)
         return results
-
-
