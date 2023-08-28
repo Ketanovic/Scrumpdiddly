@@ -81,7 +81,9 @@ function PantryForm() {
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h1>Create a Pantry Item</h1>
-          <form onSubmit={handleSubmit} id="create-ingredient-form">
+          <div className="grid">
+          </div>
+          <form onSubmit={handleSubmit} id="create-ingredient-form" placeholder="Name of Pantry">
             <div className="mb-3">
               <label htmlFor="name">Pantry Item</label>
               <input
@@ -94,30 +96,40 @@ function PantryForm() {
                 className="form-control"
               />
             </div>
-            <div className="input-group mb-2">
+            <div className="grid">
+              <label htmlFor="name">Search Ingredients</label>
+              <div>
               <input
                 type="text"
+                placeholder="Start typing what you have in your pantry"
                 value={searchIngredient}
                 onChange={(e) => setSearchIngredient(e.target.value)}
+                className="form-control"
               />
+              <div>
               <button
                 onClick={handleSearch}
                 type="button"
-                className="btn btn-outline-secondary"
+                className="btn btn-primary btn-sm"
               >
-                Search Ingredients
+              Search Ingredients
               </button>
+              </div>
+              </div>
             </div>
-            <h1>What Ingredients Do You Have?</h1>
-            <div className="mb-3">
-              <label htmlFor="name">Ingredients</label>
+
+            <div className="dropdown">
+            <h3>Click the drop down</h3>
+              <button type="button" className="btn btn-small dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">Choose ingredient from search</button>
+
               <select
                 onChange={handleChange}
                 value={ingredient}
                 name="ingredients"
                 id="ingredients"
-                className="form-select"
+                className="dropdown"
               >
+
                 <option value="">Choose an ingredient</option>
                 {filter.map((ingredient) => {
                   return (
@@ -127,7 +139,7 @@ function PantryForm() {
                   );
                 })}
               </select>
-              <table>
+              <table class="table table-striped table-hover">
                 <thead>
                   <tr>
                     <th>Name of Ingredient</th>
@@ -144,8 +156,7 @@ function PantryForm() {
                 </tbody>
               </table>
             </div>
-            <button className="btn btn-primary">Create</button>
-            <h1>Input Ingredients you have at Home!</h1>
+            <button className="btn btn-primary">See what's for dinner!</button>
           </form>
         </div>
       </div>
