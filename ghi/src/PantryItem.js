@@ -4,7 +4,6 @@ function PantryForm() {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [ingredient, setIngredient] = useState("");
-  //   const [ingredientss, setIngredientss] = useState("");
   const [filter, setFilter] = useState([]);
   const [searchIngredient, setSearchIngredient] = useState("");
   const [pantry, setPantry] = useState([]);
@@ -39,7 +38,7 @@ function PantryForm() {
 
   const handleSearch = async () => {
     const result = ingredients.filter((ingredients) =>
-      ingredients.name.startsWith(searchIngredient.toUpperCase())
+      ingredients.name.includes(searchIngredient.toUpperCase())
     );
     setFilter(result);
   };
