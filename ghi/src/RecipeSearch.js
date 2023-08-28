@@ -46,11 +46,11 @@ function RecipeSearch() {
         <div className="shadow p-4 mt-4">
           <h1>Recipes you might enjoy</h1>
             <div className="mb-3">
-              <label htmlFor="name">Ingredients List in Pantry</label>
+              {/* <label htmlFor="name">Ingredients List in Pantry</label> */}
               <table>
                 <thead>
                   <tr>
-                    <th>Name of Ingredient</th>
+                    <th>With these ingredients below....</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -64,13 +64,15 @@ function RecipeSearch() {
                 </tbody>
               </table>
             </div>
+            <div>
+              <h4>You can make these for dinner!:</h4>
+            </div>
             <div className="mb-3">
-              <label htmlFor="name">Recipes</label>
-              <table>
+              <table class="table table-striped table-hover">
                 <thead>
                   <tr>
                     <th>Recipe Result</th>
-                    <th>Recipe Count</th>
+                    <th>Number of overlapping ingredients</th>
                   </tr>
                 </thead>
                 <tbody>
