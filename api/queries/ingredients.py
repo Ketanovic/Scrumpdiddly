@@ -1,8 +1,7 @@
 from pymongo import MongoClient
 import os
-from models import IngredientIn, IngredientOut, Ingredients
+from models import IngredientIn
 from pymongo.errors import DuplicateKeyError
-
 
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
@@ -29,16 +28,13 @@ class IngredientQueries:
             except DuplicateKeyError:
                 print("duplicate key error caught")
                 pass
-     
+
         else:
             if ingredients["recipe"][0] not in dup["recipe"]:
                 self.collection.update_one(
                     {"name": ingredients["name"]},
                     {'$push': {"recipe": ingredients["recipe"][0]}},
-                    # {"upsert": True}
                     )
-
-
 
     def find_all(self):
         results = []

@@ -1,12 +1,15 @@
 from authenticator import authenticator
 from routers import pantry_item, ingredients
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from routers import accounts
+from routers import accounts, recipes
 
 app = FastAPI()
 app.include_router(authenticator.router)
+app.include_router(accounts.router)
+app.include_router(recipes.router)
+
 app.include_router(pantry_item.router, tags=["pantry_items"])
 app.include_router(ingredients.router, tags=["ingredients"])
 
@@ -34,3 +37,4 @@ def launch_details():
 
 
 app.include_router(accounts.router, tags=["Accounts"])
+app.include_router(recipes.router, tags=["Recipes"])

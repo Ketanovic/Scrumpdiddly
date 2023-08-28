@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+
 from pymongo import MongoClient
 import os
 from models import AccountIn, AccountOutWithHashedPassword
@@ -30,10 +30,7 @@ class AccountQueries:
         if self.get(account["username"]) is not None:
             raise DuplicateAccountError
         account["hashed_password"] = hashed_password
-        print("hhhhhhhheree", account, type(account["hashed_password"]))
         del account["password"]
         self.collection.insert_one(account)
-        print(account)
-        print(type(account["hashed_password"]))
         account["id"] = str(account["_id"])
         return account

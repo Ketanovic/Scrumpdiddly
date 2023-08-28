@@ -1,7 +1,7 @@
-from pydantic import BaseModel
+
 from pymongo import MongoClient
 import os
-from models import PantryItemIn, PantryItemOut, PantryItems
+from models import PantryItemIn
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 client = MongoClient(DATABASE_URL)

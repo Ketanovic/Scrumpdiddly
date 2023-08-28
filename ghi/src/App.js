@@ -4,29 +4,35 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import PantryForm from "./PantryItem";
-import RecipeSearch from "./RecipeSearch.js";
+import ListRecipes from "./Recipes/Recipes.js";
+import Nav from "./Nav.js";
+import MainPage from "./MainPage.js";
 
 function App() {
   // const [currentForm, setCurrentForm] = useState('login');
   // const toggleForm = (formName) => {
   //   setCurrentForm(formName);
- return (
-  <BrowserRouter>
-  <div className="container">
-    <Routes>
-    <Route path="/pantry">
-      <Route index element={<PantryForm />} />
-    </Route>
-    <Route path="/recipe">
-      <Route index element={<RecipeSearch />} />
-    </Route>
-    </Routes>
-  </div>
-  </BrowserRouter>
-);
+  return (
+    <BrowserRouter>
+      <Nav />
+      <div className="container">
+        <Routes>
+          <Route path="/">
+            <Route index element={<MainPage />} />
+          </Route>
+          <Route path="/pantry">
+            <Route index element={<PantryForm />} />
+          </Route>
+          <Route path="/recipes">
+            <Route index element={<ListRecipes />} />
+          </Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
- export default App;
+export default App;
 
 // function App() {
 //   const [launchInfo, setLaunchInfo] = useState([]);
