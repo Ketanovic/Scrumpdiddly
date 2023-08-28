@@ -29,12 +29,14 @@ class RecipeQueries:
             recipe = info.dict()
         else:
             recipe = info
-        if self.collection.find_one({"name": info["name"]}) is None:
+        if self.collection.find_one({"name": recipe["name"]}) is None:
             try:
                 self.collection.insert_one(recipe)
             except DuplicateRecipeError:
                 print("Recipe Already Exists")
                 return recipe
+        else:
+            pass
         return recipe
 
     def find_all(self):

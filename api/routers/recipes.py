@@ -1,6 +1,6 @@
 from fastapi import (
     APIRouter,
-    Depends,
+    Depends
 )
 from models import (
     Recipes,
@@ -41,5 +41,4 @@ async def create_recipe(
     queries: RecipeQueries = Depends(),
 ):
     recipe = queries.create(info)
-
     return recipe
