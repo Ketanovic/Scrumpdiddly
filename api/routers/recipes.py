@@ -1,25 +1,13 @@
 from fastapi import (
     APIRouter,
     Depends,
-    Request,
-    Response,
-    HTTPException,
-    status,
 )
 from models import (
     Recipes,
-    RecipeForm,
     RecipeIn,
-    RecipeOut,
-    RecipeNameForm,
-    RecipeName,
-    IngredientIn,
-    IngredientOut,
-    Ingredients,
+    RecipeName
 )
 from queries.recipes import RecipeQueries
-from queries.ingredients import IngredientQueries, DuplicateIngredientError
-import requests
 
 router = APIRouter()
 
@@ -29,7 +17,6 @@ def get_recipe(
     info: RecipeName,
     queries: RecipeQueries = Depends(),
 ):
-    form = RecipeNameForm(name=info.name)
     recipe = queries.get(info)
 
     return {
@@ -54,12 +41,5 @@ async def create_recipe(
     queries: RecipeQueries = Depends(),
 ):
     recipe = queries.create(info)
-    form = RecipeForm(
-        name=info.name,
-        category=info.category,
-        area=info.area,
-        instructions=info.instructions,
-        ingredients=info.ingredients,
-        # thumbnail=info.thumbnail,
-    )
+
     return recipe

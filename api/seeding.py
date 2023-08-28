@@ -46,7 +46,7 @@ def list_all_recipes():
                 recipe = data["meals"][j]
                 if (
                     data["meals"][j]["strIngredient" + str(i)] != ""
-                    and data["meals"][j]["strIngredient" + str(i)] != None
+                    and data["meals"][j]["strIngredient" + str(i)] is not None
                 ):
                     recipe_ingredients = data["meals"][j][
                         "strIngredient" + str(i)
@@ -54,7 +54,7 @@ def list_all_recipes():
                     ing_list.append(recipe_ingredients)
                 if (
                     data["meals"][j]["strMeasure" + str(i)] != ""
-                    and data["meals"][j]["strMeasure" + str(i)] != None
+                    and data["meals"][j]["strMeasure" + str(i)] is not None
                 ):
                     recipe_measurements = data["meals"][j][
                         "strMeasure" + str(i)

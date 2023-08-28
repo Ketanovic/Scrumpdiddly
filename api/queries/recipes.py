@@ -1,8 +1,7 @@
-from pydantic import BaseModel
+
 from pymongo import MongoClient
 import os
 from models import RecipeIn, RecipeName
-import requests
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 client = MongoClient(DATABASE_URL)

@@ -1,24 +1,13 @@
 from fastapi import (
     APIRouter,
-    Depends,
-    Request,
-    Response,
-    HTTPException,
-    status,
+    Depends
 )
-from models import (
-    Recipes,
-    RecipeForm,
-    RecipeIn,
-    RecipeOut,
-    RecipeNameForm,
-    RecipeName,
-)
+
 from queries.recipes import RecipeQueries
 import requests
 
-router = APIRouter()
 
+router = APIRouter()
 
 
 def list_all_recipes(
@@ -50,7 +39,9 @@ def list_all_recipes(
     ]
     recipe_list = []
     for letter in letters:
-        api_url = "http://www.themealdb.com/api/json/v1/1/search.php?f=" + letter
+        api_url = (
+            "http://www.themealdb.com/api/json/v1/1/search.php?f=" + letter
+            )
         response = requests.get(api_url)
         data = response.json()
         print(data)
@@ -68,5 +59,6 @@ def list_all_recipes(
             }
             print("eeeeeeeeeecondeeeeeeeeeeerrrr", encoder)
             queries.create(encoder)
+
 
 list_all_recipes()
