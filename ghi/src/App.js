@@ -1,20 +1,32 @@
 import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import PantryForm from "./PantryItem";
 import ListRecipes from "./Recipes/Recipes.js";
 import Nav from "./Nav.js";
 import MainPage from "./MainPage.js";
-import RecipeSearch from "./RecipeSearch.js";
+import RecipeSearch, {UnderscoreLower} from "./RecipeSearch.js";
+import RecipeDetail from "./RecipeDetail.js";
 
 
 
 function App() {
-  // const [currentForm, setCurrentForm] = useState('login');
-  // const toggleForm = (formName) => {
-  //   setCurrentForm(formName);
+  const [recipes, setRecipes] = useState([]);
+  let { name } = useParams()
+    const fetchRecipes = async () => {
+      const url = "http://localhost:8000/api/recipes";
+      const response = await fetch(url);
+      if (response.ok) {
+        const json = await response.json();
+        setRecipes(json.recipes);
+      }
+    };
+    ;
+    useEffect(() => {
+      fetchRecipes();
+    }, []);
   return (
     <BrowserRouter>
       <Nav />
@@ -29,9 +41,7 @@ function App() {
           <Route path="/recipes">
             <Route index element={<ListRecipes />} />
             <Route path="search" element={<RecipeSearch />} />
-          </Route>
-          <Route path="/recipe_search">
-            <Route index element={<ListRecipes />} />
+            <Route path=":name" element={<RecipeDetail />} />
           </Route>
         </Routes>
       </div>
@@ -40,6 +50,8 @@ function App() {
 }
 
 export default App;
+
+
 
 // function App() {
 //   const [launchInfo, setLaunchInfo] = useState([]);

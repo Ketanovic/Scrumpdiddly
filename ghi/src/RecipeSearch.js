@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-function RecipeSearch() {
+export function UnderscoreLower(link_item) {
+  return link_item.split(" ").join("_").toLowerCase()
+}
+
+export default function RecipeSearch() {
     const [name, setName] = useState("");
     const [ingredients, setIngredients] = useState([]);
     const [pantry, setPantry] = useState([]);
@@ -63,7 +68,6 @@ function RecipeSearch() {
          <div className="shadow p-4 mt-4">
            <h1>Recipes you might enjoy</h1>
            <div className="mb-3">
-             {/* <label htmlFor="name">Ingredients List in Pantry</label> */}
              <table>
                <thead>
                  <tr>
@@ -95,16 +99,16 @@ function RecipeSearch() {
                <tbody>
                  {recList.map((recipe_item) => {
                    return (
-                     <tr key={recipe_item}>
-                       <td>{recipe_item[0]}</td>
-                       <td>{recipe_item[1]}</td>
-                     </tr>
+                      <tr key={recipe_item}>
+                          <td>
+                            <Link to={`/recipe/${UnderscoreLower(recipe_item[0])}`} >
+                              {recipe_item[0]}
+                            </Link>
+                          </td>
+                        <td>{recipe_item[1]}</td>
+                      </tr>
                    );
                  })}
-                 {/* {for (let recipe_item of recipe){
-                    console.log({recipe_item})
-                  }
-                } */}
                </tbody>
              </table>
            </div>
@@ -113,5 +117,3 @@ function RecipeSearch() {
      </div>
    );
 }
-
-export default RecipeSearch;
