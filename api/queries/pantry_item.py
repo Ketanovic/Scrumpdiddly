@@ -20,6 +20,7 @@ class PantryItemQueries:
 
     def create(self, pantry_item_in: PantryItemIn) -> PantryItemOut:
         pantry = pantry_item_in.dict()
+        print(pantry)
         self.collection.insert_one(pantry)
         pantry["id"] = str(pantry["_id"])
         return pantry
