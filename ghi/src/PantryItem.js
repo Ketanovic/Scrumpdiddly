@@ -130,7 +130,7 @@ function PantryForm() {
                   );
                 })}
               </select>
-              <table class="table table-striped table-hover">
+              <table className="table table-striped table-hover">
                 <thead>
                   <tr>
                     <th>Items in Pantry</th>

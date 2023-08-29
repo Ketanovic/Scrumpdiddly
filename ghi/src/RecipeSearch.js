@@ -89,7 +89,7 @@ export default function RecipeSearch() {
              <h4>You can make these for dinner!:</h4>
            </div>
            <div className="mb-3">
-             <table class="table table-striped table-hover">
+             <table className="table table-striped table-hover">
                <thead>
                  <tr>
                    <th>Recipe Result</th>
