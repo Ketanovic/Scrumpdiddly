@@ -1,4 +1,5 @@
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import React, { useState, useEffect } from "react";
 
 function PantryForm() {
@@ -9,7 +10,7 @@ function PantryForm() {
   const [searchIngredient, setSearchIngredient] = useState("");
   const [pantry, setPantry] = useState([]);
   const [recipe, setRecipe] = useState([]);
-
+  const {token} = useAuthContext()
   
 
   async function fetchIngredients() {
@@ -21,8 +22,9 @@ function PantryForm() {
       setFilter(Object.values(data.ingredients));
     }
   }
-  async function fetchPantry() {
-    const response = await fetch("http://localhost:8000/api/pantry_item/");
+  async function fetchPantry() {     
+    const response = await fetch("http://localhost:8000/api/pantry_item/",{headers: { Authorization: `Bearer ${token}` }});
+    console.log("token", token)
     if (response.ok) {
       const data = await response.json();
       setPantry(Object.values(data.pantry_items));
@@ -53,6 +55,7 @@ function PantryForm() {
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
 

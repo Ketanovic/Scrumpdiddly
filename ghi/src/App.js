@@ -10,6 +10,7 @@ import MainPage from "./MainPage.js";
 import RecipeSearch, {UnderscoreLower} from "./RecipeSearch.js";
 import RecipeDetail from "./RecipeDetail.js";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
+import LoginForm from "./LoginForm.js";
 
 
 function App() {
@@ -38,6 +39,9 @@ function App() {
             </Route>
             <Route path="/pantry">
               <Route index element={<PantryForm />} />
+            </Route>
+            <Route path="/login">
+              <Route index element={<LoginForm />} />
             </Route>
             <Route path="/recipes">
               <Route index element={<ListRecipes />} />
