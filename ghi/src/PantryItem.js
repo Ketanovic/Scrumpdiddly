@@ -7,8 +7,7 @@ function PantryForm() {
   const [filter, setFilter] = useState([]);
   const [searchIngredient, setSearchIngredient] = useState("");
   const [pantry, setPantry] = useState([]);
-  const [recipe, setRecipe] = useState([])
-
+  const [recipe, setRecipe] = useState([]);
 
   async function fetchIngredients() {
     const response = await fetch("http://localhost:8000/api/ingredients/");
@@ -36,14 +35,14 @@ function PantryForm() {
 
   const handleSubmit = async (event) => {
     const value = event.target.value;
-    const value2 = value.split(",")
-    const x = value2.shift()
+    const value2 = value.split(",");
+    const x = value2.shift();
     setName(x);
-    setRecipe(value2)
+    setRecipe(value2);
     const data = {};
     data.name = x;
-    data.recipes = value2
-    console.log(data)
+    data.recipes = value2;
+    console.log(data);
     const url = "http://localhost:8000/api/pantry_item/";
     const fetchConfig = {
       method: "post",
@@ -74,45 +73,35 @@ function PantryForm() {
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h1>Create a Pantry Item</h1>
-          <div className="grid">
-          </div>
-          <form onSubmit={handleSubmit} id="create-ingredient-form" placeholder="Name of Pantry">
-            <div className="mb-3">
-              <label htmlFor="name">Pantry Item</label>
-              <input
-                required
-                onChange={handleSubmit}
-                value={name}
-                name="name"
-                id="name"
-                type="text"
-                className="form-control"
-              />
-            </div>
+          <div className="grid"></div>
+          <form
+            onSubmit={handleSubmit}
+            id="create-ingredient-form"
+            placeholder="Name of Pantry"
+          >
             <div className="grid">
               <label htmlFor="name">Search Ingredients</label>
               <div>
-              <input
-                type="text"
-                placeholder="Start typing what you have in your pantry"
-                value={searchIngredient}
-                onChange={(e) => setSearchIngredient(e.target.value)}
-                className="form-control"
-              />
-              <div>
-              <button
-                onClick={handleSearch}
-                type="button"
-                className="btn btn-primary btn-sm"
-              >
-              Search Ingredients
-              </button>
-              </div>
+                <input
+                  type="text"
+                  placeholder="Start typing what you have in your pantry"
+                  value={searchIngredient}
+                  onChange={(e) => setSearchIngredient(e.target.value)}
+                  className="form-control"
+                />
+                <div>
+                  <button
+                    onClick={handleSearch}
+                    type="button"
+                    className="btn btn-primary btn-sm"
+                  >
+                    Search Ingredients
+                  </button>
+                </div>
               </div>
             </div>
 
             <div className="dropdown">
-            <h3>Click the drop down</h3>
               <select
                 onChange={handleSubmit}
                 value={ingredient}
@@ -120,11 +109,13 @@ function PantryForm() {
                 id="ingredients"
                 className="dropdown"
               >
-
                 <option value="">Choose an ingredient</option>
                 {filter.map((ingredient) => {
                   return (
-                    <option value={[ingredient.name, ingredient.recipe]} key={ingredient.name}>
+                    <option
+                      value={[ingredient.name, ingredient.recipe]}
+                      key={ingredient.name}
+                    >
                       {ingredient.name}
                     </option>
                   );
@@ -133,7 +124,7 @@ function PantryForm() {
               <table class="table table-striped table-hover">
                 <thead>
                   <tr>
-                    <th>Name of Ingredient</th>
+                    <th>Items in Pantry</th>
                   </tr>
                 </thead>
                 <tbody>
