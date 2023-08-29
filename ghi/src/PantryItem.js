@@ -1,3 +1,4 @@
+import useToken from "@galvanize-inc/jwtdown-for-react";
 import React, { useState, useEffect } from "react";
 
 function PantryForm() {
@@ -8,6 +9,8 @@ function PantryForm() {
   const [searchIngredient, setSearchIngredient] = useState("");
   const [pantry, setPantry] = useState([]);
   const [recipe, setRecipe] = useState([]);
+
+  
 
   async function fetchIngredients() {
     const response = await fetch("http://localhost:8000/api/ingredients/");
@@ -33,6 +36,7 @@ function PantryForm() {
     setFilter(result);
   };
 
+
   const handleSubmit = async (event) => {
     const value = event.target.value;
     const value2 = value.split(",");
@@ -51,6 +55,8 @@ function PantryForm() {
         "Content-Type": "application/json",
       },
     };
+
+    
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       setName("");

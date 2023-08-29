@@ -9,7 +9,7 @@ import Nav from "./Nav.js";
 import MainPage from "./MainPage.js";
 import RecipeSearch, {UnderscoreLower} from "./RecipeSearch.js";
 import RecipeDetail from "./RecipeDetail.js";
-
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 
 
 function App() {
@@ -28,24 +28,26 @@ function App() {
       fetchRecipes();
     }, []);
   return (
-    <BrowserRouter>
-      <Nav />
-      <div className="container">
-        <Routes>
-          <Route path="/">
-            <Route index element={<MainPage />} />
-          </Route>
-          <Route path="/pantry">
-            <Route index element={<PantryForm />} />
-          </Route>
-          <Route path="/recipes">
-            <Route index element={<ListRecipes />} />
-            <Route path="search" element={<RecipeSearch />} />
-            <Route path=":name" element={<RecipeDetail />} />
-          </Route>
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Nav />
+        <div className="container">
+          <Routes>
+            <Route path="/">
+              <Route index element={<MainPage />} />
+            </Route>
+            <Route path="/pantry">
+              <Route index element={<PantryForm />} />
+            </Route>
+            <Route path="/recipes">
+              <Route index element={<ListRecipes />} />
+              <Route path="search" element={<RecipeSearch />} />
+              <Route path=":name" element={<RecipeDetail />} />
+            </Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
