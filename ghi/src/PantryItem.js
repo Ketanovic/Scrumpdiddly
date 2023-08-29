@@ -23,7 +23,7 @@ function PantryForm() {
     }
   }
   async function fetchPantry() {     
-    const response = await fetch("http://localhost:8000/api/pantry_item/",{headers: { Authorization: `Bearer ${token}` }});
+    const response = await fetch("http://localhost:8000/api/pantry_item/",{credentials: 'include'});
     console.log("token", token)
     if (response.ok) {
       const data = await response.json();

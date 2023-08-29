@@ -28,7 +28,7 @@ function App() {
       fetchRecipes();
     }, []);
   return (
-    <AuthProvider>
+    <AuthProvider baseUrl="http://localhost:8000">
       <BrowserRouter>
         <Nav />
         <div className="container">
