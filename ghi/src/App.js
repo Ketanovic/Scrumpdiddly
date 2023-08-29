@@ -12,7 +12,6 @@ import RecipeDetail from "./RecipeDetail.js";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./LoginForm.js";
 
-
 function App() {
   const [recipes, setRecipes] = useState([]);
   let { name } = useParams()
