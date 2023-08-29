@@ -1,4 +1,3 @@
-
 from pymongo import MongoClient
 import os
 from models import PantryItemIn, PantryItemOut
@@ -13,7 +12,6 @@ class DuplicatePantryItem(ValueError):
 
 
 class PantryItemQueries:
-
     @property
     def collection(self):
         return db["pantry items"]
@@ -28,6 +26,6 @@ class PantryItemQueries:
     def find_all(self):
         results = []
         for pantry in self.collection.find():
-            pantry['id'] = str(pantry['_id'])
+            pantry["id"] = str(pantry["_id"])
             results.append(pantry)
         return results
