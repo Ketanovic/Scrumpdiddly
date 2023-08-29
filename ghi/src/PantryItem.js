@@ -9,15 +9,6 @@ function PantryForm() {
   const [pantry, setPantry] = useState([]);
   const [recipe, setRecipe] = useState([])
 
-  const handleChange = (event) => {
-    const value = event.target.value;
-    const value2 = value.split(",")
-    const x = value2.shift()
-    console.log("************",x)
-    console.log("************", value2);
-    setName(x);
-    setRecipe(value2)
-  };
 
   async function fetchIngredients() {
     const response = await fetch("http://localhost:8000/api/ingredients/");
@@ -44,11 +35,15 @@ function PantryForm() {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    const value = event.target.value;
+    const value2 = value.split(",")
+    const x = value2.shift()
+    setName(x);
+    setRecipe(value2)
     const data = {};
-    data.name = name;
-    data.recipes = recipe
-    // data.recipes = recipes
+    data.name = x;
+    data.recipes = value2
+    console.log(data)
     const url = "http://localhost:8000/api/pantry_item/";
     const fetchConfig = {
       method: "post",
@@ -61,7 +56,6 @@ function PantryForm() {
     if (response.ok) {
       setName("");
       window.location.reload();
-      //setIngredients('');
     } else {
       console.error(response);
     }
@@ -87,7 +81,7 @@ function PantryForm() {
               <label htmlFor="name">Pantry Item</label>
               <input
                 required
-                onChange={handleChange}
+                onChange={handleSubmit}
                 value={name}
                 name="name"
                 id="name"
@@ -119,10 +113,8 @@ function PantryForm() {
 
             <div className="dropdown">
             <h3>Click the drop down</h3>
-              <button type="button" className="btn btn-small dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">Choose ingredient from search</button>
-
               <select
-                onChange={handleChange}
+                onChange={handleSubmit}
                 value={ingredient}
                 name="ingredients"
                 id="ingredients"
