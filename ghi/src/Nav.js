@@ -3,11 +3,9 @@ import { NavLink } from "react-router-dom";
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <NavLink className="navbar-brand" to="/">
-          CarCar
-        </NavLink>
+        <NavLink className="navbar-brand" to="/">Scrummy</NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -26,207 +24,57 @@ function Nav() {
                 Home
               </NavLink>
             </li>
+
             <li className="nav-item dropdown">
               <NavLink
                 className="nav-link dropdown-toggle"
                 to="#"
-                id="inventoryDropdown"
+                id="pantryDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Inventory
+                Pantry
               </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="inventoryDropdown">
+              <ul className="dropdown-menu" aria-labelledby="pantryDropdown">
                 <li>
-                  <NavLink className="dropdown-item" to="/inventory">
-                    List Automobiles
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/create-automobile">
-                    Create Automobile
+                  <NavLink className="dropdown-item" to="/pantry">
+                    Pantry Item
                   </NavLink>
                 </li>
               </ul>
             </li>
+
             <li className="nav-item dropdown">
               <NavLink
                 className="nav-link dropdown-toggle"
                 to="#"
-                id="manufacturersDropdown"
+                id="recipesDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Manufacturers
+                Recipes
               </NavLink>
               <ul
-                className="dropdown-menu"
-                aria-labelledby="manufacturersDropdown"
-              >
+                className="dropdown-menu" aria-labelledby="recipesDropdown">
                 <li>
-                  <NavLink className="dropdown-item" to="/manufacturers">
-                    List Manufacturers
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/create-manufacturer">
-                    Create Manufacturer
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link dropdown-toggle"
-                to="#"
-                id="modelsDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Models
-              </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="modelsDropdown">
-                <li>
-                  <NavLink className="dropdown-item" to="/vehicle-models">
-                    List Vehicle Models
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/create-vehicle-model">
-                    Create Vehicle Model
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link dropdown-toggle"
-                to="#"
-                id="techniciansDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Technicians
-              </NavLink>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="techniciansDropdown"
-              >
-                <li>
-                  <NavLink className="dropdown-item" to="/add-technician">
-                    Add a Technician
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/technicians">
-                    List all Technicians
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link dropdown-toggle"
-                to="#"
-                id="appointmentsDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Appointments
-              </NavLink>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="appointmentsDropdown"
-              >
-                <li>
-                  <NavLink className="dropdown-item" to="/create-appointment">
-                    Create Service Appointment
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/appointments">
-                    List all Service Appointments
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/service-history">
-                    Service History
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link dropdown-toggle"
-                to="#"
-                id="salesDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Sales
-              </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="salesDropdown">
-                <li>
-                  <NavLink className="dropdown-item" to="/record-sale">
-                    Record a New Sale
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/sales-history">
-                    Show all Sales
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/salesperson-history">
-                    Salesperson History
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link dropdown-toggle"
-                to="#"
-                id="peopleDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                People
-              </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="peopleDropdown">
-                <li>
-                  <NavLink className="dropdown-item" to="/add-salesperson">
-                    Add a Salesperson
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/salespeople">
-                    List all Salespeople
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/add-customer">
-                    Add a Customer
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/customers">
-                    List all Customers
+                  <NavLink className="dropdown-item" to="/recipes">
+                    List Recipes
                   </NavLink>
                 </li>
               </ul>
             </li>
           </ul>
+          <button class="btn btn-outline-success" type="button">Sign In</button> &nbsp;&nbsp;
+          <button class="btn btn-outline-success" type="button">Sign Out</button> &nbsp;&nbsp;
+          <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
+          </form>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search Recipe!</button>
         </div>
       </div>
-    </nav>
+     </nav>
   );
 }
 

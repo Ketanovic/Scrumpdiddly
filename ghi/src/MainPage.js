@@ -4,7 +4,7 @@ function MainPage() {
       <h1 className="display-5 fw-bold">Scrummy</h1>
       <div className="col-lg-6 mx-auto">
         <p className="lead mb-4">
-          The premiere solution for automobile dealership management!
+          The premiere solution for making dinner at home easier!
         </p>
       </div>
     </div>
