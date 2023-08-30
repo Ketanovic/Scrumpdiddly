@@ -7,12 +7,14 @@ import PantryForm from "./PantryItem";
 import ListRecipes from "./Recipes/Recipes.js";
 import Nav from "./Nav.js";
 import MainPage from "./MainPage.js";
+import { Register } from "./Register.jsx"
 
 
 function App() {
-  // const [currentForm, setCurrentForm] = useState('login');
-  // const toggleForm = (formName) => {
-  //   setCurrentForm(formName);
+    const [currentForm, setCurrentForm] = useState('login');
+    const toggleForm = (formName) => {
+      setCurrentForm(formName);
+    }
   return (
     <BrowserRouter>
       <Nav />
@@ -27,13 +29,17 @@ function App() {
           <Route path="/recipes">
             <Route index element={<ListRecipes />} />
           </Route>
+          <Route path="/register">
+            <Route index element={<Register />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
   );
 }
+export default App
 
-export default App;
+
 
 // function App() {
 //   const [launchInfo, setLaunchInfo] = useState([]);
