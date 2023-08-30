@@ -11,14 +11,21 @@
 
 
 
+
+body {
+  animation: ease-in 1s;
+  background: url("./background.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
 .page-wrap {
   padding-top: 80px;
 }
 
-body {
-  animation: fadeIn 1.5s;
-  background-color: #b99976;
-}
 
 
 .link {
@@ -37,13 +44,13 @@ body {
 nav {
   width: 100%;
   height: 80px;
-  background-color: #e5d3b3;
+  background-color: #e7ceb6;
   animation: easeDown 1s;
 }
 
 
 .search {
-  background-color: #d2d4c2;
+  background-color: #e7dbc4;
   border-color: #247000;
 }
 
@@ -63,6 +70,7 @@ nav {
 }
 
 .logo {
+  animation: ease-in 1s;
   max-width: 400px;
 }
 
@@ -85,7 +93,7 @@ nav {
 }
 
 .small-card:hover {
-  box-shadow: 0 0 10px 2px #b36e4e;
+  box-shadow: 0 0 10px 2px #000000;
 }
 
 .rec-button {
