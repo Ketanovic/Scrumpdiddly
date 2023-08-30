@@ -1,7 +1,7 @@
 
 from pymongo import MongoClient
 import os
-from models import PantryItemIn
+from models import PantryItemIn, PantryItemOut
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 client = MongoClient(DATABASE_URL)

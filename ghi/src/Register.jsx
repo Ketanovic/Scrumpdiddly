@@ -5,28 +5,69 @@ export const Register = (props) => {
     const [pass, setPass] = useState('');
     const [name, setName] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(e);
+        const data = {}
+        data.name = name;
+        data.email = email;
+        data.pass = pass;
+
+        const json = JSON.stringify(data)
+        const url = "http://localhost:8000/api/accounts/"
+        const fetchConfig ={
+            method: "post",
+            body: json,
+            headers: {
+                "Content-Type": "application/json",
+
+        }
+    }
+};
+        const submitResponse = await fetch(url, fetchConfig);
+        if (submitResponse.ok) {
+            setFormData({
+                name: "",
+                email: "",
+                pass: "",
+            });
+        } else {
+            console.error(submitResponse);
+        }
     }
 
+const handleNameChange = (event) => {
+    const value = event.target.value;
+    setName(value);
+}
+
+const handleEmailChange = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+}
+
+const handlePassChange = (event) => {
+    const value = event.target.value;
+    setPass(value);
+}
+
     return (
-        <div>
-        <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-            <label htmlFor="name" className="form-label"> Full Name </label>
-            <input value={name} onChange={(e) => setName(e.target.value)} name="name" id="name" placeholder="full name here" />
+        <div className="card text-bg-light mb-3">
+            <h5 className="card-header">Register</h5>
+                <div className="card-body"></div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="name" className="form-label"> Full Name </label>
+                            <input value={name} onChange={handleNameChange} type="name" id="name" placeholder="full name here" />
 
-            <label htmlFor="email" className="form-label">email</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="your email" />
+                            <label htmlFor="email" className="form-label">E-mail</label>
+                            <input value={email} onChange={handleEmailChange} type="email" placeholder="your email" />
 
-            <label htmlFor="password" className="form-label">password</label>
-            <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="your password" />
-
-            <button type="submit">Register</button>
-            </div>
-        </form>
-        <button onClick={() => props.onFormSwitch('login')}>Already have an account? Login Here</button>
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <input value={pass} onChange={handlePassChange} type="password" placeholder="your password" />
+                        </div>
+                            <button className= "btn-btn-primary" type="submit">Register</button>
+                        <button onClick={() => props.onFormSwitch('login')}>Already have an account? Login Here</button>
+                    </form>
         </div>
     );
 }
