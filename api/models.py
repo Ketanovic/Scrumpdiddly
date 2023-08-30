@@ -71,12 +71,14 @@ class RecipeNameForm(BaseModel):
 class PantryItemIn(BaseModel):
     name: str
     recipes: List
+    user_id: str
 
 
 class PantryItemOut(PantryItemIn):
     id: str
     name: str
     recipes: List
+    user_id: str
 
 
 class PantryItems(BaseModel):
