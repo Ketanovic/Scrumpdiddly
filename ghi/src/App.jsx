@@ -1,12 +1,13 @@
-import Construct from "./Construct.js";
-import ErrorNotification from "./ErrorNotification.js";
+// import Construct from "./Construct.js";
+// import ErrorNotification from "./ErrorNotification.js";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import PantryForm from "./PantryItem.js";
-import ListRecipes from "./Recipes/Recipes.js";
-import Nav from "./Nav.js";
-import MainPage from "./MainPage.js";
+import PantryForm from "./PantryItem.jsx";
+// import ListRecipes from "./Recipes.jsx";
+import Nav from "./Nav.jsx";
+import MainPage from "./MainPage.jsx";
+import RecipeList from "./List.js";
 
 
 
@@ -25,8 +26,11 @@ function App() {
           <Route path="/pantry">
             <Route index element={<PantryForm />} />
           </Route>
-          <Route path="/recipes">
+          {/* <Route path="/recipes">
             <Route index element={<ListRecipes />} />
+          </Route> */}
+          <Route path="/recipes">
+            <Route index element={<RecipeList />} />
           </Route>
         </Routes>
       </div>

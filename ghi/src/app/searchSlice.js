@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    value: ''
+    value: 'name'
 }
 
-export const counterSlice = createSlice({
+export const searchSlice = createSlice({
     name: 'search',
     initialState,
     reducers : {
@@ -17,6 +17,6 @@ export const counterSlice = createSlice({
     }
 });
 
-export const { reset, search } = searchSlice.action
+export const { reset, search } = searchSlice
 
 export default searchSlice.reducer;
