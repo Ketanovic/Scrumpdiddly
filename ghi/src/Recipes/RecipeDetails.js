@@ -1,31 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useGetAllRecipesQuery } from '../app/apiSlice';
 
 const RecipeDetails = () => {
   const { name } = useParams();
-  const [recipes, setRecipes] = useState([]);
-  const [name, setName] = useState("");
-
-  const fetchRecipes = async () => {
-    const url = "http://localhost:8000/api/recipes";
-    const response = await fetch(url);
-    if (response.ok) {
-      const json = await response.json();
-      setRecipes(json.recipes);
-    }
-  };
-
-  useEffect(() => {
-    fetchRecipes();
-  }, []);
-
-  const handleNameChange = (event) => {
-    const name = event.target.value;
-    setName(name);
-  };
-
-
-  return (
+  const { data: recipe, isLoading} = useGetAllRecipesQuery(name)
+  console.log({recipe, isLoading});
+  // if (isLoading) return <div>Loading...</div>
+  return(
     <div>
       <h1>Recipes</h1>
       <table className="table table-striped">
@@ -39,7 +21,7 @@ const RecipeDetails = () => {
           </tr>
         </thead>
         <tbody>
-          {recipes.name.map((rec) => { console.log("aaaaaaaaaaaaaaaaaaaaaa", rec.ingredients["ingredients"])
+          {recipe.name.map((rec) => { console.log("aaaaaaaaaaaaaaaaaaaaaa", rec.ingredients["ingredients"])
               return (
                 <tr key={rec.name}>
                   <td>{rec.name}</td>
@@ -47,10 +29,7 @@ const RecipeDetails = () => {
                   <td>{rec.area}</td>
                   <td>{rec.instructions}</td>
                   <td>{rec.ingredients.ingredients}</td>
-                  {/* <td>{rec.technician.first_name}</td> */}
                   <td>
-                    {/* <FinishAppointmentButton id={rec.id} />
-                    <CancelAppointmentButton id={rec.id} /> */}
                   </td>
                 </tr>
               );
@@ -60,3 +39,5 @@ const RecipeDetails = () => {
     </div>
   );
 }
+
+export default RecipeDetails()

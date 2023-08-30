@@ -1,18 +1,11 @@
-from fastapi import (
-    APIRouter,
-    Depends
-)
-from models import (
-    Recipes,
-    RecipeIn,
-    RecipeName
-)
+from fastapi import APIRouter, Depends
+from models import Recipes, RecipeIn, RecipeName
 from queries.recipes import RecipeQueries
 
 router = APIRouter()
 
 
-@router.post("/api/recipes/one")
+@router.get("/api/recipes/$recipes.name")
 def get_recipe(
     info: RecipeName,
     queries: RecipeQueries = Depends(),

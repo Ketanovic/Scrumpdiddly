@@ -15,7 +15,7 @@ import Construct from './Construct';
 import { store } from "./app/store";
 import "./index.css";
 import ListRecipes from './Recipes/Recipes';
-
+import RecipeDetails from './Recipes/RecipeDetails';
 
 const router = createBrowserRouter([
   {
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       {
         path: '/recipes',
         element: <ListRecipes />
-      }
+      },
       {
         path: '/recipes/:name',
         element: <RecipeDetails />
