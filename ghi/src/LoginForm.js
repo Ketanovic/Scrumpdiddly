@@ -1,7 +1,7 @@
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState } from "react";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useToken();
@@ -39,6 +39,7 @@ const LoginForm = () => {
             <input className="btn btn-primary" type="submit" value="Login" />
           </div>
         </form>
+        <button onClick={() => props.onFormSwitch('register')}>Don't have an account? Register Here</button>
       </div>
     </div>
   );

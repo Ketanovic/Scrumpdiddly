@@ -62,17 +62,16 @@ const handlePassChange = (event) => {
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label"> Full Name </label>
-                            <input value={name} onChange={handleNameChange} className="form-control" aria-describedby="emailHelp"> </input> type="name" id="name" placeholder="full name here" />
-
+                            <input value={name} onChange={handleNameChange} className="form-control" aria-describedby="emailHelp" type="name" placeholder="Full Name" />
                             <label htmlFor="email" className="form-label">E-mail</label>
-                            <input value={email} onChange={handleEmailChange} type="email" placeholder="your email" />
+                            <input value={email} onChange={handleEmailChange} className="form-control" aria-describedby="emailHelp" type="email" placeholder="Email Address" />
 
                             <label htmlFor="password" className="form-label">Password</label>
-                            <input value={pass} onChange={handlePassChange} type="password" placeholder="your password" />
+                            <input value={pass} onChange={handlePassChange} className="form-control" aria-describedby="emailHelp" type="password" placeholder="Your Password" />
                         </div>
                             <button className= "btn-btn-primary" type="submit">Register</button>
-                        <button onClick={() => {props.onFormSwitch('login')}}>Already have an account? Login Here</button>
                     </form>
+                    <button onClick={() => props.onFormSwitch('login')}>Already have an account? Login Here</button>
         </div>
     );
 }

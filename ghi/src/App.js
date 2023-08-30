@@ -11,6 +11,7 @@ import RecipeSearch, {UnderscoreLower} from "./RecipeSearch.js";
 import RecipeDetail from "./RecipeDetail.js";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./LoginForm.js";
+import { Register} from "./Register.jsx";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -23,7 +24,12 @@ function App() {
         setRecipes(json.recipes);
       }
     };
-    ;
+
+  const [currentForm, setCurrentForm] = useState('loginForm')
+  const toggleForm = (formName) => {
+    setCurrentForm(formName);
+  }
+
     useEffect(() => {
       fetchRecipes();
     }, []);
@@ -36,16 +42,24 @@ function App() {
             <Route path="/">
               <Route index element={<MainPage />} />
             </Route>
+
             <Route path="/pantry">
               <Route index element={<PantryForm />} />
             </Route>
+
             <Route path="/login">
               <Route index element={<LoginForm />} />
+              <Route>{currentForm === 'loginForm' ? <LoginForm onFormSwitch={toggleForm} />: <Register onFormSwitch={toggleForm} />} </Route>
             </Route>
+
             <Route path="/recipes">
               <Route index element={<ListRecipes />} />
               <Route path="search" element={<RecipeSearch />} />
               <Route path=":name" element={<RecipeDetail />} />
+            </Route>
+            <Route path="/register">
+              <Route index element={<Register />} />
+              <Route>{currentForm === 'register' ? <Register onFormSwitch={toggleForm} />: <LoginForm onFormSwitch={toggleForm} />} </Route>
             </Route>
           </Routes>
         </div>
