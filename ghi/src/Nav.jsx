@@ -1,15 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import './App.css'
-import scrump from './scrump.png'
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg position-fixed">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <NavLink className="navbar-brand link" to="/">
-          <img src={scrump} />
-        </NavLink>
+        <NavLink className="navbar-brand" to="/">Scrummy</NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -24,14 +20,14 @@ function Nav() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink className="nav-link link" to="/">
+              <NavLink className="nav-link" to="/">
                 Home
               </NavLink>
             </li>
 
             <li className="nav-item dropdown">
               <NavLink
-                className="nav-link link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 to="#"
                 id="pantryDropdown"
                 role="button"
@@ -51,7 +47,7 @@ function Nav() {
 
             <li className="nav-item dropdown">
               <NavLink
-                className="nav-link link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 to="#"
                 id="recipesDropdown"
                 role="button"
@@ -60,7 +56,8 @@ function Nav() {
               >
                 Recipes
               </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="recipesDropdown">
+              <ul
+                className="dropdown-menu" aria-labelledby="recipesDropdown">
                 <li>
                   <NavLink className="dropdown-item" to="/recipes">
                     List Recipes
@@ -69,31 +66,15 @@ function Nav() {
               </ul>
             </li>
           </ul>
-          <button className="btn btn-outline-success" type="button">
-            Sign In
-          </button>{" "}
-          &nbsp;&nbsp;
-          <button className="btn btn-outline-success" type="button">
-            Sign Out
-          </button>{" "}
-          &nbsp;&nbsp;
+          <button className="btn btn-outline-success" type="button">Sign In</button> &nbsp;&nbsp;
+          <button className="btn btn-outline-success" type="button">Sign Out</button> &nbsp;&nbsp;
           <form className="form-inline my-2 my-lg-0">
-            <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            ></input>
+          <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
           </form>
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-          >
-            Search Recipe!
-          </button>
+          <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search Recipe!</button>
         </div>
       </div>
-    </nav>
+     </nav>
   );
 }
 

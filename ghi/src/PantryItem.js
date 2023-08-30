@@ -120,7 +120,7 @@ function PantryForm() {
   }, [userId]);
 
   return (
-    <div className="row">
+    <div className="row page-wrap">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h1>Create a Pantry Item</h1>

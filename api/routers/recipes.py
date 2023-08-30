@@ -25,7 +25,7 @@ def get_recipe(
         "area": recipe["area"],
         "instructions": recipe["instructions"],
         "ingredients": recipe["ingredients"],
-        # "thumbnail": recipe["thumbnail"],
+        "thumbnail": recipe["thumbnail"],
     }
 
 
