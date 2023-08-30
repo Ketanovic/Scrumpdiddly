@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import './App.css'
+import scrump from './scrump.png'
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg">
+    <nav className="navbar navbar-expand-lg position-fixed">
       <div className="container-fluid">
-        <NavLink className="navbar-brand link" to="/">SCRUMDIDDLY</NavLink>
+        <NavLink className="navbar-brand link" to="/"><img src={scrump}/></NavLink>
         <button
           className="navbar-toggler"
           type="button"
