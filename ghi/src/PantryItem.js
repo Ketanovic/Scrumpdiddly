@@ -10,8 +10,8 @@ function PantryForm() {
   const [searchIngredient, setSearchIngredient] = useState("");
   const [pantry, setPantry] = useState([]);
   const [recipe, setRecipe] = useState([]);
-  const {token} = useAuthContext()
-  
+  const { token } = useAuthContext();
+  const [userId, setUserId] = useState("");
 
   async function fetchIngredients() {
     const response = await fetch("http://localhost:8000/api/ingredients/");
@@ -22,14 +22,58 @@ function PantryForm() {
       setFilter(Object.values(data.ingredients));
     }
   }
-  async function fetchPantry() {     
-    const response = await fetch("http://localhost:8000/api/pantry_item/",{credentials: 'include'});
-    console.log("token", token)
-    if (response.ok) {
-      const data = await response.json();
-      setPantry(Object.values(data.pantry_items));
+  // async function fetchPantry() {
+  //   const response = await fetch("http://localhost:8000/api/pantry_item/",{credentials: 'include'});
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     console.log(data);
+  //     const filtered_data = data.pantry_items.filter((data) =>
+  //     data.pantry_items.user_id.includes(userId)
+
+  //     )
+  //     setPantry(Object.values(data.pantry_items));
+  //   }
+  // }
+    const fetchUserData = async () => {
+      const response = await fetch("http://localhost:8000/token", {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUserId(data.account.id);
+      }
+    };
+  async function fetchPantry(userId) {
+    fetchUserData()
+    try {
+      const response = await fetch("http://localhost:8000/api/pantry_item/", {
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("data.pantryitem", data.pantry_items);
+
+        const filteredData = data.pantry_items.filter(
+          (item) => item.user_id === userId
+        );
+        console.log("filtered data", filteredData);
+        setPantry(filteredData);
+      } else {
+        console.error("Failed to fetch pantry items");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
     }
   }
+  // const filterPantry = async () => {
+  //   fetchPantry()
+  //   const result = pantry.filter((pantry) =>
+  //   pantry.user_id.includes(userId)
+  //   )
+  //   setPantry(result)
+  //   console.log("result", result);
+  // }
 
   const handleSearch = async () => {
     const result = ingredients.filter((ingredients) =>
@@ -37,7 +81,6 @@ function PantryForm() {
     );
     setFilter(result);
   };
-
 
   const handleSubmit = async (event) => {
     const value = event.target.value;
@@ -48,7 +91,7 @@ function PantryForm() {
     const data = {};
     data.name = x;
     data.recipes = value2;
-    console.log(data);
+    data.user_id = userId;
     const url = "http://localhost:8000/api/pantry_item/";
     const fetchConfig = {
       method: "post",
@@ -59,7 +102,6 @@ function PantryForm() {
       },
     };
 
-    
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       setName("");
@@ -71,11 +113,11 @@ function PantryForm() {
 
   useEffect(() => {
     fetchIngredients();
+    
   }, []);
-
   useEffect(() => {
-    fetchPantry();
-  }, []);
+    fetchPantry(userId);
+  }, [userId]);
 
   return (
     <div className="row page-wrap">
@@ -130,7 +172,7 @@ function PantryForm() {
                   );
                 })}
               </select>
-              <table class="table table-striped table-hover">
+              <table className="table table-striped table-hover">
                 <thead>
                   <tr>
                     <th>Items in Pantry</th>
