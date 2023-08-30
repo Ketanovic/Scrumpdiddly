@@ -4,15 +4,21 @@ export const Register = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [name, setName] = useState('');
+    const [formData, setFormData] = useState({
+        name: "",
+        email:"",
+        pass:"",
+    })
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = {}
-        data.name = name;
-        data.email = email;
-        data.pass = pass;
+        data.username = name;
+        //data.email = email;
+        data.password = pass;
 
         const json = JSON.stringify(data)
+        console.log(json)
         const url = "http://localhost:8000/api/accounts/"
         const fetchConfig ={
             method: "post",
@@ -22,12 +28,11 @@ export const Register = (props) => {
 
         }
     }
-};
         const submitResponse = await fetch(url, fetchConfig);
         if (submitResponse.ok) {
             setFormData({
                 name: "",
-                email: "",
+                //email: "",
                 pass: "",
             });
         } else {
@@ -57,7 +62,7 @@ const handlePassChange = (event) => {
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label"> Full Name </label>
-                            <input value={name} onChange={handleNameChange} type="name" id="name" placeholder="full name here" />
+                            <input value={name} onChange={handleNameChange} className="form-control" aria-describedby="emailHelp"> </input> type="name" id="name" placeholder="full name here" />
 
                             <label htmlFor="email" className="form-label">E-mail</label>
                             <input value={email} onChange={handleEmailChange} type="email" placeholder="your email" />
@@ -66,7 +71,7 @@ const handlePassChange = (event) => {
                             <input value={pass} onChange={handlePassChange} type="password" placeholder="your password" />
                         </div>
                             <button className= "btn-btn-primary" type="submit">Register</button>
-                        <button onClick={() => props.onFormSwitch('login')}>Already have an account? Login Here</button>
+                        <button onClick={() => {props.onFormSwitch('login')}}>Already have an account? Login Here</button>
                     </form>
         </div>
     );

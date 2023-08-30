@@ -11,10 +11,7 @@ import { Register } from "./Register.jsx"
 
 
 function App() {
-    const [currentForm, setCurrentForm] = useState('login');
-    const toggleForm = (formName) => {
-      setCurrentForm(formName);
-    }
+
   return (
     <BrowserRouter>
       <Nav />
@@ -35,6 +32,7 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
+
   );
 }
 export default App
