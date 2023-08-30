@@ -4,7 +4,6 @@ import { search, reset } from "./app/searchSlice";
 
 const Search = () => {
     const [searchInput, setSearchInput] = useState('');
-    const searchCriteria = useSelector(state => state.search.value);
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {

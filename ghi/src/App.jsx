@@ -1,42 +1,15 @@
-// import Construct from "./Construct.js";
-// import ErrorNotification from "./ErrorNotification.js";
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import PantryForm from "./PantryItem.jsx";
-// import ListRecipes from "./Recipes.jsx";
+import { Outlet } from "react-router-dom";
 import Nav from "./Nav.jsx";
-import MainPage from "./MainPage.jsx";
-import RecipeList from "./List.js";
 
 
-
-function App() {
-  // const [currentForm, setCurrentForm] = useState('login');
-  // const toggleForm = (formName) => {
-  //   setCurrentForm(formName);
-  return (
-    <BrowserRouter>
-      <Nav />
-      <div className="container">
-        <Routes>
-          <Route path="/">
-            <Route index element={<MainPage />} />
-          </Route>
-          <Route path="/pantry">
-            <Route index element={<PantryForm />} />
-          </Route>
-          {/* <Route path="/recipes">
-            <Route index element={<ListRecipes />} />
-          </Route> */}
-          <Route path="/recipes">
-            <Route index element={<RecipeList />} />
-          </Route>
-        </Routes>
-      </div>
-    </BrowserRouter>
-  );
-}
+const App = () => (
+  <div className="container">
+    {/* <Nav /> */}
+    <div className="mt-5">
+      < Outlet />
+    </div>
+  </div>
+)
 
 export default App;
 

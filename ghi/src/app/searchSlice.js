@@ -14,9 +14,10 @@ export const searchSlice = createSlice({
         search: (state, action) => {
             state.value = action.payload;
         }
+        // add in slice to click on recipe
     }
 });
 
-export const { reset, search } = searchSlice
+export const { reset, search } = searchSlice.actions
 
 export default searchSlice.reducer;

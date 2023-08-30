@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom"
 
-export default function ListRecipes() {
+const RecipeDetails = () => {
+  const { name } = useParams();
   const [recipes, setRecipes] = useState([]);
   const [name, setName] = useState("");
 

@@ -66,12 +66,12 @@ function Nav() {
               </ul>
             </li>
           </ul>
-          <button class="btn btn-outline-success" type="button">Sign In</button> &nbsp;&nbsp;
-          <button class="btn btn-outline-success" type="button">Sign Out</button> &nbsp;&nbsp;
-          <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
+          <button className="btn btn-outline-success" type="button">Sign In</button> &nbsp;&nbsp;
+          <button className="btn btn-outline-success" type="button">Sign Out</button> &nbsp;&nbsp;
+          <form className="form-inline my-2 my-lg-0">
+          <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
           </form>
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search Recipe!</button>
+          <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search Recipe!</button>
         </div>
       </div>
      </nav>

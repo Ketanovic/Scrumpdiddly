@@ -1,16 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+
+
+
 import reportWebVitals from './reportWebVitals';
-import { store } from './app/store';
-import { Provider } from 'react-redux';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import App from "./App";
+import MainPage from './MainPage';
+import PantryForm from './PantryItem';
 // import Search from "./Search";
+import Construct from './Construct';
+import { store } from "./app/store";
+import "./index.css";
+import ListRecipes from './Recipes/Recipes';
+
 
 const router = createBrowserRouter([
   {
-    element: <App />
+    element: <App />,
+    errorElement: <Construct />,
+    children: [
+      {
+        path: '/',
+        element: <MainPage />
+      },
+      {
+        path:'/pantry',
+        element: <PantryForm />
+      },
+      {
+        path: '/recipes',
+        element: <ListRecipes />
+      }
+      {
+        path: '/recipes/:name',
+        element: <RecipeDetails />
+      },
+    ]
   }
     ])
 
