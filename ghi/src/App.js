@@ -8,11 +8,10 @@ import ListRecipes from "./Recipes/Recipes.js";
 import Nav from "./Nav.js";
 import MainPage from "./MainPage.js";
 import RecipeSearch, {UnderscoreLower} from "./RecipeSearch.js";
-import RecipeDetail from "./RecipeDetail.js";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./LoginForm.js";
 import { Register} from "./Register.jsx";
-
+import RecipeDetailPage from './recipedetail.js'
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -56,11 +55,13 @@ function App() {
             <Route path="/recipes">
               <Route index element={<ListRecipes />} />
               <Route path="search" element={<RecipeSearch />} />
-              <Route path=":name" element={<RecipeDetail />} />
             </Route>
             <Route path="/register">
               <Route index element={<Register />} />
               {/* {currentForm === 'register' ? <Register onFormSwitch={toggleForm} />: <LoginForm onFormSwitch={toggleForm} />} */}
+            </Route>
+            <Route>
+              <Route path="/recipe-detail/:recipeId" element={<RecipeDetailPage />} />
             </Route>
           </Routes>
         </div>
