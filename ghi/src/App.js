@@ -11,7 +11,7 @@ import RecipeSearch, {UnderscoreLower} from "./RecipeSearch.js";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./LoginForm.js";
 import { Register} from "./Register.jsx";
-import RecipeDetailPage from "./RecipeDetail.js"
+import RecipeDetailPage from "./Recipes/RecipeDetail.js"
 
 function App() {
 
