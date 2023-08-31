@@ -5,11 +5,11 @@ export const Register = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [name, setName] = useState('');
-    const [formData, setFormData] = useState({
-        name: "",
-        email:"",
-        pass:"",
-    })
+    // const [formData, setFormData] = useState({
+        // name: "",
+        // email:"",
+        // pass:"",
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -32,11 +32,11 @@ export const Register = (props) => {
     }
         const submitResponse = await fetch(url, fetchConfig);
         if (submitResponse.ok) {
-            setFormData({
-                name: "",
-                email: "",
-                pass: "",
-            });
+            // setFormData({
+            //     name: "",
+            //     email: "",
+            //     pass: "",
+            // });
             navigate('/login');
         } else {
             console.error("*************",submitResponse);

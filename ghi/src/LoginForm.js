@@ -6,26 +6,27 @@ const LoginForm = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useToken();
+  const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(username, password);
+    const isSuccess = await login(username, password);
     e.target.reset();
-
     if (isSuccess) {
         navigate('/');
-    } else {
-        setErrorMessage("Login failed. Please check your credentials.");
     }
-  };
-
+    else {
+      setErrorMessage("Try again!");
+    }
+};
 
   return (
     <div className="page-wrap">
     <div className="card text-bg-light mb-3">
       <h5 className="card-header">Login</h5>
       <div className="card-body">
+        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="mb-3">
             <label className="form-label">Username:</label>
