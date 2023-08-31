@@ -50,7 +50,6 @@ function App() {
 
             <Route path="/login">
               <Route index element={<LoginForm />} />
-              {/* {currentForm === 'loginForm' ? <LoginForm onFormSwitch={toggleForm} />: <Register onFormSwitch={toggleForm} />} */}
             </Route>
 
             <Route path="/recipes">
@@ -60,7 +59,6 @@ function App() {
             </Route>
             <Route path="/register">
               <Route index element={<Register />} />
-              {/* {currentForm === 'register' ? <Register onFormSwitch={toggleForm} />: <LoginForm onFormSwitch={toggleForm} />} */}
             </Route>
           </Routes>
         </div>

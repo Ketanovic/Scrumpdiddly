@@ -25,7 +25,7 @@ export default function ListRecipes() {
                 return (
                     <div className="col-4 pb-3 card-glow">
                       <div className="small-card card-deck mb-3 text-center">
-                        <img src={rec.thumbnail} class="card-img-top" alt="..."/>
+                        <img src={rec.thumbnail} className="card-img-top" alt="..."/>
                         <div className="card-body d-flex flex-column">
                           <div className="title-card">
                             <h5 className="card-title text-truncate">{rec.name}</h5>

@@ -2,8 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import './App.css'
 import scrump from './scrump.png'
+import { useNavigate } from "react-router-dom";
+
 
 function Nav() {
+    const navigate = useNavigate()
   return (
     <nav className="navbar navbar-expand-lg position-fixed">
       <div className="container-fluid">
@@ -69,7 +72,7 @@ function Nav() {
               </ul>
             </li>
           </ul>
-          <button className="btn btn-outline-success" type="button">
+          <button className="btn btn-outline-success" type="submit" onClick={() => navigate("/login")}>
             Sign In
           </button>{" "}
           &nbsp;&nbsp;
@@ -96,5 +99,6 @@ function Nav() {
     </nav>
   );
 }
+
 
 export default Nav;
