@@ -21,6 +21,13 @@ body {
   background-size: cover;
 }
 
+body .not-main {
+  background: url('./background-nobox.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 .page-wrap {
   padding-top: 80px;
@@ -93,7 +100,7 @@ nav {
 }
 
 .small-card:hover {
-  box-shadow: 0 0 10px 2px #000000;
+  box-shadow: 0 0 10px 2px #4b2f22;
 }
 
 .rec-button {
