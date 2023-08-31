@@ -9,9 +9,8 @@ function MainPage() {
         <p className="lead mb-4">
           The premiere solution for making dinner at home easier!
         </p>
-        <button type="submit" className="btn btn-primary" onClick={() => navigate("/register")}>To use our service, please login first by clicking me!</button>
+        <button type="submit" className="btn btn-primary" onClick={() => navigate("/login")}>To use our service, please login first by clicking me!</button>
       </div>
-    </div>
   );
 }
 
