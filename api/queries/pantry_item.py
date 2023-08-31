@@ -1,8 +1,8 @@
-
 from pymongo import MongoClient
 import os
 from models import PantryItemIn, PantryItemOut
-
+from bson.objectid import ObjectId
+from bson.errors import InvalidId
 DATABASE_URL = os.environ.get("DATABASE_URL")
 client = MongoClient(DATABASE_URL)
 db = client["pantry-item-db"]
@@ -13,7 +13,6 @@ class DuplicatePantryItem(ValueError):
 
 
 class PantryItemQueries:
-
     @property
     def collection(self):
         return db["pantry items"]
@@ -28,6 +27,11 @@ class PantryItemQueries:
     def find_all(self):
         results = []
         for pantry in self.collection.find():
-            pantry['id'] = str(pantry['_id'])
+            pantry["id"] = str(pantry["_id"])
             results.append(pantry)
         return results
+
+    def delete(self, pantry_item_id: str):
+        result = self.collection.delete_one({'_id': ObjectId(pantry_item_id)})
+        return result.deleted_count > 0
+
