@@ -31,8 +31,11 @@ class RecipeQueries:
             recipe = info
         if self.collection.find_one({"name": recipe["name"]}) is None:
             try:
+                print(recipe)
                 self.collection.insert_one(recipe)
                 recipe['id'] = str(recipe['_id'])
+                print(recipe)
+                return recipe
             except DuplicateRecipeError:
                 print("Recipe Already Exists")
                 return recipe
@@ -43,7 +46,10 @@ class RecipeQueries:
     def find_all(self):
         results = []
         for recipe in self.collection.find():
+            recipe["id"] = str(ObjectId(recipe["_id"]))
+            print("aaaaaaaaaaaaaaaaa", recipe)
             results.append(recipe)
+
         return results
 
     def get_one(self, id: str):
