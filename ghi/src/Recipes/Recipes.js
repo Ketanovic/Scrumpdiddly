@@ -30,7 +30,7 @@ export default function ListRecipes() {
                     <h5 className="card-title text-truncate">{rec.name}</h5>
                   </div>
                   <p className="card-text">{rec.area} {rec.category}</p>
-                  <Link to={`/recipe-detail/${encodeURIComponent(rec.name)}`}>
+                  <Link to={`/recipes/${encodeURIComponent(rec.id)}`}>
                     <button className="btn btn-block rec-button mt-auto">Check it out!</button>
                   </Link>
                 </div>
