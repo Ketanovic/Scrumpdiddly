@@ -5,21 +5,22 @@ import { useNavigate } from "react-router-dom";
 const LoginForm = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useToken();
+  const { login, token } = useToken();
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const isSuccess = await login(username, password);
-    e.target.reset();
-    if (isSuccess) {
-        navigate('/');
-    }
-    else {
-      setErrorMessage("Try again!");
-    }
-};
+      e.preventDefault();
+      try {
+        await login(username, password);
+        if (token) {
+          navigate('/');
+        } else {
+          setErrorMessage("Failed to log in. Please check your credentials.");
+        }
+      }
+  };
+
 
   return (
     <div className="page-wrap">
@@ -56,5 +57,6 @@ const LoginForm = (props) => {
     </div>
   );
 };
+
 
 export default LoginForm;
