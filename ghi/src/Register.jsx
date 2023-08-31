@@ -16,7 +16,7 @@ export const Register = (props) => {
         e.preventDefault();
         const data = {}
         data.username = name;
-        //data.email = email;
+        data.email = email;
         data.password = pass;
 
         const json = JSON.stringify(data)
@@ -34,11 +34,11 @@ export const Register = (props) => {
         if (submitResponse.ok) {
             setFormData({
                 name: "",
-                //email: "",
+                email: "",
                 pass: "",
             });
         } else {
-            console.error(submitResponse);
+            console.error("*************",submitResponse);
         }
     }
 
@@ -91,13 +91,12 @@ const handlePassChange = (event) => {
 
                         <button
                         type="submit"
-                        class="btn btn-primary"
                         className= "btn-btn-primary"
-                        type="submit">Register
+                        >Register
                         </button>
                     </form>
                         <button
-                        class="already-have"
+                        className="already-have"
                         onClick={() => navigate("/login")}>
                             Already have an account? Login Here
                         </button>
