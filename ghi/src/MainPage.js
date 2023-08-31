@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import scrumdiddly from './scrumdiddly.png'
 
 function MainPage() {
+  const navigate = useNavigate()
   return (
       <div className='center page-wrap'>
         <div className='bg-img'>
@@ -8,7 +10,8 @@ function MainPage() {
           <p className="lead mb-4">
             The premiere solution for making dinner at home easier!
           </p>
-        </div>
+            <button type="submit" className="btn btn-primary" onClick={() => navigate("/login")}>To use our service, please login first by clicking me!</button>
+      </div>
       </div>
   );
 }

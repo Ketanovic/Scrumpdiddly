@@ -10,12 +10,14 @@ class AccountForm(BaseModel):
 
 class AccountIn(BaseModel):
     username: str
+    email: str
     password: str
 
 
 class AccountOut(BaseModel):
     id: str
     username: str
+    email: str
 
 
 class AccountOutWithHashedPassword(BaseModel):
@@ -71,12 +73,14 @@ class RecipeNameForm(BaseModel):
 class PantryItemIn(BaseModel):
     name: str
     recipes: List
+    user_id: str
 
 
 class PantryItemOut(PantryItemIn):
     id: str
     name: str
     recipes: List
+    user_id: str
 
 
 class PantryItems(BaseModel):

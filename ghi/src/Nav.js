@@ -7,7 +7,9 @@ function Nav() {
   return (
     <nav className="navbar navbar-expand-lg position-fixed">
       <div className="container-fluid">
-        <NavLink className="navbar-brand link" to="/"><img src={scrump}/></NavLink>
+        <NavLink className="navbar-brand link" to="/">
+          <img src={scrump} />
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -58,8 +60,7 @@ function Nav() {
               >
                 Recipes
               </NavLink>
-              <ul
-                className="dropdown-menu" aria-labelledby="recipesDropdown">
+              <ul className="dropdown-menu" aria-labelledby="recipesDropdown">
                 <li>
                   <NavLink className="dropdown-item" to="/recipes">
                     List Recipes
@@ -68,15 +69,31 @@ function Nav() {
               </ul>
             </li>
           </ul>
-          <button className="button" type="button">Sign In</button> &nbsp;&nbsp;
-          <button className="button" type="button">Sign Out</button> &nbsp;&nbsp;
+          <button className="btn btn-outline-success" type="button">
+            Sign In
+          </button>{" "}
+          &nbsp;&nbsp;
+          <button className="btn btn-outline-success" type="button">
+            Sign Out
+          </button>{" "}
+          &nbsp;&nbsp;
           <form className="form-inline my-2 my-lg-0">
-            <input className="form-control mr-sm-2 search" type="search" placeholder="Search" aria-label="Search"></input>
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            ></input>
           </form>
-          <button className="button" type="submit">Search Recipe!</button>
+          <button
+            className="btn btn-outline-success my-2 my-sm-0"
+            type="submit"
+          >
+            Search Recipe!
+          </button>
         </div>
       </div>
-     </nav>
+    </nav>
   );
 }
 
