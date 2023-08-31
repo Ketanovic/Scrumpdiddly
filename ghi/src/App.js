@@ -14,25 +14,12 @@ import { Register} from "./Register.jsx";
 import RecipeDetailPage from './recipedetail.js'
 
 function App() {
-  const [recipes, setRecipes] = useState([]);
-  let { name } = useParams()
-    const fetchRecipes = async () => {
-      const url = "http://localhost:8000/api/recipes";
-      const response = await fetch(url);
-      if (response.ok) {
-        const json = await response.json();
-        setRecipes(json.recipes);
-      }
-    };
 
   const [currentForm, setCurrentForm] = useState('loginForm')
   const toggleForm = (formName) => {
     setCurrentForm(formName);
   }
 
-    useEffect(() => {
-      fetchRecipes();
-    }, []);
   return (
     <AuthProvider baseUrl="http://localhost:8000">
       <BrowserRouter>
@@ -61,7 +48,7 @@ function App() {
               {/* {currentForm === 'register' ? <Register onFormSwitch={toggleForm} />: <LoginForm onFormSwitch={toggleForm} />} */}
             </Route>
             <Route>
-              <Route path="/recipe-detail/:recipeName" element={<RecipeDetailPage />} />
+              <Route path="/recipe-detail/one" element={<RecipeDetailPage />} />
             </Route>
           </Routes>
         </div>

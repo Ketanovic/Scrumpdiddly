@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 function RecipeDetailPage() {
-  const { recipeName } = useParams();  // Use recipeName from the URL parameter
+  const { recipeName } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState(false);
 
@@ -11,16 +11,16 @@ function RecipeDetailPage() {
       .then(response => response.json())
       .then(data => {
         if (data.recipes && data.recipes.length > 0) {
-        setRecipe(data.recipes[0]);
-      } else {
+          setRecipe(data.recipes[0]);
+        } else {
+          setError(true);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching recipe:', error);
         setError(true);
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching recipe:', error);
-      setError(true);
-    });
-}, [recipeName]);
+      });
+  }, [recipeName]);
 
   if (error) {
     return <div>Recipe not found or an error occurred.</div>;
