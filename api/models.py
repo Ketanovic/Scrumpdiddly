@@ -98,3 +98,7 @@ class IngredientOut(IngredientIn):
 
 class Ingredients(BaseModel):
     ingredients: List[IngredientOut]
+
+
+class DeleteStatus(BaseModel):
+    status: bool

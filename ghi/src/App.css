@@ -123,3 +123,16 @@ div.title-card {
 img.card-img-top {
   border-radius: 8px;
 }
+
+.delete-button {
+  background-color: transparent;
+  color:#247000;
+  border: 1px solid #247000;
+}
+
+.delete-button:hover {
+  transition: 0.3s;
+  background-color: #ff0000;
+  color: white;
+  border: 1px solid #ff0000;
+}
