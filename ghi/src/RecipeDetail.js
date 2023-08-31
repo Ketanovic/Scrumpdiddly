@@ -2,15 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 function RecipeDetailPage() {
-  const { recipeId } = useParams();
+  const { recipeName } = useParams();  // Use recipeName from the URL parameter
   const [recipe, setRecipe] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch(`https://www.themealdb.com/api/json/v2/9973533/lookup.php?i=${recipeId}`)
+    fetch(`http://localhost:8000/api/recipes/${encodeURIComponent(recipeName)}`)
       .then(response => response.json())
-      .then(data => setRecipe(data.meals[0]))
-      .catch(error => console.error('Error fetching recipe:', error));
-  }, [recipeId]);
+      .then(data => {
+        if (data.recipes && data.recipes.length > 0) {
+        setRecipe(data.recipes[0]);
+      } else {
+        setError(true);
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching recipe:', error);
+      setError(true);
+    });
+}, [recipeName]);
+
+  if (error) {
+    return <div>Recipe not found or an error occurred.</div>;
+  }
 
   if (!recipe) {
     return <div>Loading...</div>;
@@ -25,10 +39,10 @@ function RecipeDetailPage() {
 
   return (
     <div>
-      <h1>{recipe.strMeal}</h1>
-      <p>Category: {recipe.strCategory}</p>
-      <p>Area: {recipe.strArea}</p>
-      <p>Instructions: {recipe.strInstructions}</p>
+      <h1>{recipe.name}</h1>
+      <p>Category: {recipe.category}</p>
+      <p>Area: {recipe.area}</p>
+      <p>Instructions: {recipe.instructions}</p>
       <p>Ingredients: {ingredients.join(', ')}</p>
     </div>
   );

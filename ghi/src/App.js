@@ -61,7 +61,7 @@ function App() {
               {/* {currentForm === 'register' ? <Register onFormSwitch={toggleForm} />: <LoginForm onFormSwitch={toggleForm} />} */}
             </Route>
             <Route>
-              <Route path="/recipe-detail/:recipeId" element={<RecipeDetailPage />} />
+              <Route path="/recipe-detail/:recipeName" element={<RecipeDetailPage />} />
             </Route>
           </Routes>
         </div>
