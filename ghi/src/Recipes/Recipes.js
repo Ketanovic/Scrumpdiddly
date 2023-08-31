@@ -13,42 +13,31 @@ export default function ListRecipes() {
     }
   };
 
+
   useEffect(() => {
     fetchRecipes();
   }, []);
 
   return (
-    <div>
-      <h1>Recipes</h1>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Area</th>
-            <th>Instructions</th>
-            <th>ingredients</th>
-          </tr>
-        </thead>
-        <tbody>
-          {recipes.map((rec) => { console.log("aaaaaaaaaaaaaaaaaaaaaa", rec.ingredients["ingredients"])
-              return (
-                <tr key={rec.name}>
-                  <td>{rec.name}</td>
-                  <td>{rec.category}</td>
-                  <td>{rec.area}</td>
-                  <td>{rec.instructions}</td>
-                  <td>{rec.ingredients.ingredients}</td>
-                  {/* <td>{rec.technician.first_name}</td> */}
-                  <td>
-                    {/* <FinishAppointmentButton id={rec.id} />
-                    <CancelAppointmentButton id={rec.id} /> */}
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+    <div className="page-wrap">
+      <div className="row pt-3 ease-up">
+            {recipes.map((rec) => {
+                return (
+                    <div className="col-4 pb-3 card-glow">
+                      <div className="small-card card-deck mb-3 text-center">
+                        <img src={rec.thumbnail} class="card-img-top" alt="..."/>
+                        <div className="card-body d-flex flex-column">
+                          <div className="title-card">
+                            <h5 className="card-title text-truncate">{rec.name}</h5>
+                          </div>
+                          <p className="card-text">{rec.area} {rec.category}</p>
+                          <button className="btn btn-block rec-button mt-auto">Check it out!</button>
+                        </div>
+                      </div>
+                    </div>
+                );
+              })}
+      </div>
     </div>
   );
 }

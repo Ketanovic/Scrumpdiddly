@@ -73,7 +73,7 @@ def list_all_recipes():
                 "area": recipe["strArea"],
                 "instructions": recipe["strInstructions"],
                 "ingredients": ing_dict,
-                # "thumbnail": recipe["strImageSource"],
+                "thumbnail": recipe["strMealThumb"],
             }
             queries.create(encoder)
 
