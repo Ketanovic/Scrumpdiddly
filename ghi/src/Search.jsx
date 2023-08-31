@@ -26,10 +26,10 @@ const Search = () => {
                 <button
                     className="btn btn-lg btn-link"
                     type="button"
-                    onClick={() => {
-                        dispatch(reset())
-                        setSearchInput('');
-                    }}
+                    onClick={() =>
+                        dispatch(reset(),
+                        setSearchInput('')
+                        )}
                 >
                         reset
                 </button>

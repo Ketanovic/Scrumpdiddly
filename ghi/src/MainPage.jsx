@@ -1,3 +1,6 @@
+import Search from "./Search";
+import ListRecipes from "./Recipes/Recipes";
+
 function MainPage() {
   return (
     <div className="px-4 py-5 my-5 text-center">
@@ -6,6 +9,8 @@ function MainPage() {
         <p className="lead mb-4">
           The premiere solution for making dinner at home easier!
         </p>
+        <Search />
+        <ListRecipes />
       </div>
     </div>
   );

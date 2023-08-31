@@ -1,40 +1,28 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useGetAllRecipesQuery } from "../app/apiSlice";
 
-export default function ListRecipes() {
-  const [recipes, setRecipes] = useState([]);
+const ListRecipes = () => {
   const searchCriteria = useSelector((state) => state.search.value);
   const { data, error, isLoading } = useGetAllRecipesQuery();
   console.log({ data, error, isLoading }); //get rid of this when it works
 
-  // if (isLoading) return <>Loading...</>;
-
-  const fetchRecipes = async () => {
-    const url = "http://localhost:8000/api/recipes";
-    const response = await fetch(url);
-    if (response.ok) {
-      const json = await response.json();
-      setRecipes(json.recipes);
-    }
-  };
-
-  useEffect(() => {
-    fetchRecipes();
-  }, []);
+  if (isLoading) return <>Loading...</>;
 
   const filteredData = () => {
     if (searchCriteria)
-      return recipes.filter((recipe) => recipe.name.includes(searchCriteria));
-    return recipes;
+      return data.recipes.filter((recipe) =>
+        recipe.name.includes(searchCriteria)
+      );
+    return data.recipes;
   };
 
   return (
     <div>
       <h1 className="mt-3">
-        Recipes{" "}
+        Recipes {""}
         {searchCriteria && (
-          <small className="text-body-secondary">"{searchCriteria}</small>
+          <small className="text-body-secondary">'{searchCriteria}'</small>
         )}
       </h1>
       <table className="table table-striped">
@@ -43,29 +31,20 @@ export default function ListRecipes() {
             <th>Name</th>
             <th>Category</th>
             <th>Area</th>
-            <th>Instructions</th>
+            {/* <th>Instructions</th> */}
             <th>ingredients</th>
           </tr>
         </thead>
         <tbody>
-          {filteredData.recipes.map((rec) => {
-            console.log(
-              "aaaaaaaaaaaaaaaaaaaaaa",
-              rec,
-              rec.ingredients["ingredients"]
-            );
+          {filteredData().map((rec) => {
+            console.log("aaaaaaaaaaaaaaaaaaaaaa", rec);
             return (
               <tr key={rec.name}>
                 <td>{rec.name}</td>
                 <td>{rec.category}</td>
                 <td>{rec.area}</td>
-                <td>{rec.instructions}</td>
+                {/* <td>{rec.instructions}</td> */}
                 <td>{rec.ingredients.ingredients}</td>
-                {/* <td>{rec.technician.first_name}</td> */}
-                <td>
-                  {/* <FinishAppointmentButton id={rec.id} />
-                    <CancelAppointmentButton id={rec.id} /> */}
-                </td>
               </tr>
             );
           })}
@@ -73,4 +52,6 @@ export default function ListRecipes() {
       </table>
     </div>
   );
-}
+};
+
+export default ListRecipes;
