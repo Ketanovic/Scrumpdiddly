@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import os
 from models import RecipeIn, RecipeName
+from bson.objectid import ObjectId
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 client = MongoClient(DATABASE_URL)
@@ -31,6 +32,7 @@ class RecipeQueries:
         if self.collection.find_one({"name": recipe["name"]}) is None:
             try:
                 self.collection.insert_one(recipe)
+                recipe['id'] = str(recipe['_id'])
             except DuplicateRecipeError:
                 print("Recipe Already Exists")
                 return recipe
@@ -43,3 +45,7 @@ class RecipeQueries:
         for recipe in self.collection.find():
             results.append(recipe)
         return results
+
+    def get_one(self, id: str):
+        recipe = self.collection.find_one({"_id": ObjectId(id)})
+        return recipe
