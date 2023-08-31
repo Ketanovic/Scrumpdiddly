@@ -1,12 +1,5 @@
-from fastapi import (
-    APIRouter,
-    Depends
-)
-from models import (
-    Recipes,
-    RecipeIn,
-    RecipeName
-)
+from fastapi import APIRouter, Depends
+from models import Recipes, RecipeIn, RecipeName
 from queries.recipes import RecipeQueries
 
 router = APIRouter()
