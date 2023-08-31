@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Register = (props) => {
     const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ export const Register = (props) => {
         email:"",
         pass:"",
     })
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,18 +63,44 @@ const handlePassChange = (event) => {
                 <div className="card-body"></div>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label htmlFor="name" className="form-label"> Full Name </label>
-                            <input value={name} onChange={handleNameChange} className="form-control" aria-describedby="emailHelp"> </input> type="name" id="name" placeholder="full name here" />
+                            <label htmlFor="name"className="form-label">Full Name:</label>
+                            <input
+                            value={name}
+                            onChange={handleNameChange}
+                            className="form-control"
+                            type="name"
+                            placeholder="Full Name" />
 
-                            <label htmlFor="email" className="form-label">E-mail</label>
-                            <input value={email} onChange={handleEmailChange} type="email" placeholder="your email" />
+                            <label className="form-label"> E-mail:</label>
+                            <input
+                            value={email}
+                            onChange={handleEmailChange}
+                            className="form-control"
+                            aria-describedby="emailHelp"
+                            type="email"
+                            placeholder="Email Address" />
 
-                            <label htmlFor="password" className="form-label">Password</label>
-                            <input value={pass} onChange={handlePassChange} type="password" placeholder="your password" />
+                            <label className="form-label">Password:</label>
+                            <input
+                            value={pass}
+                            onChange={handlePassChange}
+                            className="form-control"
+                            type="password"
+                            placeholder="Your Password" />
                         </div>
-                            <button className= "btn-btn-primary" type="submit">Register</button>
-                        <button onClick={() => {props.onFormSwitch('login')}}>Already have an account? Login Here</button>
+
+                        <button
+                        type="submit"
+                        class="btn btn-primary"
+                        className= "btn-btn-primary"
+                        type="submit">Register
+                        </button>
                     </form>
+                        <button
+                        class="already-have"
+                        onClick={() => navigate("/login")}>
+                            Already have an account? Login Here
+                        </button>
         </div>
     );
 }
