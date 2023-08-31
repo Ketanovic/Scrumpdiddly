@@ -13,6 +13,7 @@ import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./LoginForm.js";
 import { Register} from "./Register.jsx";
 
+
 function App() {
   const [recipes, setRecipes] = useState([]);
   let { name } = useParams()
@@ -49,7 +50,7 @@ function App() {
 
             <Route path="/login">
               <Route index element={<LoginForm />} />
-              <Route>{currentForm === 'loginForm' ? <LoginForm onFormSwitch={toggleForm} />: <Register onFormSwitch={toggleForm} />} </Route>
+              {/* {currentForm === 'loginForm' ? <LoginForm onFormSwitch={toggleForm} />: <Register onFormSwitch={toggleForm} />} */}
             </Route>
 
             <Route path="/recipes">
@@ -59,7 +60,7 @@ function App() {
             </Route>
             <Route path="/register">
               <Route index element={<Register />} />
-              <Route>{currentForm === 'register' ? <Register onFormSwitch={toggleForm} />: <LoginForm onFormSwitch={toggleForm} />} </Route>
+              {/* {currentForm === 'register' ? <Register onFormSwitch={toggleForm} />: <LoginForm onFormSwitch={toggleForm} />} */}
             </Route>
           </Routes>
         </div>
