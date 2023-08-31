@@ -24,6 +24,7 @@ class AccountOutWithHashedPassword(BaseModel):
     id: str
     username: str
     hashed_password: str
+    email: str
 
 
 class AccountToken(Token):
