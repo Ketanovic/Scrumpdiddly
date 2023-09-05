@@ -25,6 +25,7 @@ class AccountOutWithHashedPassword(BaseModel):
     id: str
     username: str
     hashed_password: str
+    email: str
 
 
 class AccountToken(Token):
@@ -108,3 +109,7 @@ class IngredientOut(IngredientIn):
 
 class Ingredients(BaseModel):
     ingredients: List[IngredientOut]
+
+
+class DeleteStatus(BaseModel):
+    status: bool

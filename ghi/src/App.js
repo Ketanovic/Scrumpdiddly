@@ -15,10 +15,10 @@ import RecipeDetailPage from "./Recipes/RecipeDetail.js"
 
 function App() {
 
-  const [currentForm, setCurrentForm] = useState('loginForm')
+  const [currentForm, setCurrentForm] = useState("loginForm");
   const toggleForm = (formName) => {
     setCurrentForm(formName);
-  }
+  };
 
   return (
     <AuthProvider baseUrl="http://localhost:8000">
@@ -36,7 +36,6 @@ function App() {
 
             <Route path="/login">
               <Route index element={<LoginForm />} />
-              {/* {currentForm === 'loginForm' ? <LoginForm onFormSwitch={toggleForm} />: <Register onFormSwitch={toggleForm} />} */}
             </Route>
 
             <Route path="/recipes">
@@ -46,7 +45,6 @@ function App() {
             </Route>
             <Route path="/register">
               <Route index element={<Register />} />
-              {/* {currentForm === 'register' ? <Register onFormSwitch={toggleForm} />: <LoginForm onFormSwitch={toggleForm} />} */}
             </Route>
             <Route></Route>
           </Routes>
@@ -55,11 +53,7 @@ function App() {
     </AuthProvider>
   );
 }
-export default App
-
-
-
-
+export default App;
 
 // function App() {
 //   const [launchInfo, setLaunchInfo] = useState([]);

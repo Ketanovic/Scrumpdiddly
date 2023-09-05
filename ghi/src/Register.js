@@ -5,11 +5,11 @@ export const Register = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [name, setName] = useState('');
-    const [formData, setFormData] = useState({
-        name: "",
-        email:"",
-        pass:"",
-    })
+    // const [formData, setFormData] = useState({
+        // name: "",
+        // email:"",
+        // pass:"",
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -32,11 +32,12 @@ export const Register = (props) => {
     }
         const submitResponse = await fetch(url, fetchConfig);
         if (submitResponse.ok) {
-            setFormData({
-                name: "",
-                email: "",
-                pass: "",
-            });
+            // setFormData({
+            //     name: "",
+            //     email: "",
+            //     pass: "",
+            // });
+            navigate('/login');
         } else {
             console.error("*************",submitResponse);
         }
@@ -58,6 +59,7 @@ const handlePassChange = (event) => {
 }
 
     return (
+        <div className="page-wrap">
         <div className="card text-bg-light mb-3">
             <h5 className="card-header">Register</h5>
                 <div className="card-body"></div>
@@ -73,7 +75,7 @@ const handlePassChange = (event) => {
 
                             <label className="form-label"> E-mail:</label>
                             <input
-                            value={email}
+                            // value={email}
                             onChange={handleEmailChange}
                             className="form-control"
                             aria-describedby="emailHelp"
@@ -100,6 +102,7 @@ const handlePassChange = (event) => {
                         onClick={() => navigate("/login")}>
                             Already have an account? Login Here
                         </button>
+        </div>
         </div>
     );
 }

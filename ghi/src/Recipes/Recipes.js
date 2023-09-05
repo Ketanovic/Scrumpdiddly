@@ -18,7 +18,7 @@ export default function ListRecipes() {
   }, []);
 
   return (
-    <div className="page-wrap">
+    <div className="page-wrap not-main">
       <div className="row pt-3 ease-up">
         {recipes.map((rec) => { console.log(recipes)
           return (
