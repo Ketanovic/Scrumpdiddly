@@ -7,33 +7,18 @@ import PantryForm from "./PantryItem";
 import ListRecipes from "./Recipes/Recipes.js";
 import Nav from "./Nav.js";
 import MainPage from "./MainPage.js";
-import RecipeSearch, {UnderscoreLower} from "./RecipeSearch.js";
-import RecipeDetail from "./RecipeDetail.js";
+import RecipeSearch, { UnderscoreLower } from "./RecipeSearch.js";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./LoginForm.js";
-import { Register} from "./Register.jsx";
-
+import { Register } from "./Register.js";
 
 function App() {
-  const [recipes, setRecipes] = useState([]);
-  let { name } = useParams()
-    const fetchRecipes = async () => {
-      const url = "http://localhost:8000/api/recipes";
-      const response = await fetch(url);
-      if (response.ok) {
-        const json = await response.json();
-        setRecipes(json.recipes);
-      }
-    };
 
-  const [currentForm, setCurrentForm] = useState('loginForm')
+  const [currentForm, setCurrentForm] = useState("loginForm");
   const toggleForm = (formName) => {
     setCurrentForm(formName);
-  }
+  };
 
-    useEffect(() => {
-      fetchRecipes();
-    }, []);
   return (
     <AuthProvider baseUrl="http://localhost:8000">
       <BrowserRouter>
@@ -55,7 +40,6 @@ function App() {
             <Route path="/recipes">
               <Route index element={<ListRecipes />} />
               <Route path="search" element={<RecipeSearch />} />
-              <Route path=":name" element={<RecipeDetail />} />
             </Route>
             <Route path="/register">
               <Route index element={<Register />} />
@@ -66,11 +50,7 @@ function App() {
     </AuthProvider>
   );
 }
-export default App
-
-
-
-
+export default App;
 
 // function App() {
 //   const [launchInfo, setLaunchInfo] = useState([]);
