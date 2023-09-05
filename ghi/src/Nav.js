@@ -3,10 +3,23 @@ import { NavLink } from "react-router-dom";
 import './App.css'
 import scrump from './scrump.png'
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 
 function Nav() {
     const navigate = useNavigate()
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    // need to check if the user is logged in using authentication:
+    useEffect (()=> {
+      // Check the state of the user's login status
+    fetch("/api/user/is-logged-in")
+      .then((response) => response.json())
+      .then((data) => {
+        setLoggedIn(data.isLoggedIn);
+      });
+  }, []);
+
   return (
     <nav className="navbar navbar-expand-lg position-fixed">
       <div className="container-fluid">
@@ -72,13 +85,19 @@ function Nav() {
               </ul>
             </li>
           </ul>
-          <button className="btn btn-outline-success" type="submit" onClick={() => navigate("/login")}>
+          {!loggedIn &&
+          <button className="btn btn-outline-success" type="submit" onClick={() => { setLoggedIn(true); navigate("/login"); }}>
             Sign In
-          </button>{" "}
+          </button>
+          }
+          {" "}
           &nbsp;&nbsp;
-          <button className="btn btn-outline-success" type="button">
+          {loggedIn &&
+          <button className="btn btn-outline-success" type="button" onClick={() => setLoggedIn(false)}>
             Sign Out
-          </button>{" "}
+          </button>
+          }
+          {" "}
           &nbsp;&nbsp;
           <form className="form-inline my-2 my-lg-0">
             <input

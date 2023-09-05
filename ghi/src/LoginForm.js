@@ -13,7 +13,7 @@ const LoginForm = (props) => {
     e.preventDefault();
     try {
       await login(username, password);
-      console.log("error first");
+       navigate('/');
     } catch (err) {
       // Handle the error here
       console.log("Error caught in handleSubmit:", err);
