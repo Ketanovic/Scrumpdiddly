@@ -1,49 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 
 function RecipeDetailPage() {
-  const { recipeName } = useParams();
   const [recipe, setRecipe] = useState([]);
 
-  const fetchRecipe = async () => {
-    const url = "http://localhost:8000/api/recipes/";
+  const fetchSingleRecipe = async () => {
+    const url = "http://localhost:8000/api/recipes/64f0e25b7febf823138e36c6";
     const response = await fetch(url);
+    console.log("AHAHAHAHAHAHA", response)
     if (response.ok) {
       const json = await response.json();
-      setRecipe(json.recipe);
+      setRecipe(json);
+
+
     }
   };
 
   useEffect(() => {
-    fetchRecipe();
+      fetchSingleRecipe();
   }, []);
-
-  // useEffect(() => {
-  //   fetch(`http://localhost:8000/api/recipes/${encodeURIComponent(recipeName)}`)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       if (data.recipes && data.recipes.length > 0) {
-  //         setRecipe(data.recipes[0]);
-  //       } else {
-  //         setError(true);
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching recipe:', error);
-  //       setError(true);
-  //     });
-  // }, [recipeName]);
-
-  // if (!recipe) {
-  //   return <div>Loading...</div>;
-  // }
-
-  const ingredients = [];
-  for (let i = 1; i <= 20; i++) {
-    if (recipe[`strIngredient${i}`]) {
-      ingredients.push(recipe[`strIngredient${i}`]);
-    }
-  }
 
   return (
     <div>
@@ -51,7 +25,35 @@ function RecipeDetailPage() {
       <p>Category: {recipe.category}</p>
       <p>Area: {recipe.area}</p>
       <p>Instructions: {recipe.instructions}</p>
-      <p>Ingredients: {ingredients.join(', ')}</p>
+      {/* <table>
+        <tbody>
+          {recipe.ingredients.map((ingnames) => {
+            return (
+              <tr key = {ingnames}>
+                <td>{ingnames}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table> */}
+      <p></p>
+      {/* <p>Ingredients: {recipe.ingredients.ingredients}</p>
+      <table className= "table table-striped">
+        {recipe.map((rec)) => {
+          return (
+            <tr key={rec.ingredients}>
+              <td>{rec.ingredients}</td>
+            </tr>
+          )
+          <tbody>
+            {% for key, value in ingredients.items() %}
+              <tr>
+                  <td> {{ key }} </td>
+                  <td> {{ value }} </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table> */}
     </div>
   );
 }
