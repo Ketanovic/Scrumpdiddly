@@ -21,10 +21,10 @@ export default function ListRecipes() {
   return (
     <div className="page-wrap not-main">
       <div className="row pt-3 ease-up">
-            {recipes.map((rec) => {
+            {recipes.map((rec) => { 
                 return (
                     <div className="col-4 pb-3 card-glow">
-                      <div className="small-card card-deck mb-3 text-center">
+                      <div className="smaA9B7 ll-card card-deck mb-3 text-center">
                         <img src={rec.thumbnail} class="card-img-top" alt="..."/>
                         <div className="card-body d-flex flex-column">
                           <div className="title-card">
