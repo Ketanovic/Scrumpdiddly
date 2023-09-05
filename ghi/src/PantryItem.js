@@ -1,6 +1,9 @@
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import React, { useState, useEffect } from "react";
+import 'react-router-dom';
+import { Link } from "react-router-dom";
+
 
 function PantryForm() {
   const [name, setName] = useState("");
@@ -66,14 +69,6 @@ function PantryForm() {
       console.error("An error occurred:", error);
     }
   }
-  // const filterPantry = async () => {
-  //   fetchPantry()
-  //   const result = pantry.filter((pantry) =>
-  //   pantry.user_id.includes(userId)
-  //   )
-  //   setPantry(result)
-  //   console.log("result", result);
-  // }
 
   const handleSearch = async () => {
     const result = ingredients.filter((ingredients) =>
@@ -110,6 +105,21 @@ function PantryForm() {
       console.error(response);
     }
   };
+
+  const handleDelete = async (_id) => {
+    const url = `http://localhost:8000/api/pantry_item/${_id}`;
+    const fetchConfig = {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+    };
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      window.location.reload();
+    }
+  }
 
   useEffect(() => {
     fetchIngredients();
@@ -176,6 +186,7 @@ function PantryForm() {
                 <thead>
                   <tr>
                     <th>Items in Pantry</th>
+                    <th>Options</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -183,14 +194,19 @@ function PantryForm() {
                     return (
                       <tr key={pantry_item.name}>
                         <td>{pantry_item.name}</td>
+                        <td>
+                          <button type="button"onClick={() => handleDelete(pantry_item.id)} className="delete-button">Delete</button>
+                          </td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
             </div>
-            <button className="btn btn-primary">See what's for dinner!</button>
           </form>
+          <Link to={'/recipes/search'}>
+            <button className="btn btn-primary">See what's for dinner!</button>
+          </Link>
         </div>
       </div>
     </div>
