@@ -3,7 +3,7 @@ import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import PantryForm from "./PantryItem";
+import PantryForm from "./PantryItems";
 import ListRecipes from "./Recipes/Recipes.js";
 import Nav from "./Nav.js";
 import MainPage from "./MainPage.js";

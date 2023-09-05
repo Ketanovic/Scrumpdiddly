@@ -1,4 +1,4 @@
-from models import PantryItemIn, PantryItemOut, PantryItems
+from models import PantryItemIn, PantryItemOut
 from fastapi.testclient import TestClient
 from main import app
 from queries.pantry_item import PantryItemQueries
@@ -6,8 +6,7 @@ from queries.pantry_item import PantryItemQueries
 client = TestClient(app)
 
 
-class FakePantryItemQueries:    
-
+class FakePantryItemQueries:
     def create(self, pantry_item_in: PantryItemIn) -> PantryItemOut:
         return {"name": "string", "recipes": ["string"], "id": "string"}
 
