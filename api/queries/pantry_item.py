@@ -31,3 +31,4 @@ class PantryItemQueries:
             pantry['id'] = str(pantry['_id'])
             results.append(pantry)
         return results
+    

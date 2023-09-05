@@ -11,7 +11,7 @@ import RecipeSearch, {UnderscoreLower} from "./RecipeSearch.js";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./LoginForm.js";
 import { Register} from "./Register.jsx";
-import RecipeDetailPage from './recipedetail.js'
+import RecipeDetailPage from "./Recipes/RecipeDetail.js"
 
 function App() {
 
@@ -42,14 +42,13 @@ function App() {
             <Route path="/recipes">
               <Route index element={<ListRecipes />} />
               <Route path="search" element={<RecipeSearch />} />
+              <Route path="{id}" element={<RecipeDetailPage />} />
             </Route>
             <Route path="/register">
               <Route index element={<Register />} />
               {/* {currentForm === 'register' ? <Register onFormSwitch={toggleForm} />: <LoginForm onFormSwitch={toggleForm} />} */}
             </Route>
-            <Route>
-              <Route path="/recipe-detail/one" element={<RecipeDetailPage />} />
-            </Route>
+            <Route></Route>
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import List
 from jwtdown_fastapi.authentication import Token
+from bson.objectid import ObjectId
 
 
 class AccountForm(BaseModel):
@@ -49,7 +50,16 @@ class RecipeIn(BaseModel):
 
 
 class RecipeOut(RecipeIn):
-    # id: str
+    name: str
+    category: str
+    area: str
+    instructions: str
+    ingredients: dict
+    thumbnail: str
+
+
+class RecipeOutList(RecipeIn):
+    id: str
     name: str
     category: str
     area: str
@@ -59,7 +69,7 @@ class RecipeOut(RecipeIn):
 
 
 class Recipes(BaseModel):
-    recipes: List[RecipeOut]
+    recipes: List[RecipeOutList]
 
 
 class RecipeName(BaseModel):
