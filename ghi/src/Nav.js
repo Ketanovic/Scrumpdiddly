@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 function Nav() {
     const navigate = useNavigate()
     const [loggedIn, setLoggedIn] = useState(false);
+    const [username, setUsername] = useState(null);
 
     // need to check if the user is logged in using authentication:
     useEffect (()=> {
@@ -17,6 +18,9 @@ function Nav() {
       .then((response) => response.json())
       .then((data) => {
         setLoggedIn(data.isLoggedIn);
+        if(data.isLoggedIn) {
+          setUsername(data.username);
+        }
       });
   }, []);
 
@@ -85,6 +89,12 @@ function Nav() {
               </ul>
             </li>
           </ul>
+            {!loggedIn ? (
+              <span>Hey you! You should sign in! ➡️ </span>
+            ) : (
+              <span>Welcome! You are signed in!</span>
+            )}
+            &nbsp;&nbsp;
           {!loggedIn &&
           <button className="btn btn-outline-success" type="submit" onClick={() => { setLoggedIn(true); navigate("/login"); }}>
             Sign In
