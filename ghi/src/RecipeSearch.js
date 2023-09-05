@@ -93,6 +93,7 @@ export default function RecipeSearch() {
   }, [userId]);
 
   return (
+    <div className="page-wrap">
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
@@ -144,6 +145,7 @@ export default function RecipeSearch() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

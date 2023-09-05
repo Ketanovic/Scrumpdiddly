@@ -58,7 +58,8 @@ const handlePassChange = (event) => {
 }
 
     return (
-        <div className="card text-bg-light mb-3">
+        <div className="page-wrap">
+        <div className="mb-3">
             <h5 className="card-header">Register</h5>
                 <div className="card-body"></div>
                     <form onSubmit={handleSubmit}>
@@ -71,7 +72,7 @@ const handlePassChange = (event) => {
                             type="name"
                             placeholder="Full Name" />
 
-                            <label className="form-label"> E-mail:</label>
+                            <label className="form-label"> Email:</label>
                             <input
                             value={email}
                             onChange={handleEmailChange}
@@ -100,6 +101,7 @@ const handlePassChange = (event) => {
                         onClick={() => navigate("/login")}>
                             Already have an account? Login Here
                         </button>
+        </div>
         </div>
     );
 }

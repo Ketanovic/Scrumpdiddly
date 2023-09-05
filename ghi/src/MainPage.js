@@ -4,7 +4,7 @@ import scrumdiddly from './scrumdiddly.png'
 function MainPage() {
   const navigate = useNavigate()
   return (
-      <div className='center page-wrap'>
+      <div className='center page-wrap main'>
         <div className='bg-img'>
           <img src={scrumdiddly} className='logo' />
           <p className="lead mb-4">

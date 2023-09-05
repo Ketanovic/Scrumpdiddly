@@ -15,6 +15,7 @@ const LoginForm = (props) => {
   };
 
   return (
+    <div className="page-wrap">
     <div className="card text-bg-light mb-3">
       <h5 className="card-header">Login</h5>
       <div className="card-body">
@@ -43,6 +44,7 @@ const LoginForm = (props) => {
         </form>
         <button onClick={() => navigate("/register")}>Don't have an account? Register Here</button>
       </div>
+    </div>
     </div>
   );
 };
