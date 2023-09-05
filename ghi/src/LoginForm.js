@@ -21,22 +21,6 @@ const LoginForm = (props) => {
     }
   };
 
-  // const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     try {
-  //       await login(username, password);
-  //       console.log("error first")
-  //     } catch(err){
-  //       console.log("error")
-  //       setErrorMessage("Failed to log in. Please check your credentials.")
-  //     }
-  //   };
-  //   if (token) {
-  //     navigate('/');
-  //   } else {
-  //     setErrorMessage("Failed to log in. Please check your credentials.");
-  //   }
-  // }
 
   return (
     <div className="page-wrap">
