@@ -4,11 +4,11 @@ import { useParams } from 'react-router-dom';
 export default function RecipeDetailPage() {
   const [recipe, setRecipe] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  const id  = useParams();
-  console.log("wwwwwwwwwwwwwwwwwwwwwwwwww", id)
+  const {recipeid}  = useParams();
+  console.log("wwwwwwwwwwwwwwwwwwwwwwwwww", recipeid)
 
   const fetchSingleRecipe = async () => {
-    const url = `http://localhost:8000/api/recipes/${id}`;
+    const url = `http://localhost:8000/api/recipes/${recipeid}`;
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
