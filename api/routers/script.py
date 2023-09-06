@@ -44,11 +44,9 @@ def list_all_recipes(
             )
         response = requests.get(api_url)
         data = response.json()
-        print(data)
         for j in data["meals"]:
             recipe_list.append(j)
         for recipe in recipe_list:
-            print(recipe)
             encoder = {
                 "name": recipe["strMeal"],
                 "category": recipe["strCategory"],
@@ -57,7 +55,6 @@ def list_all_recipes(
                 # "ingredients": recipe["strIngredient1"],
                 # "thumbnail": recipe["strImageSource"],
             }
-            print("eeeeeeeeeecondeeeeeeeeeeerrrr", encoder)
             queries.create(encoder)
 
 
