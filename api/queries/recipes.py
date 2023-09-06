@@ -33,7 +33,7 @@ class RecipeQueries:
             try:
                 print(recipe)
                 self.collection.insert_one(recipe)
-                recipe['id'] = str(recipe['_id'])
+                recipe["id"] = str(recipe["_id"])
                 print(recipe)
                 return recipe
             except DuplicateRecipeError:
@@ -47,7 +47,6 @@ class RecipeQueries:
         results = []
         for recipe in self.collection.find():
             recipe["id"] = str(ObjectId(recipe["_id"]))
-            print("aaaaaaaaaaaaaaaaa", recipe)
             results.append(recipe)
 
         return results

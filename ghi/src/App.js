@@ -4,21 +4,61 @@ import "./App.css";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import PantryForm from "./PantryItem";
-import ListRecipes from "./Recipes/Recipes.js";
 import Nav from "./Nav.js";
 import MainPage from "./MainPage.js";
 import RecipeSearch, {UnderscoreLower} from "./RecipeSearch.js";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./LoginForm.js";
-import { Register} from "./Register.jsx";
+import { Register} from "./Register.js";
 import RecipeDetailPage from "./Recipes/RecipeDetail.js"
+import ListRecipes from "./Recipes/Recipes.js";
+
 
 function App() {
+  // const [currentForm, setCurrentForm] = useState("loginForm");
+  const [ID, setID] = useState([]);
 
-  const [currentForm, setCurrentForm] = useState("loginForm");
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-  };
+  useEffect(() => {
+    async function getData() {
+      const url = `http://localhost:8000/api/recipes`;
+      const response = await fetch(url);
+      const data = await response.json();
+      if (response.ok) {
+        setID(data.recipes);
+
+      } else {
+        console.log("drat! something happened");
+      }
+    }
+    getData();
+  }, []);
+
+  const recipeids = []
+  for (const x of ID) {
+    recipeids.push(x.id)
+  }
+
+
+  // const [ID, setID] = useState([]);
+
+  // async function getId() {
+  //   const IDUrl = 'http://localhost:8000/api/recipes';
+  //   const response = await fetch(IDUrl)
+  //   if (response.ok) {
+  //     const json = await response.json();
+  //     setID(json)
+  //   }
+  //   console.log("iiiiiiiiiiiiiiiiiiiii", ID)
+  // }
+
+  // const toggleForm = (formName) => {
+  //   setCurrentForm(formName);
+  // };
+
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <AuthProvider baseUrl="http://localhost:8000">
@@ -41,7 +81,7 @@ function App() {
             <Route path="/recipes">
               <Route index element={<ListRecipes />} />
               <Route path="search" element={<RecipeSearch />} />
-              <Route path="{id}" element={<RecipeDetailPage />} />
+              <Route path=":recipeids" element={<RecipeDetailPage />} />
             </Route>
             <Route path="/register">
               <Route index element={<Register />} />

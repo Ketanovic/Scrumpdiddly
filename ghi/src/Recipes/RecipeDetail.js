@@ -1,19 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-function RecipeDetailPage() {
+export default function RecipeDetailPage() {
   const [recipe, setRecipe] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+  const id  = useParams();
+  console.log("wwwwwwwwwwwwwwwwwwwwwwwwww", id)
 
   const fetchSingleRecipe = async () => {
-    const url = "http://localhost:8000/api/recipes/64f0e25b7febf823138e36c6";
+    const url = `http://localhost:8000/api/recipes/${id}`;
     const response = await fetch(url);
-    console.log("AHAHAHAHAHAHA", response)
     if (response.ok) {
-      const json = await response.json();
-      setRecipe(json);
-
-
+      const data = await response.json();
+      setRecipe(data);
+      let ingredientList = [];
+      for (let key in data.ingredients) {
+        let tempList = [];
+        tempList.push(key);
+        tempList.push(data.ingredients[key]);
+        ingredientList.push(tempList);
+        tempList = [];
+      }
+      setIngredients(ingredientList)
     }
   };
+
+
 
   useEffect(() => {
       fetchSingleRecipe();
@@ -25,9 +37,9 @@ function RecipeDetailPage() {
       <p>Category: {recipe.category}</p>
       <p>Area: {recipe.area}</p>
       <p>Instructions: {recipe.instructions}</p>
-      {/* <table>
+      <table>
         <tbody>
-          {recipe.ingredients.map((ingnames) => {
+          {ingredients.map((ingnames) => {
             return (
               <tr key = {ingnames}>
                 <td>{ingnames}</td>
@@ -35,7 +47,7 @@ function RecipeDetailPage() {
             );
           })}
         </tbody>
-      </table> */}
+      </table>
       <p></p>
       {/* <p>Ingredients: {recipe.ingredients.ingredients}</p>
       <table className= "table table-striped">
@@ -57,5 +69,3 @@ function RecipeDetailPage() {
     </div>
   );
 }
-
-export default RecipeDetailPage;
