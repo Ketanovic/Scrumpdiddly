@@ -110,7 +110,7 @@ def create_ingredients():
                         ing_dict["recipe"] = []
                         if data["meals"][j]["strMeal"] is not None:
                             ing_dict["recipe"].append(
-                                data["meals"][j]["strMeal"].upper()
+                                data["meals"][j]["strMeal"].upper().replace(",", " ")
                                 )
                             # call queries.create on single ingredient
                             queries.create(ing_dict)
