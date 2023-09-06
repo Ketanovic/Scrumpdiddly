@@ -16,7 +16,7 @@ function PantryForm() {
   const { token } = useAuthContext();
   const [userId, setUserId] = useState("");
   const navigate = useNavigate();
-  
+
 
   async function fetchIngredients() {
     const response = await fetch("http://localhost:8000/api/ingredients/");
@@ -27,7 +27,7 @@ function PantryForm() {
       setFilter(Object.values(data.ingredients));
     }
   }
-  
+
   const fetchUserData = async () => {
     const response = await fetch("http://localhost:8000/token", {
       credentials: "include",
@@ -35,7 +35,7 @@ function PantryForm() {
     if (response.ok) {
       const data = await response.json();
       setUserId(data.account.id);
-      
+
     }
   };
   async function fetchPantry(userId) {
@@ -51,7 +51,7 @@ function PantryForm() {
         const filteredData = data.pantry_items.filter(
           (item) => item.user_id === userId
         );
-        
+
         setPantry(filteredData);
       } else {
         console.error("Failed to fetch pantry items");
@@ -74,10 +74,11 @@ function PantryForm() {
     const x = value2.shift();
     setName(x);
     setRecipe(value2);
-    const data = {};
-    data.name = x;
-    data.recipes = value2;
-    data.user_id = userId;
+    const data = {
+      name: x,
+      recipes: value2,
+      user_id: userId
+    };
     const url = "http://localhost:8000/api/pantry_item/";
     const fetchConfig = {
       method: "post",
@@ -91,7 +92,9 @@ function PantryForm() {
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       setName("");
-      window.location.reload();
+      const newPantry = [...pantry]
+      newPantry.push(data)
+      setPantry(newPantry)
     } else {
       console.error(response);
     }
@@ -120,8 +123,8 @@ function PantryForm() {
   }, [userId]);
 
   if (token === null) {
-    console.log("not logged in", token);    
-    navigate('/login')    
+    console.log("not logged in", token);
+    navigate('/login')
   } else {
     return (
       <div className="row page-wrap">
