@@ -14,6 +14,7 @@ export default function RecipeSearch() {
   const [recList, setRecList] = useState([]);
   const [userId, setUserId] = useState("");
   const [recipeId, setRecipeId] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
   const fetchUserData = async () => {
     const response = await fetch("http://localhost:8000/token", {
@@ -34,12 +35,12 @@ export default function RecipeSearch() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("data.pantryitem", data.pantry_items);
+        // console.log("data.pantryitem", data.pantry_items);
 
         const filteredData = data.pantry_items.filter(
           (item) => item.user_id === userId
         );
-        console.log("filtered data", filteredData);
+        // console.log("filtered data", filteredData);
         setPantry(filteredData);
       } else {
         console.error("Failed to fetch pantry items");
@@ -57,7 +58,7 @@ export default function RecipeSearch() {
       const dict = {};
       const data = await response.json();
       const pantryDict = Object.values(data.pantry_items);
-      console.log("pantry", pantry);
+      // console.log("pantry", pantry);
       for (let recipes of pantry) {
         for (let recipe of recipes.recipes) {
           if (dict[recipe] === undefined) {
@@ -80,7 +81,7 @@ export default function RecipeSearch() {
         let y = b[1];
         return y - x;
       });
-      console.log("recipe list sorted*******", recipeList);
+      // console.log("recipe list sorted*******", recipeList);
       setRecipe(Object.keys(dict));
       setDict2(dict);
       setRecList(recipeList.slice(0, 10));
@@ -93,19 +94,21 @@ export default function RecipeSearch() {
     if (response.ok) {
       const json = await response.json();
       setRecipeId(json.recipes);
+      // console.log("derrik", json.recipes)
+      // console.log("reclist", recList);
+      for (let pantryRecipe of recList) {
+        // console.log("-------", pantryRecipe);
+        for (let recipe of json.recipes) {
+          // console.log("====", recipe.name);
+          // console.log("pantry name", pantryRecipe[0]);
+          if (pantryRecipe[0] === recipe.name.toUpperCase()) {
+            pantryRecipe.push(recipe.id);
+          }
+        }
+      }console.log("updated rec list", recList);
     }
   };
 
-  const recipewithid = recipeId;
-  const recipewithquantities = recList;
-  for (let x in recipewithquantities) {
-    for (let y in recipewithid) {
-      if (x[0] === y.name) {
-        y["matches"] = x[1];
-      }
-    }
-  }
-  console.log("ooooooooooooooooooooooooooo", recipewithid);
 
   useEffect(() => {
     fetchPantryRecipes();
@@ -115,57 +118,59 @@ export default function RecipeSearch() {
   }, [userId]);
   useEffect(() => {
     fetchRecipes();
-  }, []);
+  }, [recList]);
 
   return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
-          <h1>Recipes you might enjoy</h1>
-          <div className="mb-3">
-            <table>
-              <thead>
-                <tr>
-                  <th>With these ingredients below....</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pantry.map((pantry_item) => {
-                  return (
-                    <tr key={pantry_item.name}>
-                      <td>{pantry_item.name}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h4>You can make these for dinner!:</h4>
-          </div>
-          <div className="mb-3">
-            <table className="table table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>Recipe Result</th>
-                  <th>Number of overlapping ingredients</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recList.map((recipe_item) => {
-                  return (
-                    <tr key={recipe_item}>
-                      <td>
-                        <Link to={`/recipe/${UnderscoreLower(recipe_item[0])}`}>
-                          {recipe_item[0]}
-                        </Link>
-                      </td>
-                      <td>{recipe_item[1]}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+    <div className="row page-wrap">
+      <div className="row">
+        <div className="offset-3 col-6">
+          <div className="shadow p-4 mt-4">
+            <h1>Recipes you might enjoy</h1>
+            <div className="mb-3">
+              <table>
+                <thead>
+                  <tr>
+                    <th>With these ingredients below....</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {pantry.map((pantry_item) => {
+                    return (
+                      <tr key={pantry_item.name}>
+                        <td>{pantry_item.name}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h4>You can make these for dinner!:</h4>
+            </div>
+            <div className="mb-3">
+              <table className="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>Recipe Result</th>
+                    <th>Number of overlapping ingredients</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {recList.map((recipe_item) => {
+                    return (
+                      <tr key={recipe_item}>
+                        <td>
+                          <Link to={`/recipes/${recipe_item[2]}`}>
+                            {recipe_item[0]}
+                          </Link>
+                        </td>
+                        <td>{recipe_item[1]}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

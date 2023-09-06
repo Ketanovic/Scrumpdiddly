@@ -118,11 +118,6 @@ def create_ingredients():
                             ing_dict = {}
                         else:
                             continue
-    # try:
-    #     print(ing_list)
-    #     return queries.create(ing_list)
-    # except DuplicateIngredientError:
-    #     pass
 
 
 create_ingredients()

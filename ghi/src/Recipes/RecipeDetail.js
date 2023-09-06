@@ -31,22 +31,24 @@ export default function RecipeDetailPage() {
   }, []);
 
   return (
-    <div>
-      <h1>{recipe.name}</h1>
-      <p>Category: {recipe.category}</p>
-      <p>Area: {recipe.area}</p>
-      <p>Instructions: {recipe.instructions}</p>
-      <table>
-        <tbody>
-          {ingredients.map((ingnames) => {
-            return (
-              <tr key = {ingnames}>
-                <td>{ingnames}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <div className="row page-wrap">
+      <div>
+        <h1>{recipe.name}</h1>
+        <p>Category: {recipe.category}</p>
+        <p>Area: {recipe.area}</p>
+        <p>Instructions: {recipe.instructions}</p>
+        <table>
+          <tbody>
+            {ingredients.map((ingnames) => {
+              return (
+                <tr key={ingnames}>
+                  <td>{ingnames}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
