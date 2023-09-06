@@ -30,11 +30,9 @@ class RecipeQueries:
         else:
             recipe = info
         if self.collection.find_one({"name": recipe["name"]}) is None:
-            try:
-                print(recipe)
+            try:                
                 self.collection.insert_one(recipe)
                 recipe["id"] = str(recipe["_id"])
-                print(recipe)
                 return recipe
             except DuplicateRecipeError:
                 print("Recipe Already Exists")

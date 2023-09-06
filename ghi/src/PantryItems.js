@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
-
 function PantryForm() {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
@@ -16,7 +15,6 @@ function PantryForm() {
   const { token } = useAuthContext();
   const [userId, setUserId] = useState("");
   const navigate = useNavigate();
-
 
   async function fetchIngredients() {
     const response = await fetch("http://localhost:8000/api/ingredients/");
@@ -35,7 +33,6 @@ function PantryForm() {
     if (response.ok) {
       const data = await response.json();
       setUserId(data.account.id);
-
     }
   };
   async function fetchPantry(userId) {
@@ -77,7 +74,7 @@ function PantryForm() {
     const data = {
       name: x,
       recipes: value2,
-      user_id: userId
+      user_id: userId,
     };
     const url = "http://localhost:8000/api/pantry_item/";
     const fetchConfig = {
@@ -92,9 +89,9 @@ function PantryForm() {
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       setName("");
-      const newPantry = [...pantry]
-      newPantry.push(data)
-      setPantry(newPantry)
+      const newPantry = [...pantry];
+      newPantry.push(data);
+      setPantry(newPantry);
     } else {
       console.error(response);
     }
@@ -111,7 +108,9 @@ function PantryForm() {
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      window.location.reload();
+      setPantry((prevPantry) =>
+        prevPantry.filter((pantry) => pantry.id !== _id)
+      );
     }
   };
 
@@ -124,7 +123,7 @@ function PantryForm() {
 
   if (token === null) {
     console.log("not logged in", token);
-    navigate('/login')
+    navigate("/login");
   } else {
     return (
       <div className="row page-wrap">
