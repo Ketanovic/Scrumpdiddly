@@ -19,6 +19,7 @@ body .main {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  padding-bottom: 25px;
 }
 
 body {
