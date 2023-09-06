@@ -46,7 +46,7 @@ function Nav() {
               <ul className="dropdown-menu" aria-labelledby="pantryDropdown">
                 <li>
                   <NavLink className="dropdown-item" to="/pantry">
-                    Pantry Item
+                    Pantry Items
                   </NavLink>
                 </li>
               </ul>
