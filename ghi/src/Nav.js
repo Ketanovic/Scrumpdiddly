@@ -19,13 +19,12 @@ function Nav() {
     const response = await fetch("http://localhost:8000/token", {
       credentials: "include",
     });
-    if (response.body != null) {
+    if (response.ok && response != null) {
       const data = await response.json();
-      console.log("+++++++++++++++", data)
+      if (data !== null) {
       setUsername(data.account.username);
       setLoggedIn(true)
-      console.log(data.account.username);
-      console.log(username)
+      }
     }
   };
 

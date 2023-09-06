@@ -13,7 +13,6 @@ function MainPage() {
     });
     if (response.ok && response != null) {
       const data = await response.json();
-      console.log("%%%%%%%%%%%%%%%", data)
       if (data !== null) {
       setUsername(data.account.username);
       setLoggedIn(true)
