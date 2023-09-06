@@ -5,14 +5,23 @@ import { useNavigate } from "react-router-dom";
 const LoginForm = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useToken();
+  const { login, token } = useToken();
+  const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(username, password);
-    e.target.reset();
+    try {
+     await login(username, password);
+     setTimeout(function () {window.location.replace("/")}, 1000)
+
+    } catch (err) {
+      // Handle the error here
+      console.log("Error caught in handleSubmit:", err);
+      setErrorMessage("Failed to log in. Please check your credentials.");
+    }
   };
+
 
   return (
     <div className="page-wrap">

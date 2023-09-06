@@ -5,21 +5,23 @@ from fastapi import (
 from models import (
     Recipes,
     RecipeIn,
-    RecipeName
+    RecipeName,
+    RecipeOut
 )
 from queries.recipes import RecipeQueries
 
 router = APIRouter()
 
 
-@router.post("/api/recipes/one")
-def get_recipe(
+@router.post('/api/recipes/search')
+def search_recipe(
     info: RecipeName,
     queries: RecipeQueries = Depends(),
 ):
     recipe = queries.get(info)
 
     return {
+        "id": recipe["id"],
         "name": recipe["name"],
         "category": recipe["category"],
         "area": recipe["area"],
@@ -27,6 +29,14 @@ def get_recipe(
         "ingredients": recipe["ingredients"],
         "thumbnail": recipe["thumbnail"],
     }
+
+
+@router.get('/api/recipes/{id}', response_model=RecipeOut)
+def get_recipe(
+    id: str,
+    queries: RecipeQueries = Depends(),
+):
+    return queries.get_one(id=id)
 
 
 @router.get("/api/recipes", response_model=Recipes)
