@@ -31,17 +31,10 @@ return (
       <p className="lead mb-4">
         The premiere solution for making dinner at home easier!
       </p>
-      {/* {!loggedIn && (
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={() => navigate("/login")}
-        >
-          To use our service, please login first by clicking me!
-        </button>
-            )} */}
-       {loggedIn &&
-       <h1>Hello! Welcome To Scrumdiddly!</h1>}
+      {!loggedIn &&
+        <h1>Hello! Welcome To Scrumdiddly!</h1>}
+      {loggedIn &&
+       <h1>Hello, {username}! Welcome To Scrumdiddly!</h1>}
     </div>
   </div>
 );
