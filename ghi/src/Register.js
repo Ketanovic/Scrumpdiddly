@@ -60,48 +60,55 @@ const handlePassChange = (event) => {
 
     return (
         <div className="page-wrap">
-        <div className="card text-bg-light mb-3">
-            <h5 className="card-header">Register</h5>
+        <div className="mb-3 form-bg offset-3 col-6 py-3">
+            <h3 className="card-header">Register</h3>
                 <div className="card-body"></div>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label htmlFor="name"className="form-label">Full Name:</label>
-                            <input
-                            value={name}
-                            onChange={handleNameChange}
-                            className="form-control"
-                            type="name"
-                            placeholder="Full Name" />
-
-                            <label className="form-label"> E-mail:</label>
-                            <input
-                            // value={email}
-                            onChange={handleEmailChange}
-                            className="form-control"
-                            aria-describedby="emailHelp"
-                            type="email"
-                            placeholder="Email Address" />
-
-                            <label className="form-label">Password:</label>
-                            <input
-                            value={pass}
-                            onChange={handlePassChange}
-                            className="form-control"
-                            type="password"
-                            placeholder="Your Password" />
+                            <div className="mx-3">
+                                <label htmlFor="name"className="form-label">Full Name:</label>
+                                <input
+                                value={name}
+                                onChange={handleNameChange}
+                                className="form-control"
+                                type="name"
+                                placeholder="Full Name" />
+                            </div>
+                            <div className="m-3">
+                                <label className="form-label"> Email:</label>
+                                <input
+                                value={email}
+                                onChange={handleEmailChange}
+                                className="form-control"
+                                aria-describedby="emailHelp"
+                                type="email"
+                                placeholder="Email Address" />
+                            </div>
+                            <div className="m-3">
+                                <label className="form-label">Password:</label>
+                                <input
+                                value={pass}
+                                onChange={handlePassChange}
+                                className="form-control"
+                                type="password"
+                                placeholder="Password" />
+                            </div>
                         </div>
-
-                        <button
-                        type="submit"
-                        className= "btn-btn-primary"
-                        >Register
-                        </button>
+                        <div className="d-flex justify-content-center py-1">
+                            <button
+                            type="submit"
+                            className= "button"
+                            >Register
+                            </button>
+                        </div>
                     </form>
+                    <div className="d-flex justify-content-center pt-2">
                         <button
-                        className="already-have"
+                        className="button"
                         onClick={() => navigate("/login")}>
-                            Already have an account? Login Here
+                            Already have an account? <i>Login Here.</i>
                         </button>
+                    </div>
         </div>
         </div>
     );
