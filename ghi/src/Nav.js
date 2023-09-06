@@ -54,9 +54,9 @@ function Nav() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <img src={require("./menu.png")} className="navbar-toggle-icon toggle-button"/>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse nav-dropdown" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink className="nav-link link" to="/">
@@ -130,7 +130,7 @@ function Nav() {
             ></input>
           </form>
           <button
-            className="btn btn-outline-success my-2 my-sm-0"
+            className="button my-2 my-sm-0"
             type="submit"
           >
             Search Recipe!
