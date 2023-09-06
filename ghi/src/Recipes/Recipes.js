@@ -20,7 +20,7 @@ export default function ListRecipes() {
   return (
     <div className="page-wrap not-main">
       <div className="row pt-3 ease-up">
-        {recipes.map((rec) => { console.log(recipes)
+        {recipes.map((rec) => {
           return (
             <div className="col-4 pb-3 card-glow" key={rec.id}>
               <div className="small-card card-deck mb-3 text-center">

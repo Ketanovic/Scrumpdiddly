@@ -15,50 +15,11 @@ import ListRecipes from "./Recipes/Recipes.js";
 
 
 function App() {
-  // const [currentForm, setCurrentForm] = useState("loginForm");
-  const [ID, setID] = useState([]);
+  const [currentForm, setCurrentForm] = useState("loginForm");
+  const toggleForm = (formName) => {
+    setCurrentForm(formName);
+  };
 
-  useEffect(() => {
-    async function getData() {
-      const url = `http://localhost:8000/api/recipes`;
-      const response = await fetch(url);
-      const data = await response.json();
-      if (response.ok) {
-        setID(data.recipes);
-
-      } else {
-        console.log("drat! something happened");
-      }
-    }
-    getData();
-  }, []);
-
-  const recipeids = []
-  for (const x of ID) {
-    recipeids.push(x.id)
-  }
-
-
-  // const [ID, setID] = useState([]);
-
-  // async function getId() {
-  //   const IDUrl = 'http://localhost:8000/api/recipes';
-  //   const response = await fetch(IDUrl)
-  //   if (response.ok) {
-  //     const json = await response.json();
-  //     setID(json)
-  //   }
-  //   console.log("iiiiiiiiiiiiiiiiiiiii", ID)
-  // }
-
-  // const toggleForm = (formName) => {
-  //   setCurrentForm(formName);
-  // };
-
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
 
   return (
     <AuthProvider baseUrl="http://localhost:8000">
@@ -94,36 +55,3 @@ function App() {
   );
 }
 export default App;
-
-// function App() {
-//   const [launchInfo, setLaunchInfo] = useState([]);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     async function getData() {
-//       let url = `${process.env.REACT_APP_API_HOST}/api/launch-details`;
-//       console.log("fastapi url: ", url);
-//       let response = await fetch(url);
-//       console.log("------- hello? -------");
-//       let data = await response.json();
-
-//       if (response.ok) {
-//         console.log("got launch data!");
-//         setLaunchInfo(data.launch_details);
-//       } else {
-//         console.log("drat! something happened");
-//         setError(data.message);
-//       }
-//     }
-//     getData();
-//   }, []);
-
-//   return (
-//     <div>
-//       <ErrorNotification error={error} />
-//       <Construct info={launchInfo} />
-//     </div>
-//   );
-// }
-
-// export default App;

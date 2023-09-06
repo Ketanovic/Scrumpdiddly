@@ -5,7 +5,6 @@ export default function RecipeDetailPage() {
   const [recipe, setRecipe] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const {recipeid}  = useParams();
-  console.log("wwwwwwwwwwwwwwwwwwwwwwwwww", recipeid)
 
   const fetchSingleRecipe = async () => {
     const url = `http://localhost:8000/api/recipes/${recipeid}`;
@@ -48,24 +47,6 @@ export default function RecipeDetailPage() {
           })}
         </tbody>
       </table>
-      <p></p>
-      {/* <p>Ingredients: {recipe.ingredients.ingredients}</p>
-      <table className= "table table-striped">
-        {recipe.map((rec)) => {
-          return (
-            <tr key={rec.ingredients}>
-              <td>{rec.ingredients}</td>
-            </tr>
-          )
-          <tbody>
-            {% for key, value in ingredients.items() %}
-              <tr>
-                  <td> {{ key }} </td>
-                  <td> {{ value }} </td>
-              </tr>
-            {% endfor %}
-        </tbody>
-      </table> */}
     </div>
   );
 }
