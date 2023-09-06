@@ -11,8 +11,8 @@ function Nav() {
     const navigate = useNavigate()
     const [loggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState("");
-    //const { token } = useAuthContext();
     const { logout, token } = useToken();
+    const [errorMessage, setErrorMessage] = useState(null);
 
 
   const fetchUserData = async () => {
@@ -32,19 +32,7 @@ function Nav() {
     logout(); {
       localStorage.clear();
       setLoggedIn(false)
-    }
-  // const url = `http://localhost:8000/token`;
-  // const fetchConfig = {
-  //   method: "delete",
-  //   // headers: {"Content-Type": "application/json"}
-  // };
-  // const response = await fetch(url, {fetchConfig, credentials: "include"});
-
-  // if (response.ok) {
-  //   localStorage.removeItem('token-info');
-  //   setLoggedIn(null)
-  //   console.log("$$$$$$$$$$$$$$$$$", response)
-  //}
+    } setTimeout(function () {window.location.replace("/")}, 1000)
 };
 
   useEffect(() => {
