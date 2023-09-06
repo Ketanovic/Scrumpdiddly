@@ -69,11 +69,11 @@ function Nav() {
               </ul>
             </li>
           </ul>
-          <button className="btn btn-outline-success" type="button">
+          <button className="button" type="button">
             Sign In
           </button>{" "}
           &nbsp;&nbsp;
-          <button className="btn btn-outline-success" type="button">
+          <button className="button" type="button">
             Sign Out
           </button>{" "}
           &nbsp;&nbsp;
@@ -86,7 +86,7 @@ function Nav() {
             ></input>
           </form>
           <button
-            className="btn btn-outline-success my-2 my-sm-0"
+            className="button my-2 my-sm-0"
             type="submit"
           >
             Search Recipe!

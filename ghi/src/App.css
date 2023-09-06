@@ -72,7 +72,7 @@ nav {
 
 .button:hover {
   transition: 0.5s;
-  background-color: #87a37a;
+  background-color: #247000;
   color: rgb(255, 255, 255);
 }
 
@@ -135,4 +135,11 @@ img.card-img-top {
   background-color: #ff0000;
   color: white;
   border: 1px solid #ff0000;
+}
+
+
+
+
+.form-bg {
+  background-color: #dbbfa5;
 }
