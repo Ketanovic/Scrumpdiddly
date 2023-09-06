@@ -4,25 +4,53 @@ import './App.css'
 import scrump from './scrump.png'
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 
 function Nav() {
     const navigate = useNavigate()
     const [loggedIn, setLoggedIn] = useState(false);
-    const [username, setUsername] = useState(null);
+    const [username, setUsername] = useState("");
+    //const { token } = useAuthContext();
+    const { logout, token } = useToken();
 
-    // need to check if the user is logged in using authentication:
-    useEffect (()=> {
-      // Check the state of the user's login status
-    fetch("/api/user/is-logged-in")
-      .then((response) => response.json())
-      .then((data) => {
-        setLoggedIn(data.isLoggedIn);
-        if(data.isLoggedIn) {
-          setUsername(data.username);
-        }
-      });
-  }, []);
+
+  const fetchUserData = async () => {
+    const response = await fetch("http://localhost:8000/token", {
+      credentials: "include",
+    });
+    if (response.body != null) {
+      const data = await response.json();
+      console.log("+++++++++++++++", data)
+      setUsername(data.account.username);
+      setLoggedIn(true)
+      console.log(data.account.username);
+      console.log(username)
+    }
+  };
+
+  const handleLogout = async () => {
+    logout(); {
+      localStorage.clear();
+      setLoggedIn(false)
+    }
+  // const url = `http://localhost:8000/token`;
+  // const fetchConfig = {
+  //   method: "delete",
+  //   // headers: {"Content-Type": "application/json"}
+  // };
+  // const response = await fetch(url, {fetchConfig, credentials: "include"});
+
+  // if (response.ok) {
+  //   localStorage.removeItem('token-info');
+  //   setLoggedIn(null)
+  //   console.log("$$$$$$$$$$$$$$$$$", response)
+  //}
+};
+
+  useEffect(() => {
+  fetchUserData();
+      }, [username]);
 
   return (
     <nav className="navbar navbar-expand-lg position-fixed">
@@ -49,25 +77,27 @@ function Nav() {
               </NavLink>
             </li>
 
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link link dropdown-toggle"
-                to="#"
-                id="pantryDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Pantry
-              </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="pantryDropdown">
-                <li>
-                  <NavLink className="dropdown-item" to="/pantry">
-                    Pantry Item
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
+            {loggedIn && (
+              <li className="nav-item dropdown">
+                <NavLink
+                  className="nav-link link dropdown-toggle"
+                  to="#"
+                  id="pantryDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Pantry
+                </NavLink>
+                <ul className="dropdown-menu" aria-labelledby="pantryDropdown">
+                  <li>
+                    <NavLink className="dropdown-item" to="/pantry">
+                      Pantry Item
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+            )}
 
             <li className="nav-item dropdown">
               <NavLink
@@ -89,21 +119,16 @@ function Nav() {
               </ul>
             </li>
           </ul>
-            {!loggedIn ? (
-              <span>Hey you! You should sign in! ➡️ </span>
-            ) : (
-              <span>Welcome! You are signed in!</span>
-            )}
             &nbsp;&nbsp;
           {!loggedIn &&
-          <button className="btn btn-outline-success" type="submit" onClick={() => { setLoggedIn(true); navigate("/login"); }}>
+          <button className="btn btn-outline-success" type="submit" onClick={() => { navigate("/login"); }}>
             Sign In
           </button>
           }
           {" "}
           &nbsp;&nbsp;
           {loggedIn &&
-          <button className="btn btn-outline-success" type="button" onClick={() => setLoggedIn(false)}>
+          <button className="btn btn-outline-success" type="button" onClick={(handleLogout)}>
             Sign Out
           </button>
           }
