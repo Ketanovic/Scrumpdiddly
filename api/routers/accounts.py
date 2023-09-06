@@ -28,7 +28,11 @@ async def create_account(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Account with that username is already taken",
         )
-    form = AccountForm(username=info.username, email=info.email, password=info.password)
+    form = AccountForm(
+        username=info.username,
+        email=info.email,
+        password=info.password
+            )
     token = await authenticator.login(response, request, form, queries)
     return AccountToken(account=account, **token.dict())
 

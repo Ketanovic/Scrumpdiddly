@@ -31,7 +31,7 @@ export default function ListRecipes() {
           </tr>
         </thead>
         <tbody>
-          {recipes.map((rec) => { console.log("aaaaaaaaaaaaaaaaaaaaaa", rec, rec.ingredients["ingredients"])
+          {recipes.map((rec) => {
               return (
                 <tr key={rec.name}>
                   <td>{rec.name}</td>
