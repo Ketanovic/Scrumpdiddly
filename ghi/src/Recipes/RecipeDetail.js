@@ -30,6 +30,7 @@ export default function RecipeDetailPage() {
       fetchSingleRecipe();
   }, []);
 
+  console.log(ingredients)
   return (
     <div className="row page-wrap">
       <div>
