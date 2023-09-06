@@ -3,10 +3,54 @@ import { NavLink } from "react-router-dom";
 import './App.css'
 import scrump from './scrump.png'
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 
 function Nav() {
     const navigate = useNavigate()
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [username, setUsername] = useState("");
+    //const { token } = useAuthContext();
+    const { logout, token } = useToken();
+
+
+  const fetchUserData = async () => {
+    const response = await fetch("http://localhost:8000/token", {
+      credentials: "include",
+    });
+    if (response.ok && response != null) {
+      const data = await response.json();
+      if (data !== null) {
+      setUsername(data.account.username);
+      setLoggedIn(true)
+      }
+    }
+  };
+
+  const handleLogout = async () => {
+    logout(); {
+      localStorage.clear();
+      setLoggedIn(false)
+    }
+  // const url = `http://localhost:8000/token`;
+  // const fetchConfig = {
+  //   method: "delete",
+  //   // headers: {"Content-Type": "application/json"}
+  // };
+  // const response = await fetch(url, {fetchConfig, credentials: "include"});
+
+  // if (response.ok) {
+  //   localStorage.removeItem('token-info');
+  //   setLoggedIn(null)
+  //   console.log("$$$$$$$$$$$$$$$$$", response)
+  //}
+};
+
+  useEffect(() => {
+  fetchUserData();
+      }, [username]);
+
   return (
     <nav className="navbar navbar-expand-lg position-fixed">
       <div className="container-fluid">
@@ -32,25 +76,27 @@ function Nav() {
               </NavLink>
             </li>
 
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link link dropdown-toggle"
-                to="#"
-                id="pantryDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Pantry
-              </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="pantryDropdown">
-                <li>
-                  <NavLink className="dropdown-item" to="/pantry">
-                    Pantry Items
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
+            {loggedIn && (
+              <li className="nav-item dropdown">
+                <NavLink
+                  className="nav-link link dropdown-toggle"
+                  to="#"
+                  id="pantryDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Pantry
+                </NavLink>
+                <ul className="dropdown-menu" aria-labelledby="pantryDropdown">
+                  <li>
+                    <NavLink className="dropdown-item" to="/pantry">
+                      Pantry Item
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+            )}
 
             <li className="nav-item dropdown">
               <NavLink
@@ -72,13 +118,20 @@ function Nav() {
               </ul>
             </li>
           </ul>
-          <button className="btn btn-outline-success" type="submit" onClick={() => navigate("/login")}>
+            &nbsp;&nbsp;
+          {!loggedIn &&
+          <button className="btn btn-outline-success" type="submit" onClick={() => { navigate("/login"); }}>
             Sign In
-          </button>{" "}
+          </button>
+          }
+          {" "}
           &nbsp;&nbsp;
-          <button className="btn btn-outline-success" type="button">
+          {loggedIn &&
+          <button className="btn btn-outline-success" type="button" onClick={(handleLogout)}>
             Sign Out
-          </button>{" "}
+          </button>
+          }
+          {" "}
           &nbsp;&nbsp;
           <form className="form-inline my-2 my-lg-0">
             <input

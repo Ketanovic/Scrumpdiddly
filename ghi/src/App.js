@@ -23,7 +23,7 @@ function App() {
 
   return (
     <AuthProvider baseUrl="http://localhost:8000">
-      <BrowserRouter>
+      <BrowserRouter forceRefresh = {true}>
         <Nav />
         <div className="container">
           <Routes>

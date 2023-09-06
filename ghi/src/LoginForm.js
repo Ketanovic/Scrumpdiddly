@@ -12,8 +12,9 @@ const LoginForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(username, password);
-      console.log("error first");
+     await login(username, password);
+     setTimeout(function () {window.location.replace("/")}, 1000)
+
     } catch (err) {
       // Handle the error here
       console.log("Error caught in handleSubmit:", err);
