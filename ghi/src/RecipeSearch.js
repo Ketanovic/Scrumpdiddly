@@ -94,21 +94,15 @@ export default function RecipeSearch() {
     if (response.ok) {
       const json = await response.json();
       setRecipeId(json.recipes);
-      // console.log("derrik", json.recipes)
-      // console.log("reclist", recList);
       for (let pantryRecipe of recList) {
-        // console.log("-------", pantryRecipe);
         for (let recipe of json.recipes) {
-          // console.log("====", recipe.name);
-          // console.log("pantry name", pantryRecipe[0]);
           if (pantryRecipe[0] === recipe.name.toUpperCase()) {
             pantryRecipe.push(recipe.id);
           }
         }
-      }console.log("updated rec list", recList);
-    }
+      }
+    }console.log("look at me", recList);
   };
-
 
   useEffect(() => {
     fetchPantryRecipes();
@@ -125,7 +119,7 @@ export default function RecipeSearch() {
       <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
-            <h1>Recipes you might enjoy</h1>
+            <h1 className="card-header mb-3">Recipes you might enjoy</h1>
             <div className="mb-3">
               <table>
                 <thead>
