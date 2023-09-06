@@ -16,6 +16,9 @@ function PantryForm() {
   const { token } = useAuthContext();
   const [userId, setUserId] = useState("");
 
+
+
+
   async function fetchIngredients() {
     const response = await fetch("http://localhost:8000/api/ingredients/");
     if (response.ok) {
@@ -25,18 +28,9 @@ function PantryForm() {
       setFilter(Object.values(data.ingredients));
     }
   }
-  // async function fetchPantry() {
-  //   const response = await fetch("http://localhost:8000/api/pantry_item/",{credentials: 'include'});
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     console.log(data);
-  //     const filtered_data = data.pantry_items.filter((data) =>
-  //     data.pantry_items.user_id.includes(userId)
 
-  //     )
-  //     setPantry(Object.values(data.pantry_items));
-  //   }
-  // }
+
+
     const fetchUserData = async () => {
       const response = await fetch("http://localhost:8000/token", {
         credentials: "include",
@@ -46,6 +40,9 @@ function PantryForm() {
         setUserId(data.account.id);
       }
     };
+
+
+
   async function fetchPantry(userId) {
     fetchUserData()
     try {
@@ -70,12 +67,16 @@ function PantryForm() {
     }
   }
 
+
+
   const handleSearch = async () => {
     const result = ingredients.filter((ingredients) =>
       ingredients.name.includes(searchIngredient.toUpperCase())
     );
     setFilter(result);
   };
+
+
 
   const handleSubmit = async (event) => {
     const value = event.target.value;
@@ -106,6 +107,10 @@ function PantryForm() {
     }
   };
 
+
+
+
+
   const handleDelete = async (_id) => {
     const url = `http://localhost:8000/api/pantry_item/${_id}`;
     const fetchConfig = {
@@ -121,6 +126,8 @@ function PantryForm() {
     }
   }
 
+
+
   useEffect(() => {
     fetchIngredients();
     
@@ -128,6 +135,9 @@ function PantryForm() {
   useEffect(() => {
     fetchPantry(userId);
   }, [userId]);
+
+
+
 
   return (
     <div className="row page-wrap">
@@ -154,7 +164,7 @@ function PantryForm() {
                   <button
                     onClick={handleSearch}
                     type="button"
-                    className="btn btn-primary btn-sm"
+                    className="button"
                   >
                     Search Ingredients
                   </button>
@@ -205,7 +215,7 @@ function PantryForm() {
             </div>
           </form>
           <Link to={'/recipes/search'}>
-            <button className="btn btn-primary">See what's for dinner!</button>
+            <button className="button">See what's for dinner!</button>
           </Link>
         </div>
       </div>
