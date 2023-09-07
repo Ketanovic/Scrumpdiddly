@@ -41,7 +41,7 @@ export default function ListRecipes() {
         />
         <button
           onClick={handleSearch}
-          className="button my-2 my-sm-0"
+          className="btn btn-success"
           type="button"
         >
           Search Recipe!
