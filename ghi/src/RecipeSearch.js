@@ -117,9 +117,9 @@ export default function RecipeSearch() {
   return (
     <div className="row page-wrap">
       <div className="row">
-        <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
-            <h1 className="card-header mb-3">Recipes you might enjoy</h1>
+          <div className="mb-3 form-bg offset-3 col-6 py-3">
+            <div className="mx-3">
+            <h1 className="card-header mb-3 ">Recipes You Might Enjoy</h1>
             <div className="mb-3">
               <table>
                 <thead>
