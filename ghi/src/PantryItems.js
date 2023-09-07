@@ -20,7 +20,6 @@ function PantryForm() {
     const response = await fetch("http://localhost:8000/api/ingredients/");
     if (response.ok) {
       const data = await response.json();
-
       setIngredients(Object.values(data.ingredients));
       setFilter(Object.values(data.ingredients));
     }
