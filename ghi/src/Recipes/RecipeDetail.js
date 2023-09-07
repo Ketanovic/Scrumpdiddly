@@ -30,25 +30,35 @@ export default function RecipeDetailPage() {
       fetchSingleRecipe();
   }, []);
 
-  console.log(ingredients)
-  return (
-    <div className="row page-wrap">
-      <div>
-        <h1>{recipe.name}</h1>
-        <p>Category: {recipe.category}</p>
-        <p>Area: {recipe.area}</p>
-        <p>Instructions: {recipe.instructions}</p>
-        <table>
-          <tbody>
-            {ingredients.map((ingnames) => {
-              return (
-                <tr key={ingnames}>
-                  <td>{ingnames}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+
+
+return (
+    <div className="page-wrap container">
+      <div className="row">
+        <div className="col-md-6">
+          <img src={recipe.thumbnail} className="img-fluid" alt="Recipe Thumbnail" />
+        </div>
+        <div className="col-md-6">
+          <div className="card" style={{ maxHeight: '800px', overflowY: 'auto' }}>
+            <div className="card-body">
+              <h2 className="card-title">{recipe.name}</h2>
+              <p className="card-text">{recipe.area} {recipe.category}</p>
+              <p className="card-text">{recipe.instructions}</p>
+                <div className="mt-4">
+                  <table className="table table-bordered">
+                    <tbody>
+                      {ingredients.map((ingnames, index) => (
+                        <tr key={index}>
+                          <td>{ingnames[0]}</td>
+                          <td>{ingnames[1]}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
