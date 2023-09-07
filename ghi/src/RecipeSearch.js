@@ -6,11 +6,8 @@ export function UnderscoreLower(link_item) {
 }
 
 export default function RecipeSearch() {
-  const [name, setName] = useState("");
-  const [ingredients, setIngredients] = useState([]);
   const [pantry, setPantry] = useState([]);
   const [recipe, setRecipe] = useState([]);
-  const [dict2, setDict2] = useState({});
   const [recList, setRecList] = useState([]);
   const [userId, setUserId] = useState("");
   const [recipeId, setRecipeId] = useState([]);
@@ -35,12 +32,10 @@ export default function RecipeSearch() {
 
       if (response.ok) {
         const data = await response.json();
-        // console.log("data.pantryitem", data.pantry_items);
 
         const filteredData = data.pantry_items.filter(
           (item) => item.user_id === userId
         );
-        // console.log("filtered data", filteredData);
         setPantry(filteredData);
       } else {
         console.error("Failed to fetch pantry items");
@@ -51,41 +46,34 @@ export default function RecipeSearch() {
   }
 
   async function fetchPantryRecipes() {
-    const response = await fetch("http://localhost:8000/api/pantry_item/", {
-      credentials: "include",
-    });
-    if (response.ok) {
-      const dict = {};
-      const data = await response.json();
-      const pantryDict = Object.values(data.pantry_items);
-      // console.log("pantry", pantry);
-      for (let recipes of pantry) {
-        for (let recipe of recipes.recipes) {
-          if (dict[recipe] === undefined) {
-            dict[recipe] = 0;
-          }
-
-          dict[recipe] += 1;
+    //create object to count ingredient counts
+    const dict = {};
+    for (let recipes of pantry) {
+      for (let recipe of recipes.recipes) {
+        if (dict[recipe] === undefined) {
+          dict[recipe] = 0;
         }
+
+        dict[recipe] += 1;
       }
-      let recipeList = [];
-      for (let key in dict) {
-        let tempList = [];
-        tempList.push(key);
-        tempList.push(dict[key]);
-        recipeList.push(tempList);
-        tempList = [];
-      }
-      recipeList.sort(function (a, b) {
-        let x = a[1];
-        let y = b[1];
-        return y - x;
-      });
-      // console.log("recipe list sorted*******", recipeList);
-      setRecipe(Object.keys(dict));
-      setDict2(dict);
-      setRecList(recipeList.slice(0, 10));
     }
+    //creates a list of recipe and number of times in pantry ingredients
+    let recipeList = [];
+    for (let key in dict) {
+      let tempList = [];
+      tempList.push(key);
+      tempList.push(dict[key]);
+      recipeList.push(tempList);
+      tempList = [];
+    }
+    // sorts recipes by number of related ingredients
+    recipeList.sort(function (a, b) {
+      let x = a[1];
+      let y = b[1];
+      return y - x;
+    });
+    setRecipe(Object.keys(dict));
+    setRecList(recipeList.slice(0, 10));
   }
 
   const fetchRecipes = async () => {
@@ -101,7 +89,7 @@ export default function RecipeSearch() {
           }
         }
       }
-    }console.log("look at me", recList);
+    }
   };
 
   useEffect(() => {
@@ -117,8 +105,8 @@ export default function RecipeSearch() {
   return (
     <div className="row page-wrap">
       <div className="row">
-          <div className="mb-3 form-bg offset-3 col-6 py-3">
-            <div className="mx-3">
+        <div className="mb-3 form-bg offset-3 col-6 py-3">
+          <div className="mx-3">
             <h1 className="card-header mb-3 ">Recipes You Might Enjoy</h1>
             <div className="mb-3">
               <table>
