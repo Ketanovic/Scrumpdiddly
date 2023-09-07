@@ -120,8 +120,7 @@ function PantryForm() {
     fetchPantry(userId);
   }, [userId]);
 
-  if (token === null) {
-    console.log("not logged in", token);
+  if (token === null) {    
     navigate("/login");
   } else {
     return (

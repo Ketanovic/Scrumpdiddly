@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export function UnderscoreLower(link_item) {
-  return link_item.split(" ").join("_").toLowerCase();
-}
+
 
 export default function RecipeSearch() {
-  const [name, setName] = useState("");
-  const [ingredients, setIngredients] = useState([]);
   const [pantry, setPantry] = useState([]);
-  const [recipe, setRecipe] = useState([]);
-  const [dict2, setDict2] = useState({});
   const [recList, setRecList] = useState([]);
   const [userId, setUserId] = useState("");
   const [recipeId, setRecipeId] = useState([]);
-  const [recipes, setRecipes] = useState([]);
 
   const fetchUserData = async () => {
     const response = await fetch("http://localhost:8000/token", {
@@ -35,12 +28,10 @@ export default function RecipeSearch() {
 
       if (response.ok) {
         const data = await response.json();
-        // console.log("data.pantryitem", data.pantry_items);
 
         const filteredData = data.pantry_items.filter(
           (item) => item.user_id === userId
         );
-        // console.log("filtered data", filteredData);
         setPantry(filteredData);
       } else {
         console.error("Failed to fetch pantry items");
@@ -58,7 +49,6 @@ export default function RecipeSearch() {
       const dict = {};
       const data = await response.json();
       const pantryDict = Object.values(data.pantry_items);
-      // console.log("pantry", pantry);
       for (let recipes of pantry) {
         for (let recipe of recipes.recipes) {
           if (dict[recipe] === undefined) {
@@ -81,9 +71,7 @@ export default function RecipeSearch() {
         let y = b[1];
         return y - x;
       });
-      // console.log("recipe list sorted*******", recipeList);
-      setRecipe(Object.keys(dict));
-      setDict2(dict);
+      
       setRecList(recipeList.slice(0, 10));
     }
   }
@@ -95,13 +83,13 @@ export default function RecipeSearch() {
       const json = await response.json();
       setRecipeId(json.recipes);
       for (let pantryRecipe of recList) {
-        for (let recipe of json.recipes) {
+        for (let recipe of recipeId) {
           if (pantryRecipe[0] === recipe.name.toUpperCase()) {
             pantryRecipe.push(recipe.id);
           }
         }
       }
-    }console.log("look at me", recList);
+    }
   };
 
   useEffect(() => {
