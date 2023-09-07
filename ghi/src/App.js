@@ -1,8 +1,8 @@
-import Construct from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
+// import Construct from "./Construct.js";
+// import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PantryForm from "./PantryItems";
 import Nav from "./Nav.js";
 import MainPage from "./MainPage.js";
@@ -15,15 +15,15 @@ import ListRecipes from "./Recipes/Recipes.js";
 
 
 function App() {
-  const [currentForm, setCurrentForm] = useState("loginForm");
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-  };
+  // const [currentForm, setCurrentForm] = useState("loginForm");
+  // const toggleForm = (formName) => {
+  //   setCurrentForm(formName);
+  // };
 
 
   return (
     <AuthProvider baseUrl="http://localhost:8000">
-      <BrowserRouter forceRefresh = {true}>
+      <BrowserRouter >
         <Nav />
         <div className="container">
           <Routes>

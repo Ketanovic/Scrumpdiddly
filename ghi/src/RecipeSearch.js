@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export function UnderscoreLower(link_item) {
-  return link_item.split(" ").join("_").toLowerCase();
-}
+
 
 export default function RecipeSearch() {
   const [pantry, setPantry] = useState([]);
-  const [recipe, setRecipe] = useState([]);
   const [recList, setRecList] = useState([]);
   const [userId, setUserId] = useState("");
+  const [recipeId, setRecipeId] = useState([]);
 
   const fetchUserData = async () => {
     const response = await fetch("http://localhost:8000/token", {
@@ -44,34 +42,38 @@ export default function RecipeSearch() {
   }
 
   async function fetchPantryRecipes() {
-    //create object to count ingredient counts
-    const dict = {};
-    for (let recipes of pantry) {
-      for (let recipe of recipes.recipes) {
-        if (dict[recipe] === undefined) {
-          dict[recipe] = 0;
-        }
-
-        dict[recipe] += 1;
-      }
-    }
-    //creates a list of recipe and number of times in pantry ingredients
-    let recipeList = [];
-    for (let key in dict) {
-      let tempList = [];
-      tempList.push(key);
-      tempList.push(dict[key]);
-      recipeList.push(tempList);
-      tempList = [];
-    }
-    // sorts recipes by number of related ingredients
-    recipeList.sort(function (a, b) {
-      let x = a[1];
-      let y = b[1];
-      return y - x;
+    const response = await fetch("http://localhost:8000/api/pantry_item/", {
+      credentials: "include",
     });
-    setRecipe(Object.keys(dict));
-    setRecList(recipeList.slice(0, 10));
+    if (response.ok) {
+      const dict = {};
+      const data = await response.json();
+      const pantryDict = Object.values(data.pantry_items);
+      for (let recipes of pantry) {
+        for (let recipe of recipes.recipes) {
+          if (dict[recipe] === undefined) {
+            dict[recipe] = 0;
+          }
+
+          dict[recipe] += 1;
+        }
+      }
+      let recipeList = [];
+      for (let key in dict) {
+        let tempList = [];
+        tempList.push(key);
+        tempList.push(dict[key]);
+        recipeList.push(tempList);
+        tempList = [];
+      }
+      recipeList.sort(function (a, b) {
+        let x = a[1];
+        let y = b[1];
+        return y - x;
+      });
+      
+      setRecList(recipeList.slice(0, 10));
+    }
   }
 
   const fetchRecipes = async () => {
@@ -79,8 +81,9 @@ export default function RecipeSearch() {
     const response = await fetch(url);
     if (response.ok) {
       const json = await response.json();
+      setRecipeId(json.recipes);
       for (let pantryRecipe of recList) {
-        for (let recipe of json.recipes) {
+        for (let recipe of recipeId) {
           if (pantryRecipe[0] === recipe.name.toUpperCase()) {
             pantryRecipe.push(recipe.id);
           }
@@ -102,8 +105,8 @@ export default function RecipeSearch() {
   return (
     <div className="row page-wrap">
       <div className="row">
-        <div className="mb-3 form-bg offset-3 col-6 py-3">
-          <div className="mx-3">
+          <div className="mb-3 form-bg offset-3 col-6 py-3">
+            <div className="mx-3">
             <h1 className="card-header mb-3 ">Recipes You Might Enjoy</h1>
             <div className="mb-3">
               <table>
