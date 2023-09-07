@@ -10,8 +10,6 @@ export default function RecipeSearch() {
   const [recipe, setRecipe] = useState([]);
   const [recList, setRecList] = useState([]);
   const [userId, setUserId] = useState("");
-  const [recipeId, setRecipeId] = useState([]);
-  const [recipes, setRecipes] = useState([]);
 
   const fetchUserData = async () => {
     const response = await fetch("http://localhost:8000/token", {
@@ -81,7 +79,6 @@ export default function RecipeSearch() {
     const response = await fetch(url);
     if (response.ok) {
       const json = await response.json();
-      setRecipeId(json.recipes);
       for (let pantryRecipe of recList) {
         for (let recipe of json.recipes) {
           if (pantryRecipe[0] === recipe.name.toUpperCase()) {
