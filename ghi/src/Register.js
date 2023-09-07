@@ -51,60 +51,69 @@ const handlePassChange = (event) => {
 }
 
     return (
-        <div className="page-wrap">
-        <div className="mb-3 form-bg offset-3 col-6 py-3">
-            <h3 className="card-header">Register</h3>
-            {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
-                <div className="card-body"></div>
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                            <div className="mx-3">
-                                <label htmlFor="name"className="form-label">Username:</label>
-                                <input
-                                value={name}
-                                onChange={handleNameChange}
-                                className="form-control"
-                                type="name"
-                                placeholder="Full Name" />
-                            </div>
-                            <div className="m-3">
-                                <label className="form-label"> Email:</label>
-                                <input
-                                value={email}
-                                onChange={handleEmailChange}
-                                className="form-control"
-                                aria-describedby="emailHelp"
-                                type="email"
-                                placeholder="Email Address" />
-                            </div>
-                            <div className="m-3">
-                                <label className="form-label">Password:</label>
-                                <input
-                                value={pass}
-                                onChange={handlePassChange}
-                                className="form-control"
-                                type="password"
-                                placeholder="Password" />
-                            </div>
-                        </div>
-                        <div className="d-flex justify-content-center py-1">
-                            <button
-                            type="submit"
-                            className= "button"
-                            >Register
-                            </button>
-                        </div>
-                    </form>
-                    <div className="d-flex justify-content-center pt-2">
-                        <button
-                        className="button"
-                        onClick={() => navigate("/login")}>
-                            Already have an account? <i>Login Here.</i>
-                        </button>
-                    </div>
+    <div className="page-wrap d-flex justify-content-center align-items-center">
+      <div className="mb-3 form-bg col-6 py-3">
+        <h3 className="card-header text-center">Register</h3>
+        {errorMessage && (
+          <div className="alert alert-danger text-center mt-3" role="alert">
+            {errorMessage}
+          </div>
+        )}
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <div className="mx-3">
+                <label htmlFor="name" className="form-label">
+                  Username:
+                </label>
+                <input
+                  value={name}
+                  onChange={handleNameChange}
+                  className="form-control"
+                  type="name"
+                  placeholder="Full Name"
+                />
+              </div>
+              <div className="m-3">
+                <label className="form-label"> Email:</label>
+                <input
+                  value={email}
+                  onChange={handleEmailChange}
+                  className="form-control"
+                  aria-describedby="emailHelp"
+                  type="email"
+                  placeholder="Email Address"
+                />
+              </div>
+              <div className="m-3">
+                <label className="form-label">Password:</label>
+                <input
+                  value={pass}
+                  onChange={handlePassChange}
+                  className="form-control"
+                  type="password"
+                  placeholder="Password"
+                />
+              </div>
+            </div>
+            <div className="d-flex justify-content-center py-1">
+              <button type="submit" className="btn btn-primary">
+                Register
+              </button>
+            </div>
+          </form>
+          <div className="d-flex justify-content-center pt-2">
+            <button
+              className="btn btn-link"
+              onClick={() => navigate("/login")}
+            >
+              Already have an account? <i>Login Here.</i>
+            </button>
+          </div>
         </div>
-        </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
 
 export default Register;
