@@ -47,7 +47,7 @@ class FakeRecipeQueries:
             return None
 
 
-def test_recipe_list():
+def test_recipes_list():
     res = client.get("/api/recipes")
     data = res.json()
 
