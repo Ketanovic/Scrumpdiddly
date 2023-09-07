@@ -128,8 +128,8 @@ function PantryForm() {
   } else {
     return (
       <div className="row page-wrap">
-        <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
+        <div className="mb-3 form-bg offset-3 col-6 py-3">
+          <div className="mx-3">
             <h1>Create a Pantry Item</h1>
             <div className="grid"></div>
             <form
@@ -139,23 +139,21 @@ function PantryForm() {
             >
               <div className="grid">
                 <label htmlFor="name">Search Ingredients</label>
-                <div>
+                <div className="d-flex flex-row">
                   <input
                     type="text"
-                    placeholder="Start typing what you have in your pantry"
+                    placeholder="Start typing what you have in your pantry..."
                     value={searchIngredient}
                     onChange={(e) => setSearchIngredient(e.target.value)}
-                    className="form-control"
-                  />
-                  <div>
-                    <button
-                      onClick={handleSearch}
-                      type="button"
-                      className="btn btn-primary btn-sm"
-                    >
-                      Search Ingredients
-                    </button>
-                  </div>
+                    className="form-control w-75"
+                  />&nbsp;&nbsp;&nbsp;
+                  <button
+                    onClick={handleSearch}
+                    type="button"
+                    className="button"
+                  >
+                    Search
+                  </button>
                 </div>
               </div>
 
@@ -167,7 +165,7 @@ function PantryForm() {
                   id="ingredients"
                   className="dropdown"
                 >
-                  <option value="">Choose an ingredient</option>
+                  <option value="">Choose an Ingredient</option>
                   {filter.map((ingredient) => {
                     return (
                       <option
@@ -207,11 +205,13 @@ function PantryForm() {
                 </table>
               </div>
             </form>
+            <div className="d-flex justify-content-center">
             <Link to={"/recipes/search"}>
-              <button className="btn btn-primary">
+              <button className="button">
                 See what's for dinner!
               </button>
             </Link>
+            </div>
           </div>
         </div>
       </div>
