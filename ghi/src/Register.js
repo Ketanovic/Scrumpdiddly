@@ -5,11 +5,7 @@ export const Register = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [name, setName] = useState('');
-    // const [formData, setFormData] = useState({
-        // name: "",
-        // email:"",
-        // pass:"",
-
+    const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -31,15 +27,11 @@ export const Register = (props) => {
         }
     }
         const submitResponse = await fetch(url, fetchConfig);
+        const responseData = await submitResponse.json();
         if (submitResponse.ok) {
-            // setFormData({
-            //     name: "",
-            //     email: "",
-            //     pass: "",
-            // });
             navigate('/login');
         } else {
-            console.error("*************",submitResponse);
+            setErrorMessage(responseData.message || 'Oops! Username or email has already been taken')
         }
     }
 
@@ -62,11 +54,12 @@ const handlePassChange = (event) => {
         <div className="page-wrap">
         <div className="mb-3 form-bg offset-3 col-6 py-3">
             <h3 className="card-header">Register</h3>
+            {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
                 <div className="card-body"></div>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <div className="mx-3">
-                                <label htmlFor="name"className="form-label">Full Name:</label>
+                                <label htmlFor="name"className="form-label">Username:</label>
                                 <input
                                 value={name}
                                 onChange={handleNameChange}
