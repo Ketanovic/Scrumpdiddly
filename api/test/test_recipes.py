@@ -1,12 +1,28 @@
+<<<<<<< HEAD
+from fastapi.testclient import TestClient
+from main import app
+from queries.recipes import RecipeQueries
+from models import RecipeIn
+
+=======
 from models import RecipeOut
 from fastapi.testclient import TestClient
 from main import app
 from queries.recipes import RecipeQueries
+>>>>>>> bc89e4734b1500f1dcdaea3455f2d3d320560de9
 
 client = TestClient(app)
 
 
 class FakeRecipeQueries:
+<<<<<<< HEAD
+    def create(self, info: RecipeIn) -> dict:
+        return {
+            "name": "Tuna Sandwhich",
+            "category": "Sandwich",
+            "area": "American",
+            "instructions": "Squish tuna between bread",
+=======
     def find_all(self):
         return {
             "recipes": [
@@ -28,10 +44,35 @@ class FakeRecipeQueries:
             "category": "string",
             "area": "string",
             "instructions": "string",
+>>>>>>> bc89e4734b1500f1dcdaea3455f2d3d320560de9
             "ingredients": {},
             "thumbnail": "string",
         }
 
+<<<<<<< HEAD
+
+def test_create_recipe():
+    app.dependency_overrides[RecipeQueries] = FakeRecipeQueries
+    recipe = {
+        "name": "Tuna Sandwhich",
+        "category": "Sandwich",
+        "area": "American",
+        "instructions": "Squish tuna between bread",
+        "ingredients": {},
+        "thumbnail": "string",
+    }
+    res = client.post("/api/recipes", json=recipe)
+    data = res.json()
+    assert res.status_code == 200
+    assert data == {
+        "name": "Tuna Sandwhich",
+        "category": "Sandwich",
+        "area": "American",
+        "instructions": "Squish tuna between bread",
+        "ingredients": {},
+        "thumbnail": "string",
+    }
+=======
     def get_one(self, id):
         if id == "64f9e07ba76d802cbc3e8487":
             return {
@@ -77,3 +118,4 @@ def test_get_recipe():
     assert "instructions" in data
     assert "ingredients" in data
     assert "thumbnail" in data
+>>>>>>> bc89e4734b1500f1dcdaea3455f2d3d320560de9
