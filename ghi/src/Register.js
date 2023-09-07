@@ -71,7 +71,7 @@ const handlePassChange = (event) => {
                   onChange={handleNameChange}
                   className="form-control"
                   type="name"
-                  placeholder="Full Name"
+                  placeholder="Username"
                 />
               </div>
               <div className="m-3">
