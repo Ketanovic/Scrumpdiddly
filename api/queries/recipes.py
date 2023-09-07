@@ -30,7 +30,7 @@ class RecipeQueries:
         else:
             recipe = info
         if self.collection.find_one({"name": recipe["name"]}) is None:
-            try:                
+            try:
                 self.collection.insert_one(recipe)
                 recipe["id"] = str(recipe["_id"])
                 return recipe
