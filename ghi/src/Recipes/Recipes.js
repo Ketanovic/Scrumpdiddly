@@ -48,7 +48,7 @@ export default function ListRecipes() {
         </button>
       </form>
       <div className="row pt-3 ease-up">
-        {displayedRecipes.map((rec) => ( // <<< Make sure you use displayedRecipes here
+        {displayedRecipes.map((rec) => (
           <div className="col-4 pb-3 card-glow" key={rec.id}>
             <div className="small-card card-deck mb-3 text-center">
               <img src={rec.thumbnail} className="card-img-top" alt="..." />
