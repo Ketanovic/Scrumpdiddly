@@ -1,28 +1,24 @@
-<<<<<<< HEAD
 from fastapi.testclient import TestClient
 from main import app
 from queries.recipes import RecipeQueries
-from models import RecipeIn
-
-=======
-from models import RecipeOut
-from fastapi.testclient import TestClient
-from main import app
-from queries.recipes import RecipeQueries
->>>>>>> bc89e4734b1500f1dcdaea3455f2d3d320560de9
+from models import RecipeIn, RecipeOut
 
 client = TestClient(app)
 
 
 class FakeRecipeQueries:
-<<<<<<< HEAD
     def create(self, info: RecipeIn) -> dict:
-        return {
-            "name": "Tuna Sandwhich",
-            "category": "Sandwich",
-            "area": "American",
-            "instructions": "Squish tuna between bread",
-=======
+        return (
+            {
+                "name": "Tuna Sandwhich",
+                "category": "Sandwich",
+                "area": "American",
+                "instructions": "Squish tuna between bread",
+                "ingredients": {},
+                "thumbnail": "string",
+            },
+        )
+
     def find_all(self):
         return {
             "recipes": [
@@ -39,17 +35,31 @@ class FakeRecipeQueries:
         }
 
     def get_recipe(self, id: RecipeOut):
-        return {
-            "name": "string",
-            "category": "string",
-            "area": "string",
-            "instructions": "string",
->>>>>>> bc89e4734b1500f1dcdaea3455f2d3d320560de9
-            "ingredients": {},
-            "thumbnail": "string",
-        }
+        return (
+            {
+                "name": "string",
+                "category": "string",
+                "area": "string",
+                "instructions": "string",
+                "ingredients": {},
+                "thumbnail": "string",
+            },
+        )
 
-<<<<<<< HEAD
+    def get_one(self, id):
+        if id == "64f9e07ba76d802cbc3e8487":
+            return {
+                "id": "string",
+                "name": "string",
+                "category": "string",
+                "area": "string",
+                "instructions": "string",
+                "ingredients": {},
+                "thumbnail": "string",
+            }
+        else:
+            return None
+
 
 def test_create_recipe():
     app.dependency_overrides[RecipeQueries] = FakeRecipeQueries
@@ -72,20 +82,6 @@ def test_create_recipe():
         "ingredients": {},
         "thumbnail": "string",
     }
-=======
-    def get_one(self, id):
-        if id == "64f9e07ba76d802cbc3e8487":
-            return {
-                "id": "string",
-                "name": "string",
-                "category": "string",
-                "area": "string",
-                "instructions": "string",
-                "ingredients": {},
-                "thumbnail": "string",
-            }
-        else:
-            return None
 
 
 def test_recipes_list():
@@ -118,4 +114,3 @@ def test_get_recipe():
     assert "instructions" in data
     assert "ingredients" in data
     assert "thumbnail" in data
->>>>>>> bc89e4734b1500f1dcdaea3455f2d3d320560de9
