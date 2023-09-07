@@ -31,36 +31,35 @@ export default function RecipeDetailPage() {
   }, []);
 
 
+
 return (
-    <div className="container-fluid">
-      <div classname="page-wrap">
-        <div className="row">
-          <div className="col">
-            <div className="card text-center mt-4">
-              <img src={recipe.thumbnail} className="card-img-top" alt="Recipe Thumbnail" />
-              <div className="card-body d-flex flex-column">
-                <div className="title-card">
-                  <h2 className="card-title text-truncate">{recipe.name}</h2>
+    <div className="row page-wrap">
+      <div className="row">
+        <div className="container-fluid mt-4">
+          <div className="card text-center">
+            <img src={recipe.thumbnail} className="card-img-top" alt="Recipe Thumbnail" />
+            <div className="card-body d-flex flex-column">
+              <div className="title-card">
+                <h2 className="card-title text-truncate">{recipe.name}</h2>
                 </div>
-                <p className="card-text">{recipe.area} {recipe.category}</p>
-                <p className="card-text">{recipe.instructions}</p>
-                <div className="mt-auto">
-                  <table className="table table-bordered">
-                    <tbody>
-                      {ingredients.map((ingnames, index) => (
-                        <tr key={index}>
-                          <td>{ingnames[0]}</td>
-                          <td>{ingnames[1]}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  <p className="card-text">{recipe.area} {recipe.category}</p>
+                  <p className="card-text">{recipe.instructions}</p>
+                  <div className="mt-auto">
+                    <table className="table table-bordered">
+                      <tbody>
+                        {ingredients.map((ingnames, index) => (
+                          <tr key={index}>
+                            <td>{ingnames[0]}</td>
+                            <td>{ingnames[1]}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 }
