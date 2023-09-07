@@ -99,17 +99,6 @@ def test_recipes_list():
             }
         ]
     }
-    # assert "recipes" in data
-    # assert isinstance(data["recipes"], list)
-
-    # if data["recipes"]:
-    #     first_recipe = data["recipes"][0]
-    #     assert "name" in first_recipe
-    #     assert "category" in first_recipe
-    #     assert "area" in first_recipe
-    #     assert "instructions" in first_recipe
-    #     assert "ingredients" in first_recipe
-    #     assert "thumbnail" in first_recipe
 
 
 def test_get_recipe():
