@@ -31,20 +31,20 @@ export default function RecipeDetailPage() {
   }, []);
 
 
+
 return (
-    <div className="container-fluid">
-      <div classname="page-wrap">
-        <div className="row">
-          <div className="col">
-            <div className="card text-center mt-4">
-              <img src={recipe.thumbnail} className="card-img-top" alt="Recipe Thumbnail" />
-              <div className="card-body d-flex flex-column">
-                <div className="title-card">
-                  <h2 className="card-title text-truncate">{recipe.name}</h2>
-                </div>
-                <p className="card-text">{recipe.area} {recipe.category}</p>
-                <p className="card-text">{recipe.instructions}</p>
-                <div className="mt-auto">
+    <div className="page-wrap container">
+      <div className="row">
+        <div className="col-md-6">
+          <img src={recipe.thumbnail} className="img-fluid" alt="Recipe Thumbnail" />
+        </div>
+        <div className="col-md-6">
+          <div className="card" style={{ maxHeight: '800px', overflowY: 'auto' }}>
+            <div className="card-body">
+              <h2 className="card-title">{recipe.name}</h2>
+              <p className="card-text">{recipe.area} {recipe.category}</p>
+              <p className="card-text">{recipe.instructions}</p>
+                <div className="mt-4">
                   <table className="table table-bordered">
                     <tbody>
                       {ingredients.map((ingnames, index) => (
@@ -56,7 +56,6 @@ return (
                     </tbody>
                   </table>
                 </div>
-              </div>
             </div>
           </div>
         </div>

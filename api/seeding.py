@@ -67,7 +67,7 @@ def list_all_recipes():
                     for ing_list, measure_list in zip(ing_list, measure_list)
                 }
                 encoder = {
-                    "name": recipe["strMeal"],
+                    "name": recipe["strMeal"].replace(",", " "),
                     "category": recipe["strCategory"],
                     "area": recipe["strArea"],
                     "instructions": recipe["strInstructions"],
