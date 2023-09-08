@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 export default function RecipeDetailPage() {
   const [recipe, setRecipe] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  const {recipeid}  = useParams();
+  const {recipeid} = useParams();
 
   const fetchSingleRecipe = async () => {
     const url = `${process.env.REACT_APP_API_HOST}/api/recipes/${recipeid}`;
@@ -18,19 +18,14 @@ export default function RecipeDetailPage() {
         tempList.push(key);
         tempList.push(data.ingredients[key]);
         ingredientList.push(tempList);
-        tempList = [];
       }
       setIngredients(ingredientList)
     }
   };
 
-
-
   useEffect(() => {
       fetchSingleRecipe();
   }, []);
-
-
 
 return (
     <div className="page-wrap container">
@@ -49,7 +44,7 @@ return (
                     <tbody>
                       {ingredients.map((ingnames, index) => (
                         <tr key={index}>
-                          <td>{ingnames[0]}</td>
+                          <td>{ingnames[0].toUpperCase()}</td>
                           <td>{ingnames[1]}</td>
                         </tr>
                       ))}

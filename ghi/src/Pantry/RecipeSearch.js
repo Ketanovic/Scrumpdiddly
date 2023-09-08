@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-
-
 export default function RecipeSearch() {
   const [pantry, setPantry] = useState([]);
   const [recList, setRecList] = useState([]);
   const [userId, setUserId] = useState("");
   const [recipeId, setRecipeId] = useState([]);
-
   const fetchUserData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
       credentials: "include",
@@ -18,17 +14,17 @@ export default function RecipeSearch() {
       setUserId(data.account.id);
     }
   };
-
   async function fetchPantry(userId) {
     fetchUserData();
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/pantry_item/`, {
-        credentials: "include",
-      });
-
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/pantry_item/`,
+        {
+          credentials: "include",
+        }
+      );
       if (response.ok) {
         const data = await response.json();
-
         const filteredData = data.pantry_items.filter(
           (item) => item.user_id === userId
         );
@@ -40,7 +36,6 @@ export default function RecipeSearch() {
       console.error("An error occurred:", error);
     }
   }
-
   async function fetchPantryRecipes() {
     //create object to count ingredient counts
     const dict = {};
@@ -49,7 +44,6 @@ export default function RecipeSearch() {
         if (dict[recipe] === undefined) {
           dict[recipe] = 0;
         }
-
         dict[recipe] += 1;
       }
     }
@@ -68,9 +62,7 @@ export default function RecipeSearch() {
       let y = b[1];
       return y - x;
     });
-    
     let tempList = recipeList.slice(0, 15);
-
     const url = `${process.env.REACT_APP_API_HOST}/api/recipes`;
     const response = await fetch(url);
     if (response.ok) {
@@ -84,18 +76,14 @@ export default function RecipeSearch() {
         }
       }
     }
-    setRecList(tempList)
+    setRecList(tempList);
   }
-
-
   useEffect(() => {
     fetchPantryRecipes();
   }, [pantry]);
   useEffect(() => {
     fetchPantry(userId);
   }, [userId]);
-
-
   return (
     <div className="row page-wrap">
       <div className="row">
@@ -133,7 +121,6 @@ export default function RecipeSearch() {
                 </thead>
                 <tbody>
                   {recList.map((recipe_item) => {
-                    
                     return (
                       <tr key={recipe_item}>
                         <td>
