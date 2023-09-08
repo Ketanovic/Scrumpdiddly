@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import scrumdiddly from './CSS/Images/scrumdiddly.png'
 import React, { useState, useEffect } from "react";
 import scrumdiddly from './scrumdiddly.png'
 

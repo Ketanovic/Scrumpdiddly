@@ -1,13 +1,13 @@
-import "./App.css";
+import "./CSS/App.css";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import React from "react";
-import PantryForm from "./PantryItems";
+import PantryForm from "./Pantry/PantryItems";
 import Nav from "./Nav.js";
 import MainPage from "./MainPage.js";
-import RecipeSearch, {UnderscoreLower} from "./RecipeSearch.js";
+import RecipeSearch from "./Pantry/RecipeSearch";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
-import LoginForm from "./LoginForm.js";
-import { Register} from "./Register.js";
+import LoginForm from "./Login-Register/LoginForm.js";
+import { Register} from "./Login-Register/Register.js";
 import RecipeDetailPage from "./Recipes/RecipeDetail.js"
 import ListRecipes from "./Recipes/Recipes.js";
 
