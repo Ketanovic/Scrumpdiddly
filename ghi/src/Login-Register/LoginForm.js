@@ -16,7 +16,6 @@ const LoginForm = (props) => {
      setTimeout(function () {window.location.replace("/")}, 1000)
 
     } catch (err) {
-      // Handle the error here
       console.log("Error caught in handleSubmit:", err);
       setErrorMessage("Failed to log in. Please check your credentials.");
     }

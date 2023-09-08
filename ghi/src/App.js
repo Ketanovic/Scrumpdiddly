@@ -1,5 +1,3 @@
-// import Construct from "./Construct.js";
-// import ErrorNotification from "./ErrorNotification";
 import "./CSS/App.css";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import React from "react";
@@ -15,9 +13,6 @@ import ListRecipes from "./Recipes/Recipes.js";
 
 
 function App() {
-
-
-
   return (
     <AuthProvider baseUrl= {process.env.REACT_APP_API_HOST}>
       <BrowserRouter >
