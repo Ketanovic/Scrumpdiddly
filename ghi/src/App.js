@@ -13,12 +13,6 @@ import ListRecipes from "./Recipes/Recipes.js";
 
 
 function App() {
-<<<<<<< HEAD
-=======
-  
-
-
->>>>>>> main
   return (
     <AuthProvider baseUrl= {process.env.REACT_APP_API_HOST}>
       <BrowserRouter >
