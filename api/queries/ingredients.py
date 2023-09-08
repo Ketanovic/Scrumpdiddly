@@ -26,7 +26,6 @@ class IngredientQueries:
             try:
                 self.collection.insert_one(ingredients)
             except DuplicateKeyError:
-                print("duplicate key error caught")
                 pass
 
         else:
