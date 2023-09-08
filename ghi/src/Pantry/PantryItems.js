@@ -5,9 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 function PantryForm() {
-  const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
-  const [ingredient, setIngredient] = useState("");
   const [filter, setFilter] = useState([]);
   const [searchIngredient, setSearchIngredient] = useState("");
   const [pantry, setPantry] = useState([]);
@@ -67,8 +65,6 @@ function PantryForm() {
     const value = event.target.value;
     const splitValue = value.split(",");
     const firstValue = splitValue.shift();
-    // setName(firstValue);
-    // setRecipes(splitValue);
     const data = {
       name: firstValue,
       recipes: splitValue,
@@ -85,8 +81,7 @@ function PantryForm() {
     };
 
     const response = await fetch(url, fetchConfig);
-    if (response.ok) {
-      setName("");
+    if (response.ok) {      
       const newPantry = [...pantry];
       newPantry.push(data);
       setPantry(newPantry);
