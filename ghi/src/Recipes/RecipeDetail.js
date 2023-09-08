@@ -7,7 +7,7 @@ export default function RecipeDetailPage() {
   const {recipeid}  = useParams();
 
   const fetchSingleRecipe = async () => {
-    const url = `http://localhost:8000/api/recipes/${recipeid}`;
+    const url = `${process.env.REACT_APP_API_HOST}/api/recipes/${recipeid}`;
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();

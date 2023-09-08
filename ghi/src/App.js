@@ -15,14 +15,11 @@ import ListRecipes from "./Recipes/Recipes.js";
 
 
 function App() {
-  // const [currentForm, setCurrentForm] = useState("loginForm");
-  // const toggleForm = (formName) => {
-  //   setCurrentForm(formName);
-  // };
+  
 
 
   return (
-    <AuthProvider baseUrl="http://localhost:8000">
+    <AuthProvider baseUrl= {process.env.REACT_APP_API_HOST}>
       <BrowserRouter >
         <Nav />
         <div className="container">
