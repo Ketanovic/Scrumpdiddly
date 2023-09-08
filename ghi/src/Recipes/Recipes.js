@@ -29,8 +29,7 @@ export default function ListRecipes() {
     <div className="page-wrap">
       <form
         onSubmit={(e) => { e.preventDefault(); handleSearch(); }}
-        className="form-inline my-2 my-lg-0"
-      >
+        className="form-inline my-2 my-lg-0">
         <input
           className="form-control mr-sm-2"
           type="search"
@@ -38,7 +37,7 @@ export default function ListRecipes() {
           value={searchRecipe}
           onChange={(e) => setSearchRecipe(e.target.value)}
           aria-label="Search"
-        />
+          />
         <button
           onClick={handleSearch}
           className="btn btn-success"

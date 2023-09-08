@@ -2,11 +2,10 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login, token } = useToken();
-  const [errorMessage, setErrorMessage] = useState(null);
+  const { login } = useToken();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -14,14 +13,8 @@ const LoginForm = (props) => {
     try {
      await login(username, password);
      setTimeout(function () {window.location.replace("/")}, 1000)
-
-    } catch (err) {
-      // Handle the error here
-      console.log("Error caught in handleSubmit:", err);
-      setErrorMessage("Failed to log in. Please check your credentials.");
-    }
+    } catch (err) {}
   };
-
 
   return (
     <div className="page-wrap">
@@ -60,7 +53,7 @@ const LoginForm = (props) => {
         </div>
       </div>
     </div>
-    </div>
+  </div>
   );
 };
 
