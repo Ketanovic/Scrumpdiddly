@@ -2,8 +2,6 @@ import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-
-
 function PantryForm() {
   const [ingredients, setIngredients] = useState([]);
   const [filter, setFilter] = useState([]);
@@ -14,7 +12,9 @@ function PantryForm() {
   const navigate = useNavigate();
 
   async function fetchIngredients() {
-    const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/ingredients/`);
+    const response = await fetch(
+      `${process.env.REACT_APP_API_HOST}/api/ingredients/`
+    );
     if (response.ok) {
       const data = await response.json();
       setIngredients(Object.values(data.ingredients));
@@ -34,9 +34,12 @@ function PantryForm() {
   async function fetchPantry(userId) {
     fetchUserData();
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/pantry_item/`, {
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/pantry_item/`,
+        {
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -81,7 +84,7 @@ function PantryForm() {
     };
 
     const response = await fetch(url, fetchConfig);
-    if (response.ok) {      
+    if (response.ok) {
       const newPantry = [...pantry];
       newPantry.push(data);
       setPantry(newPantry);
@@ -125,7 +128,8 @@ function PantryForm() {
             <form
               onSubmit={handleSubmit}
               id="create-ingredient-form"
-              placeholder="Name of Pantry">
+              placeholder="Name of Pantry"
+            >
               <div className="grid">
                 <label htmlFor="name">Search Ingredients</label>
                 <div className="d-flex flex-row">
@@ -135,11 +139,13 @@ function PantryForm() {
                     value={searchIngredient}
                     onChange={(e) => setSearchIngredient(e.target.value)}
                     className="form-control w-75"
-                  />&nbsp;&nbsp;&nbsp;
+                  />
+                  &nbsp;&nbsp;&nbsp;
                   <button
                     onClick={handleSearch}
                     type="button"
-                    className="button">
+                    className="button"
+                  >
                     Search
                   </button>
                 </div>
@@ -157,7 +163,8 @@ function PantryForm() {
                     return (
                       <option
                         value={[ingredient.name, ingredient.recipe]}
-                        key={ingredient.name}>
+                        key={ingredient.name}
+                      >
                         {ingredient.name}
                       </option>
                     );
@@ -179,7 +186,8 @@ function PantryForm() {
                             <button
                               type="button"
                               onClick={() => handleDelete(pantry_item.id)}
-                              className="delete-button">
+                              className="delete-button"
+                            >
                               Delete
                             </button>
                           </td>
@@ -191,11 +199,9 @@ function PantryForm() {
               </div>
             </form>
             <div className="d-flex justify-content-center">
-            <Link to={"/recipes/search"}>
-              <button className="button">
-                See what's for dinner!
-              </button>
-            </Link>
+              <Link to={"/recipes/search"}>
+                <button className="button">See what's for dinner!</button>
+              </Link>
             </div>
           </div>
         </div>

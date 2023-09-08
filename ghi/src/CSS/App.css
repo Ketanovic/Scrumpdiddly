@@ -1,11 +1,19 @@
 @keyframes fadeIn {
-  from {opacity:0}
-  to {opacity:1}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes easeDown {
-  from {top: -100px}
-  to {top: 0vh}
+  from {
+    top: -100px;
+  }
+  to {
+    top: 0vh;
+  }
 }
 
 body .main {
@@ -19,7 +27,7 @@ body .main {
 }
 
 body {
-  background: url('./Images/background-nobox.png') no-repeat center center fixed;
+  background: url("./Images/background-nobox.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -32,7 +40,7 @@ body {
 
 .link {
   transition: 0.4;
-  color:#d44300;
+  color: #d44300;
   text-decoration: none;
 }
 
@@ -97,7 +105,7 @@ nav {
 
 .rec-button {
   background-color: transparent;
-  color:#d44300;
+  color: #d44300;
   border: 1px solid #d44300;
 }
 
@@ -121,7 +129,7 @@ img.card-img-top {
 
 .delete-button {
   background-color: transparent;
-  color:#247000;
+  color: #247000;
   border: 1px solid #247000;
 }
 

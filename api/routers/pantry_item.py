@@ -10,7 +10,7 @@ router = APIRouter()
 @router.get("/api/pantry_item", response_model=PantryItems)
 def list_pantry_items(
     queries: PantryItemQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data)
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return {"pantry_items": queries.find_all()}
 
@@ -25,12 +25,11 @@ def create_pantry_item(
 
 
 @router.delete(
-        "/api/pantry_item/{pantry_item_id}",
-        response_model=DeleteStatus
-          )
+    "/api/pantry_item/{pantry_item_id}", response_model=DeleteStatus
+)
 def delete_pantry_item(
     pantry_item_id: str,
     account_data: dict = Depends(authenticator.get_current_account_data),
-    queries: PantryItemQueries = Depends()
+    queries: PantryItemQueries = Depends(),
 ):
     return {"status": queries.delete(pantry_item_id=pantry_item_id)}
