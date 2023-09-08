@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 
 
+
 export default function RecipeSearch() {
   const [pantry, setPantry] = useState([]);
   const [recList, setRecList] = useState([]);
   const [userId, setUserId] = useState("");
-  const [recipeId, setRecipeId] = useState([]);
 
   const fetchUserData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
@@ -70,12 +70,12 @@ export default function RecipeSearch() {
     });
     
     let tempList = recipeList.slice(0, 15);
-
+    
+    // adds recipe id onto list for browser link
     const url = `${process.env.REACT_APP_API_HOST}/api/recipes`;
     const response = await fetch(url);
     if (response.ok) {
       const json = await response.json();
-      setRecipeId(json.recipes);
       for (let pantryRecipe of tempList) {
         for (let recipe of json.recipes) {
           if (pantryRecipe[0] === recipe.name.toUpperCase()) {

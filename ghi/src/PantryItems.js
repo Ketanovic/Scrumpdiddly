@@ -13,7 +13,6 @@ function PantryForm() {
   const [filter, setFilter] = useState([]);
   const [searchIngredient, setSearchIngredient] = useState("");
   const [pantry, setPantry] = useState([]);
-  const [recipe, setRecipe] = useState([]);
   const { token } = useAuthContext();
   const [userId, setUserId] = useState("");
   const navigate = useNavigate();
@@ -68,13 +67,13 @@ function PantryForm() {
 
   const handleSubmit = async (event) => {
     const value = event.target.value;
-    const value2 = value.split(",");
-    const x = value2.shift();
-    setName(x);
-    setRecipe(value2);
+    const splitValue = value.split(",");
+    const firstValue = splitValue.shift();
+    // setName(firstValue);
+    // setRecipes(splitValue);
     const data = {
-      name: x,
-      recipes: value2,
+      name: firstValue,
+      recipes: splitValue,
       user_id: userId,
     };
     const url = `${process.env.REACT_APP_API_HOST}/api/pantry_item/`;

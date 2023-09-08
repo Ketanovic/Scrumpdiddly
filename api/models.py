@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from typing import List
 from jwtdown_fastapi.authentication import Token
-from bson.objectid import ObjectId
 
 
 class AccountForm(BaseModel):
