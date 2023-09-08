@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-
-
 export default function RecipeSearch() {
   const [pantry, setPantry] = useState([]);
   const [recList, setRecList] = useState([]);
@@ -68,7 +66,7 @@ export default function RecipeSearch() {
       let y = b[1];
       return y - x;
     });
-    
+
     setRecList(recipeList.slice(0, 25));
   }
 

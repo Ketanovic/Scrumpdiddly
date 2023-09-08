@@ -1,9 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import scrumdiddly from './scrumdiddly.png'
 import React, { useState, useEffect } from "react";
+import scrumdiddly from './scrumdiddly.png'
 
 function MainPage() {
-  const navigate = useNavigate()
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
 
@@ -11,7 +9,7 @@ function MainPage() {
     const response = await fetch("http://localhost:8000/token", {
       credentials: "include",
     });
-    if (response.ok && response != null) {
+    if (response.ok) {
       const data = await response.json();
       if (data !== null) {
       setUsername(data.account.username);
@@ -19,7 +17,6 @@ function MainPage() {
       }
     }
   };
-
   useEffect(() => {
   fetchUserData();
       }, []);

@@ -1,4 +1,3 @@
-
 @keyframes fadeIn {
   from {opacity:0}
   to {opacity:1}
@@ -8,9 +7,6 @@
   from {top: -100px}
   to {top: 0vh}
 }
-
-
-
 
 body .main {
   animation: ease-in 1s;
@@ -34,8 +30,6 @@ body {
   padding-top: 100px;
 }
 
-
-
 .link {
   transition: 0.4;
   color:#d44300;
@@ -47,15 +41,12 @@ body {
   color: white;
 }
 
-
-
 nav {
   width: 100%;
   height: 90px;
   background-color: #e7ceb6;
   animation: easeDown 1s;
 }
-
 
 .search {
   background-color: #e7dbc4;
@@ -120,7 +111,6 @@ div.title-card {
   height: 50px;
 }
 
-
 img.toggle-button {
   max-width: 30px;
 }
@@ -142,11 +132,8 @@ img.card-img-top {
   border: 1px solid #ff0000;
 }
 
-
-
-
 .form-bg {
-  background-color: #cfb399;
+  background-color: #e7ceb6;
 }
 
 .nav-dropdown {
