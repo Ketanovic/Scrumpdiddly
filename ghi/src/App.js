@@ -1,5 +1,3 @@
-// import Construct from "./Construct.js";
-// import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import React from "react";
@@ -15,12 +13,6 @@ import ListRecipes from "./Recipes/Recipes.js";
 
 
 function App() {
-  // const [currentForm, setCurrentForm] = useState("loginForm");
-  // const toggleForm = (formName) => {
-  //   setCurrentForm(formName);
-  // };
-
-
   return (
     <AuthProvider baseUrl="http://localhost:8000">
       <BrowserRouter >
