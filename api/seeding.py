@@ -48,7 +48,8 @@ def list_all_recipes():
                     recipe = data["meals"][j]
                     if (
                         data["meals"][j]["strIngredient" + str(i)] != ""
-                        and data["meals"][j]["strIngredient" + str(i)] is not None
+                        and data["meals"][j]["strIngredient" + str(i)]
+                        is not None
                     ):
                         recipe_ingredients = data["meals"][j][
                             "strIngredient" + str(i)

@@ -1,16 +1,15 @@
 import { NavLink } from "react-router-dom";
-import './CSS/App.css'
-import scrump from './CSS/Images/scrump.png'
+import "./CSS/App.css";
+import scrump from "./CSS/Images/scrump.png";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
-
 function Nav() {
-    const navigate = useNavigate()
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [username, setUsername] = useState("");
-    const { logout } = useToken();
+  const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const { logout } = useToken();
 
   const fetchUserData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
@@ -19,23 +18,27 @@ function Nav() {
     if (response.ok) {
       const data = await response.json();
       if (data !== null) {
-      setUsername(data.account.username);
-      setLoggedIn(true)
+        setUsername(data.account.username);
+        setLoggedIn(true);
       }
     }
   };
 
   const handleLogout = async () => {
-    logout(); {
+    logout();
+    {
       localStorage.clear();
-      setLoggedIn(false)
+      setLoggedIn(false);
       //this location replace was needed for the page to register a sign out ask Riley or Dario
-    } setTimeout(function () {window.location.replace("/")}, 1000)
-};
+    }
+    setTimeout(function () {
+      window.location.replace("/");
+    }, 1000);
+  };
 
   useEffect(() => {
-  fetchUserData();
-      }, [username]);
+    fetchUserData();
+  }, [username]);
 
   return (
     <nav className="navbar navbar-expand-lg position-fixed">
@@ -52,9 +55,15 @@ function Nav() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <img src={require("./CSS/Images/menu.png")} className="navbar-toggle-icon toggle-button"/>
+          <img
+            src={require("./CSS/Images/menu.png")}
+            className="navbar-toggle-icon toggle-button"
+          />
         </button>
-        <div className="collapse navbar-collapse nav-dropdown" id="navbarSupportedContent">
+        <div
+          className="collapse navbar-collapse nav-dropdown"
+          id="navbarSupportedContent"
+        >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink className="nav-link link" to="/">
@@ -69,7 +78,8 @@ function Nav() {
                   id="pantryDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false">
+                  aria-expanded="false"
+                >
                   Pantry
                 </NavLink>
                 <ul className="dropdown-menu" aria-labelledby="pantryDropdown">
@@ -88,7 +98,8 @@ function Nav() {
                 id="recipesDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false"
+              >
                 Recipes
               </NavLink>
               <ul className="dropdown-menu" aria-labelledby="recipesDropdown">
@@ -100,16 +111,26 @@ function Nav() {
               </ul>
             </li>
           </ul>
-          {!loggedIn &&
-          <button className="btn btn-outline-success" type="submit" onClick={() => { navigate("/login"); }}>
-            Sign In
-          </button>
-          }
-          {loggedIn &&
-          <button className="btn btn-outline-success" type="button" onClick={(handleLogout)}>
-            Sign Out
-          </button>
-          }
+          {!loggedIn && (
+            <button
+              className="btn btn-outline-success"
+              type="submit"
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Sign In
+            </button>
+          )}
+          {loggedIn && (
+            <button
+              className="btn btn-outline-success"
+              type="button"
+              onClick={handleLogout}
+            >
+              Sign Out
+            </button>
+          )}
         </div>
       </div>
     </nav>
