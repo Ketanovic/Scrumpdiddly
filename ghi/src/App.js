@@ -13,8 +13,14 @@ import ListRecipes from "./Recipes/Recipes.js";
 
 
 function App() {
+<<<<<<< HEAD
+=======
+  
+
+
+>>>>>>> main
   return (
-    <AuthProvider baseUrl="http://localhost:8000">
+    <AuthProvider baseUrl= {process.env.REACT_APP_API_HOST}>
       <BrowserRouter >
         <Nav />
         <div className="container">
