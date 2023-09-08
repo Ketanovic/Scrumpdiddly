@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import './App.css'
-import scrump from './scrump.png'
+import './CSS/App.css'
+import scrump from './CSS/Images/scrump.png'
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
@@ -55,7 +55,7 @@ function Nav() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <img src={require("./menu.png")} className="navbar-toggle-icon toggle-button"/>
+          <img src={require("./CSS/Images/menu.png")} className="navbar-toggle-icon toggle-button"/>
         </button>
         <div className="collapse navbar-collapse nav-dropdown" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
