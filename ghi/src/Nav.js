@@ -16,7 +16,7 @@ function Nav() {
 
 
   const fetchUserData = async () => {
-    const response = await fetch("http://localhost:8000/token", {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
       credentials: "include",
     });
     if (response.ok && response != null) {
@@ -32,6 +32,7 @@ function Nav() {
     logout(); {
       localStorage.clear();
       setLoggedIn(false)
+      //this location replace was needed for the page to register a sign out ask Riley or Dario
     } setTimeout(function () {window.location.replace("/")}, 1000)
 };
 
