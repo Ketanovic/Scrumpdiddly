@@ -23,9 +23,8 @@ export const Register = (props) => {
             body: json,
             headers: {
                 "Content-Type": "application/json",
-
-        }
-    }
+            }
+      }
         const submitResponse = await fetch(url, fetchConfig);
         const responseData = await submitResponse.json();
         if (submitResponse.ok) {

@@ -1,9 +1,8 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import './App.css'
 import scrump from './scrump.png'
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
 
@@ -11,15 +10,13 @@ function Nav() {
     const navigate = useNavigate()
     const [loggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState("");
-    const { logout, token } = useToken();
-    const [errorMessage, setErrorMessage] = useState(null);
-
+    const { logout } = useToken();
 
   const fetchUserData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
       credentials: "include",
     });
-    if (response.ok && response != null) {
+    if (response.ok) {
       const data = await response.json();
       if (data !== null) {
       setUsername(data.account.username);
@@ -53,8 +50,7 @@ function Nav() {
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          aria-label="Toggle navigation">
           <img src={require("./menu.png")} className="navbar-toggle-icon toggle-button"/>
         </button>
         <div className="collapse navbar-collapse nav-dropdown" id="navbarSupportedContent">
@@ -64,7 +60,6 @@ function Nav() {
                 Home
               </NavLink>
             </li>
-
             {loggedIn && (
               <li className="nav-item dropdown">
                 <NavLink
@@ -73,8 +68,7 @@ function Nav() {
                   id="pantryDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+                  aria-expanded="false">
                   Pantry
                 </NavLink>
                 <ul className="dropdown-menu" aria-labelledby="pantryDropdown">
@@ -86,7 +80,6 @@ function Nav() {
                 </ul>
               </li>
             )}
-
             <li className="nav-item dropdown">
               <NavLink
                 className="nav-link link dropdown-toggle"
@@ -94,8 +87,7 @@ function Nav() {
                 id="recipesDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+                aria-expanded="false">
                 Recipes
               </NavLink>
               <ul className="dropdown-menu" aria-labelledby="recipesDropdown">
@@ -107,26 +99,20 @@ function Nav() {
               </ul>
             </li>
           </ul>
-            &nbsp;&nbsp;
           {!loggedIn &&
           <button className="btn btn-outline-success" type="submit" onClick={() => { navigate("/login"); }}>
             Sign In
           </button>
           }
-          {" "}
-          &nbsp;&nbsp;
           {loggedIn &&
           <button className="btn btn-outline-success" type="button" onClick={(handleLogout)}>
             Sign Out
           </button>
           }
-          {" "}
-          &nbsp;&nbsp;
         </div>
       </div>
     </nav>
   );
 }
-
 
 export default Nav;

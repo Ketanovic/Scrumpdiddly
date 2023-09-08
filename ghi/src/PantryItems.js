@@ -1,7 +1,5 @@
-import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import React, { useState, useEffect } from "react";
-import "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -122,7 +120,7 @@ function PantryForm() {
     fetchPantry(userId);
   }, [userId]);
 
-  if (token === null) {    
+  if (token === null) {
     navigate("/login");
   } else {
     return (
@@ -130,18 +128,16 @@ function PantryForm() {
         <div className="mb-3 form-bg offset-3 col-6 py-3">
           <div className="mx-3">
             <h1>Create a Pantry Item</h1>
-            <div className="grid"></div>
             <form
               onSubmit={handleSubmit}
               id="create-ingredient-form"
-              placeholder="Name of Pantry"
-            >
+              placeholder="Name of Pantry">
               <div className="grid">
                 <label htmlFor="name">Search Ingredients</label>
                 <div className="d-flex flex-row">
                   <input
                     type="text"
-                    placeholder="Start typing what you have in your pantry..."
+                    placeholder="Type here what you have in your pantry..."
                     value={searchIngredient}
                     onChange={(e) => setSearchIngredient(e.target.value)}
                     className="form-control w-75"
@@ -149,8 +145,7 @@ function PantryForm() {
                   <button
                     onClick={handleSearch}
                     type="button"
-                    className="button"
-                  >
+                    className="button">
                     Search
                   </button>
                 </div>
@@ -159,7 +154,6 @@ function PantryForm() {
               <div className="dropdown">
                 <select
                   onChange={handleSubmit}
-                  value={ingredient}
                   name="ingredients"
                   id="ingredients"
                   className="dropdown"
@@ -169,8 +163,7 @@ function PantryForm() {
                     return (
                       <option
                         value={[ingredient.name, ingredient.recipe]}
-                        key={ingredient.name}
-                      >
+                        key={ingredient.name}>
                         {ingredient.name}
                       </option>
                     );
@@ -192,8 +185,7 @@ function PantryForm() {
                             <button
                               type="button"
                               onClick={() => handleDelete(pantry_item.id)}
-                              className="delete-button"
-                            >
+                              className="delete-button">
                               Delete
                             </button>
                           </td>
