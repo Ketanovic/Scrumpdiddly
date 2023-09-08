@@ -17,7 +17,7 @@ export const Register = (props) => {
 
         const json = JSON.stringify(data)
         console.log(json)
-        const url = "http://localhost:8000/api/accounts/"
+        const url = `${process.env.REACT_APP_API_HOST}/api/accounts/`;
         const fetchConfig ={
             method: "post",
             body: json,
