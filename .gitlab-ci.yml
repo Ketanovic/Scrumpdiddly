@@ -1,29 +1,29 @@
-# services:
-#   - docker:dind
+services:
+  - docker:dind
 
-# stages:
-#   - test
+stages:
+  - test
 #   - build
 #   - deploy
 
 # Run flake8 to check for code quality
-# lint-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - pip install flake8
-#     - flake8 api
+lint-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 api
 
 # # Run the unit tests
-# api-unit-tests-job:
-#   image: python:3-bullseye
-#   stage: test
-#   needs:
-#     - lint-test-job
-#   script:
-#     - cd api
-#     - pip install -r requirements.txt
-#     - python -m pytest
+api-unit-tests-job:
+  image: python:3-bullseye
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd api
+    - pip install -r requirements.txt
+    - python -m pytest
 
 # # Build API Image:
 # build-api-image:
