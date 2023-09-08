@@ -2,6 +2,8 @@ import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+
+
 function PantryForm() {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
@@ -15,7 +17,7 @@ function PantryForm() {
   const navigate = useNavigate();
 
   async function fetchIngredients() {
-    const response = await fetch("http://localhost:8000/api/ingredients/");
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/ingredients/`);
     if (response.ok) {
       const data = await response.json();
       setIngredients(Object.values(data.ingredients));
@@ -24,7 +26,7 @@ function PantryForm() {
   }
 
   const fetchUserData = async () => {
-    const response = await fetch("http://localhost:8000/token", {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
       credentials: "include",
     });
     if (response.ok) {
@@ -35,7 +37,7 @@ function PantryForm() {
   async function fetchPantry(userId) {
     fetchUserData();
     try {
-      const response = await fetch("http://localhost:8000/api/pantry_item/", {
+      const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/pantry_item/`, {
         credentials: "include",
       });
 
@@ -73,7 +75,7 @@ function PantryForm() {
       recipes: value2,
       user_id: userId,
     };
-    const url = "http://localhost:8000/api/pantry_item/";
+    const url = `${process.env.REACT_APP_API_HOST}/api/pantry_item/`;
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(data),
@@ -95,7 +97,7 @@ function PantryForm() {
   };
 
   const handleDelete = async (_id) => {
-    const url = `http://localhost:8000/api/pantry_item/${_id}`;
+    const url = `${process.env.REACT_APP_API_HOST}/api/pantry_item/${_id}`;
     const fetchConfig = {
       method: "DELETE",
       headers: {

@@ -6,7 +6,7 @@ function MainPage() {
   const [username, setUsername] = useState("");
 
   const fetchUserData = async () => {
-    const response = await fetch("http://localhost:8000/token", {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
       credentials: "include",
     });
     if (response.ok) {
@@ -25,13 +25,13 @@ return (
   <div className='center page-wrap'>
     <div className='bg-img'>
       <img src={scrumdiddly} className='logo' />
-      <p className="lead mb-4">
+      <h1 className="lead mb-4" style={{fontSize: '25px', padding:'10px', color: 'rgba(249, 248, 245, 0.8)', display: 'inline-block'}}>
         The premiere solution for making dinner at home easier!
-      </p>
+      </h1>
       {!loggedIn &&
-        <h1>Hello! Welcome To Scrumdiddly!</h1>}
+        <h1 style={{padding:'10px', color:'rgba(247, 244, 236, 0.8)', display: 'inline-block'}}>Welcome To Scrumdiddly!</h1>}
       {loggedIn &&
-       <h1>Hello, {username}! Welcome To Scrumdiddly!</h1>}
+       <h1 style={{padding:'10px', color: 'rgba(247, 244, 236, 0.8)', display: 'inline-block'}}>Hello, {username}! Welcome To Scrumdiddly!</h1>}
     </div>
   </div>
 );

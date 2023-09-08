@@ -7,7 +7,7 @@ export default function ListRecipes() {
   const [displayedRecipes, setDisplayedRecipes] = useState([]);
 
   const fetchRecipes = async () => {
-    const url = "http://localhost:8000/api/recipes";
+    const url = `${process.env.REACT_APP_API_HOST}/api/recipes`;
     const response = await fetch(url);
     if (response.ok) {
       const json = await response.json();

@@ -8,7 +8,7 @@ export default function RecipeSearch() {
   const [recipeId, setRecipeId] = useState([]);
 
   const fetchUserData = async () => {
-    const response = await fetch("http://localhost:8000/token", {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
       credentials: "include",
     });
     if (response.ok) {
@@ -20,7 +20,7 @@ export default function RecipeSearch() {
   async function fetchPantry(userId) {
     fetchUserData();
     try {
-      const response = await fetch("http://localhost:8000/api/pantry_item/", {
+      const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/pantry_item/`, {
         credentials: "include",
       });
 
@@ -70,13 +70,14 @@ export default function RecipeSearch() {
     setRecList(recipeList.slice(0, 25));
   }
 
-  const fetchRecipes = async () => {
-    const url = "http://localhost:8000/api/recipes";
+    let tempList = recipeList.slice(0, 15);
+
+    const url = `${process.env.REACT_APP_API_HOST}/api/recipes`;
     const response = await fetch(url);
     if (response.ok) {
       const json = await response.json();
       setRecipeId(json.recipes);
-      for (let pantryRecipe of recList) {
+      for (let pantryRecipe of tempList) {
         for (let recipe of json.recipes) {
           if (pantryRecipe[0] === recipe.name.toUpperCase()) {
             pantryRecipe.push(recipe.id);
@@ -84,7 +85,9 @@ export default function RecipeSearch() {
         }
       }
     }
-  };
+    setRecList(tempList)
+  }
+
 
   useEffect(() => {
     fetchPantryRecipes();
@@ -92,9 +95,7 @@ export default function RecipeSearch() {
   useEffect(() => {
     fetchPantry(userId);
   }, [userId]);
-  useEffect(() => {
-    fetchRecipes();
-  }, [recList]);
+
 
   return (
     <div className="row page-wrap">
@@ -133,7 +134,7 @@ export default function RecipeSearch() {
                 </thead>
                 <tbody>
                   {recList.map((recipe_item) => {
-                    console.log(recipe_item);
+
                     return (
                       <tr key={recipe_item}>
                         <td>

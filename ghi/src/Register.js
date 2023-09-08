@@ -17,7 +17,7 @@ export const Register = (props) => {
 
         const json = JSON.stringify(data)
         console.log(json)
-        const url = "http://localhost:8000/api/accounts/"
+        const url = `${process.env.REACT_APP_API_HOST}/api/accounts/`;
         const fetchConfig ={
             method: "post",
             body: json,
@@ -70,7 +70,7 @@ const handlePassChange = (event) => {
                   onChange={handleNameChange}
                   className="form-control"
                   type="name"
-                  placeholder="Full Name"
+                  placeholder="Username"
                 />
               </div>
               <div className="m-3">
