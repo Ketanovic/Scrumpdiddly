@@ -3,12 +3,11 @@ import scrumdiddly from './scrumdiddly.png'
 import React, { useState, useEffect } from "react";
 
 function MainPage() {
-  const navigate = useNavigate()
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
 
   const fetchUserData = async () => {
-    const response = await fetch("http://localhost:8000/token", {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
       credentials: "include",
     });
     if (response.ok && response != null) {
