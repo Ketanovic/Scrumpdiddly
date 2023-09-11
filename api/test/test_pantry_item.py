@@ -4,8 +4,12 @@ from main import app
 from queries.pantry_item import PantryItemQueries
 from pydantic import BaseModel
 from authenticator import authenticator
+import os
+
 
 client = TestClient(app)
+
+SIGNING_KEY = "SDF4S5374GS75FSD"
 
 
 class UserOut(BaseModel):
@@ -41,6 +45,7 @@ class FakePantryItemQueries:
 
 
 def test_list_pantry_items():
+    print(os.environ)
     app.dependency_overrides[
         authenticator.get_current_account_data
     ] = fake_get_current_account_data
@@ -65,6 +70,7 @@ def test_list_pantry_items():
 def test_create_pantry_item():
     app.dependency_overrides[PantryItemQueries] = FakePantryItemQueries
     pantry = {"name": "string", "recipes": ["string"], "user_id": "string"}
+
     res = client.post("/api/pantry_item", json=pantry)
     data = res.json()
     assert res.status_code == 200
