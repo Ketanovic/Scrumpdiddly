@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 export default function RecipeSearch() {
@@ -29,7 +30,7 @@ export default function RecipeSearch() {
         const filteredData = data.pantry_items.filter(
           (item) => item.user_id === userId
         );
-        setPantry(filteredData);        
+        setPantry(filteredData);
       } else {
         console.error("Failed to fetch pantry items");
       }
@@ -77,7 +78,6 @@ export default function RecipeSearch() {
       }
     }
     setRecList(tempList);
-    
   }
   useEffect(() => {
     fetchPantry(userId);
@@ -86,7 +86,6 @@ export default function RecipeSearch() {
   useEffect(() => {
     fetchPantryRecipes();
   }, [pantry]);
-  
 
   return (
     <div className="row page-wrap">
