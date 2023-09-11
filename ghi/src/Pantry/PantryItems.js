@@ -91,7 +91,8 @@ function PantryForm() {
       const response = await fetch(url, fetchConfig);
       if (response.ok) {
         setError("");
-        fetchPantry(userId);
+        const data2 = await response.json()
+        data.id = data2.id 
         const newPantry = [...pantry];
         newPantry.push(data);
         setPantry(newPantry);
