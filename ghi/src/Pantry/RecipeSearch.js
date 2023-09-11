@@ -4,7 +4,8 @@ export default function RecipeSearch() {
   const [pantry, setPantry] = useState([]);
   const [recList, setRecList] = useState([]);
   const [userId, setUserId] = useState("");
-  const fetchUserData = async () => {
+
+  async function fetchUserData() {
     const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
       credentials: "include",
     });
@@ -13,6 +14,7 @@ export default function RecipeSearch() {
       setUserId(data.account.id);
     }
   };
+  
   async function fetchPantry() {
     try {
       const response = await fetch(
@@ -77,6 +79,7 @@ export default function RecipeSearch() {
   }
   useEffect(() => {
     fetchPantryRecipes();
+    fetchUserData();
     fetchPantry();
   }, [pantry],[]);
 

@@ -23,7 +23,7 @@ function PantryForm() {
     }
   }
 
-  const fetchUserData = async () => {
+  async function fetchUserData async (){
     const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
       credentials: "include",
     });
@@ -120,6 +120,7 @@ function PantryForm() {
 
   useEffect(() => {
     fetchPantry();
+    fetchUserData();
     fetchIngredients();
   },[]);
 
