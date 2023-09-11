@@ -191,7 +191,6 @@ function PantryForm() {
                       return (
                         <tr key={pantry_item.name}>
                           <td>{pantry_item.name}</td>
-                          <td>{pantry_item.id}</td>
                           <td>
                             <button
                               type="button"
