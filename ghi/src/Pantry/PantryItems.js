@@ -168,7 +168,7 @@ function PantryForm() {
                   id="ingredients"
                   className="dropdown"
                 >
-                  <option value="">Choose an Ingredient</option>
+                  <option value="" selected="true" disabled="disabled">Choose an Ingredient</option>
                   {filter.map((ingredient) => {
                     return (
                       <option
