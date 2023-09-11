@@ -79,8 +79,8 @@ export default function RecipeSearch() {
   useEffect(() => {
     fetchPantryRecipes();
     fetchPantry(userId);
-  }, [pantry],[userId]);
-  
+  }, [pantry, userId]);
+
   return (
     <div className="row page-wrap">
       <div className="row">
