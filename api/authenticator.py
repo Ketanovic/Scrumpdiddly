@@ -28,4 +28,4 @@ class MyAuthenticator(Authenticator):
         return account.username, AccountOut(**account.dict())
 
 
-authenticator = MyAuthenticator(os.environ["8561AEF9223AD68F607B7EDD6636E123"])
+authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
