@@ -7,15 +7,14 @@ import MainPage from "./MainPage.js";
 import RecipeSearch from "./Pantry/RecipeSearch";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./Login-Register/LoginForm.js";
-import { Register} from "./Login-Register/Register.js";
-import RecipeDetailPage from "./Recipes/RecipeDetail.js"
+import { Register } from "./Login-Register/Register.js";
+import RecipeDetailPage from "./Recipes/RecipeDetail.js";
 import ListRecipes from "./Recipes/Recipes.js";
-
 
 function App() {
   return (
-    <AuthProvider baseUrl= {process.env.REACT_APP_API_HOST}>
-      <BrowserRouter >
+    <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
+      <BrowserRouter>
         <Nav />
         <div className="container">
           <Routes>

@@ -29,10 +29,8 @@ async def create_account(
             detail="Account with that username is already taken",
         )
     form = AccountForm(
-        username=info.username,
-        email=info.email,
-        password=info.password
-            )
+        username=info.username, email=info.email, password=info.password
+    )
     token = await authenticator.login(response, request, form, queries)
     return AccountToken(account=account, **token.dict())
 

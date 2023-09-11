@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function ListRecipes() {
   const [recipes, setRecipes] = useState([]);
@@ -14,12 +14,14 @@ export default function ListRecipes() {
       setRecipes(json.recipes);
       setDisplayedRecipes(json.recipes);
     }
-  }
+  };
 
   const handleSearch = () => {
-    const filteredRecipes = recipes.filter(rec => rec.name.toLowerCase().includes(searchRecipe.toLowerCase()));
+    const filteredRecipes = recipes.filter((rec) =>
+      rec.name.toLowerCase().includes(searchRecipe.toLowerCase())
+    );
     setDisplayedRecipes(filteredRecipes);
-  }
+  };
 
   useEffect(() => {
     fetchRecipes();
@@ -28,8 +30,12 @@ export default function ListRecipes() {
   return (
     <div className="page-wrap">
       <form
-        onSubmit={(e) => { e.preventDefault(); handleSearch(); }}
-        className="form-inline my-2 my-lg-0">
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSearch();
+        }}
+        className="form-inline my-2 my-lg-0"
+      >
         <input
           className="form-control mr-sm-2"
           type="search"
@@ -37,7 +43,7 @@ export default function ListRecipes() {
           value={searchRecipe}
           onChange={(e) => setSearchRecipe(e.target.value)}
           aria-label="Search"
-          />
+        />
         <button
           onClick={handleSearch}
           className="btn btn-success"
@@ -55,9 +61,13 @@ export default function ListRecipes() {
                 <div className="title-card">
                   <h5 className="card-title text-truncate">{rec.name}</h5>
                 </div>
-                <p className="card-text">{rec.area} {rec.category}</p>
+                <p className="card-text">
+                  {rec.area} {rec.category}
+                </p>
                 <Link to={`/recipes/${encodeURIComponent(rec.id)}`}>
-                  <button className="btn btn-block rec-button mt-auto">Check it out!</button>
+                  <button className="btn btn-block rec-button mt-auto">
+                    Check it out!
+                  </button>
                 </Link>
               </div>
             </div>

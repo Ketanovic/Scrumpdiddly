@@ -36,10 +36,13 @@ function PantryForm() {
     fetchUserData();
     try {
       const response = await fetch(
+        
         `${process.env.REACT_APP_API_HOST}/api/pantry_item/`,
+       
         {
-          credentials: "include",
-        }
+            credentials: "include",
+          }
+      
       );
 
       if (response.ok) {
@@ -149,9 +152,13 @@ function PantryForm() {
                     className="form-control w-75"
                   />
                   &nbsp;&nbsp;&nbsp;
+                  />
+                  &nbsp;&nbsp;&nbsp;
                   <button
                     onClick={handleSearch}
                     type="button"
+                    className="button"
+                  >
                     className="button"
                   >
                     Search
@@ -171,6 +178,8 @@ function PantryForm() {
                     return (
                       <option
                         value={[ingredient.name, ingredient.recipe]}
+                        key={ingredient.name}
+                      >
                         key={ingredient.name}
                       >
                         {ingredient.name}
