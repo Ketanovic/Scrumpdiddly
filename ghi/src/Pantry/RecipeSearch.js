@@ -13,8 +13,7 @@ export default function RecipeSearch() {
       setUserId(data.account.id);
     }
   };
-  async function fetchPantry(userId) {
-    fetchUserData();
+  async function fetchPantry() {
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_HOST}/api/pantry_item/`,
@@ -78,9 +77,9 @@ export default function RecipeSearch() {
   }
   useEffect(() => {
     fetchPantryRecipes();
-    fetchPantry(userId);
-  }, [pantry],[userId]);
-  
+    fetchPantry();
+  }, [pantry],[]);
+
   return (
     <div className="row page-wrap">
       <div className="row">

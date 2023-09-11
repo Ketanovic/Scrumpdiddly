@@ -32,8 +32,7 @@ function PantryForm() {
       setUserId(data.account.id);
     }
   };
-  async function fetchPantry(userId) {
-    fetchUserData();
+  async function fetchPantry() {
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_HOST}/api/pantry_item/`,
@@ -92,7 +91,7 @@ function PantryForm() {
       if (response.ok) {
         setError("");
         const data2 = await response.json()
-        data.id = data2.id 
+        data.id = data2.id
         const newPantry = [...pantry];
         newPantry.push(data);
         setPantry(newPantry);
@@ -120,10 +119,10 @@ function PantryForm() {
   };
 
   useEffect(() => {
-    fetchPantry(userId);
-    fetchIngredients();    
-  },[userId]);
- 
+    fetchPantry();
+    fetchIngredients();
+  },[]);
+
 
   if (token === null) {
     navigate("/login");
