@@ -24,7 +24,7 @@ function MainPage() {
   return (
     <div className="center page-wrap">
       <div className="bg-img">
-        <img src={scrumdiddly} className="logo" />
+        <img src={scrumdiddly} className="logo" alt="a nice logo" />
         <h1
           className="lead mb-4"
           style={{

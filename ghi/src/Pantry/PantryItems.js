@@ -75,7 +75,7 @@ function PantryForm() {
       recipes: splitValue,
       user_id: userId,
     };
-    if (pantry.some((e) => e.name == data.name)) {
+    if (pantry.some((e) => e.name === data.name)) {
       setError("Item already in pantry");
     } else {
       const url = `${process.env.REACT_APP_API_HOST}/api/pantry_item/`;
@@ -120,11 +120,10 @@ function PantryForm() {
   };
 
   useEffect(() => {
-    fetchIngredients();
-  }, []);
-  useEffect(() => {
     fetchPantry(userId);
-  }, [userId]);
+    fetchIngredients();    
+  },[userId]);
+ 
 
   if (token === null) {
     navigate("/login");

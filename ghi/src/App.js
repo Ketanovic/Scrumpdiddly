@@ -1,5 +1,5 @@
 import "./CSS/App.css";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import React from "react";
 import PantryForm from "./Pantry/PantryItems";
 import Nav from "./Nav.js";

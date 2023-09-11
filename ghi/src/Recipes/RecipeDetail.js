@@ -25,7 +25,7 @@ export default function RecipeDetailPage() {
 
   useEffect(() => {
     fetchSingleRecipe();
-  }, []);
+  });
 
   return (
     <div className="page-wrap container">

@@ -25,12 +25,11 @@ function Nav() {
   };
 
   const handleLogout = async () => {
-    logout();
-    {
-      localStorage.clear();
-      setLoggedIn(false);
-      //this location replace was needed for the page to register a sign out ask Riley or Dario
-    }
+    logout();    
+    localStorage.clear();
+    setLoggedIn(false);
+    //this location replace was needed for the page to register a sign out ask Riley or Dario
+    
     setTimeout(function () {
       window.location.replace("/");
     }, 1000);
@@ -44,7 +43,7 @@ function Nav() {
     <nav className="navbar navbar-expand-lg position-fixed">
       <div className="container-fluid">
         <NavLink className="navbar-brand link" to="/">
-          <img src={scrump} />
+          <img src={scrump} alt="another pretty logo" />
         </NavLink>
         <button
           className="navbar-toggler"
@@ -58,6 +57,7 @@ function Nav() {
           <img
             src={require("./CSS/Images/menu.png")}
             className="navbar-toggle-icon toggle-button"
+            alt="the blurred background"
           />
         </button>
         <div
