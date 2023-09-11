@@ -9,6 +9,7 @@ function PantryForm() {
   const [pantry, setPantry] = useState([]);
   const { token } = useAuthContext();
   const [userId, setUserId] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   async function fetchIngredients() {
@@ -36,6 +37,7 @@ function PantryForm() {
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_HOST}/api/pantry_item/`,
+
         {
           credentials: "include",
         }
@@ -73,23 +75,29 @@ function PantryForm() {
       recipes: splitValue,
       user_id: userId,
     };
-    const url = `${process.env.REACT_APP_API_HOST}/api/pantry_item/`;
-    const fetchConfig = {
-      method: "post",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    const response = await fetch(url, fetchConfig);
-    if (response.ok) {
-      const newPantry = [...pantry];
-      newPantry.push(data);
-      setPantry(newPantry);
+    if (pantry.some((e) => e.name == data.name)) {
+      setError("Item already in pantry");
     } else {
-      console.error(response);
+      const url = `${process.env.REACT_APP_API_HOST}/api/pantry_item/`;
+      const fetchConfig = {
+        method: "post",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await fetch(url, fetchConfig);
+      if (response.ok) {
+        setError("");
+        fetchPantry(userId);
+        const newPantry = [...pantry];
+        newPantry.push(data);
+        setPantry(newPantry);
+      } else {
+        console.error(response);
+      }
     }
   };
 
@@ -125,6 +133,7 @@ function PantryForm() {
         <div className="mb-3 form-bg offset-3 col-6 py-3">
           <div className="mx-3">
             <h1>Create a Pantry Item</h1>
+            <p>{error}</p>
             <form
               onSubmit={handleSubmit}
               id="create-ingredient-form"
@@ -182,6 +191,7 @@ function PantryForm() {
                       return (
                         <tr key={pantry_item.name}>
                           <td>{pantry_item.name}</td>
+                          <td>{pantry_item.id}</td>
                           <td>
                             <button
                               type="button"
