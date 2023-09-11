@@ -4,7 +4,6 @@ from main import app
 from queries.pantry_item import PantryItemQueries
 from pydantic import BaseModel
 from authenticator import authenticator
-from fastapi import Depends
 
 
 client = TestClient(app)
