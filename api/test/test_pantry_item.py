@@ -34,11 +34,14 @@ class FakePantryItemQueries:
                 "id": "string",
                 "user_id": "string"
             }]
+    
+    def delete(self, pantry_item_id: str):
+        return True
+
 
 
 def test_list_pantry_items():
-    app.dependency_overrides
-    [authenticator.get_current_account_data] = fake_get_current_account_data
+    app.dependency_overrides[authenticator.get_current_account_data] = fake_get_current_account_data
     headers = {"Authorization": "Bearer your_access_token_here"}
     app.dependency_overrides[PantryItemQueries] = FakePantryItemQueries
     res = client.get("/api/pantry_item", headers=headers)
@@ -65,3 +68,10 @@ def test_create_pantry_item():
         "id": "string",
         "user_id": "string"
         }
+
+def test_delete_pantry_item():
+    app.dependency_overrides[PantryItemQueries] = FakePantryItemQueries
+    response = client.delete("/api/pantry_item/{pantry_item_id}")
+    data = response.json()
+    assert response.status_code == 200
+    assert data == {"status": True}
