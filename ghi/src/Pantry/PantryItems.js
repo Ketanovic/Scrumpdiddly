@@ -122,7 +122,7 @@ function PantryForm() {
   useEffect(() => {
     fetchPantry(userId);
     fetchIngredients();    
-  },[userId]);
+  });
  
 
   if (token === null) {
