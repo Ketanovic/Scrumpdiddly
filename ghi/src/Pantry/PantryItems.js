@@ -91,8 +91,8 @@ function PantryForm() {
       const response = await fetch(url, fetchConfig);
       if (response.ok) {
         setError("");
-        const data2 = await response.json();
-        data.id = data2.id;
+        const data2 = await response.json()
+        data.id = data2.id 
         const newPantry = [...pantry];
         newPantry.push(data);
         setPantry(newPantry);
@@ -121,8 +121,9 @@ function PantryForm() {
 
   useEffect(() => {
     fetchPantry(userId);
-    fetchIngredients();
-  }, [userId, fetchPantry]);
+    fetchIngredients();    
+  },[userId]);
+ 
 
   if (token === null) {
     navigate("/login");
@@ -166,9 +167,7 @@ function PantryForm() {
                   id="ingredients"
                   className="dropdown"
                 >
-                  <option value="" selected="true" disabled="disabled">
-                    Choose an Ingredient
-                  </option>
+                  <option value="" selected="true" disabled="disabled">Choose an Ingredient</option>
                   {filter.map((ingredient) => {
                     return (
                       <option
