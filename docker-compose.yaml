@@ -24,7 +24,7 @@ services:
   fastapi:
     environment:
       CORS_HOST: http://localhost:3000
-      SIGNING_KEY: ${SIGNING_KEY}
+      SIGNING_KEY: 8561AEF9223AD68F607B7EDD6636E123
       DATABASE_URL: mongodb://example_user:secret@mongo
     build:
       context: api
