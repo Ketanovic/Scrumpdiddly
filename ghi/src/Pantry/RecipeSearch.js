@@ -4,6 +4,7 @@ export default function RecipeSearch() {
   const [pantry, setPantry] = useState([]);
   const [recList, setRecList] = useState([]);
   const [userId, setUserId] = useState("");
+
   const fetchUserData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
       credentials: "include",
@@ -13,8 +14,9 @@ export default function RecipeSearch() {
       setUserId(data.account.id);
     }
   };
+  fetchUserData();
+
   async function fetchPantry(userId) {
-    fetchUserData();
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_HOST}/api/pantry_item/`,
@@ -27,7 +29,7 @@ export default function RecipeSearch() {
         const filteredData = data.pantry_items.filter(
           (item) => item.user_id === userId
         );
-        setPantry(filteredData);
+        setPantry(filteredData);        
       } else {
         console.error("Failed to fetch pantry items");
       }
@@ -75,12 +77,17 @@ export default function RecipeSearch() {
       }
     }
     setRecList(tempList);
+    
   }
   useEffect(() => {
-    fetchPantryRecipes();
     fetchPantry(userId);
-  }, [pantry, userId]);
+  }, [userId]);
+
+  useEffect(() => {
+    fetchPantryRecipes();
+  }, [pantry]);
   
+
   return (
     <div className="row page-wrap">
       <div className="row">
