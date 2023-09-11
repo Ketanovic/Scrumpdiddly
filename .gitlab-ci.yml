@@ -20,6 +20,8 @@ api-unit-tests-job:
   stage: test
   needs:
     - lint-test-job
+  variables:
+    SIGNING_KEY: "DOESSOMETHING"
   script:
     - cd api
     - pip install -r requirements.txt
