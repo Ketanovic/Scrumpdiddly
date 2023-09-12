@@ -1,4 +1,3 @@
-
 from pymongo import MongoClient
 import os
 from models import AccountIn, AccountOutWithHashedPassword

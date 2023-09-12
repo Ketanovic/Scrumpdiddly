@@ -14,7 +14,6 @@ class DuplicateIngredientError(ValueError):
 
 
 class IngredientQueries:
-
     @property
     def collection(self):
         return db["ingredients"]
@@ -26,15 +25,14 @@ class IngredientQueries:
             try:
                 self.collection.insert_one(ingredients)
             except DuplicateKeyError:
-                print("duplicate key error caught")
                 pass
 
         else:
             if ingredients["recipe"][0] not in dup["recipe"]:
                 self.collection.update_one(
                     {"name": ingredients["name"]},
-                    {'$push': {"recipe": ingredients["recipe"][0]}},
-                    )
+                    {"$push": {"recipe": ingredients["recipe"][0]}},
+                )
 
     def find_all(self):
         results = []

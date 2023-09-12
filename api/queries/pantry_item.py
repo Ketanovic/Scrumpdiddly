@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 import os
 from models import PantryItemIn, PantryItemOut
+from bson.objectid import ObjectId
+
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 client = MongoClient(DATABASE_URL)
@@ -18,7 +20,6 @@ class PantryItemQueries:
 
     def create(self, pantry_item_in: PantryItemIn) -> PantryItemOut:
         pantry = pantry_item_in.dict()
-        print(pantry)
         self.collection.insert_one(pantry)
         pantry["id"] = str(pantry["_id"])
         return pantry
@@ -29,3 +30,7 @@ class PantryItemQueries:
             pantry["id"] = str(pantry["_id"])
             results.append(pantry)
         return results
+
+    def delete(self, pantry_item_id: str):
+        result = self.collection.delete_one({"_id": ObjectId(pantry_item_id)})
+        return result.deleted_count > 0

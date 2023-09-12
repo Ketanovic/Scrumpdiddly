@@ -10,31 +10,25 @@ class AccountForm(BaseModel):
 
 class AccountIn(BaseModel):
     username: str
+    email: str
     password: str
 
 
 class AccountOut(BaseModel):
     id: str
     username: str
+    email: str
 
 
 class AccountOutWithHashedPassword(BaseModel):
     id: str
     username: str
     hashed_password: str
+    email: str
 
 
 class AccountToken(Token):
     account: AccountOut
-
-
-class RecipeForm(BaseModel):
-    name: str
-    category: str
-    area: str
-    instructions: str
-    ingredients: dict
-    # thumbnail: str
 
 
 class RecipeIn(BaseModel):
@@ -43,40 +37,47 @@ class RecipeIn(BaseModel):
     area: str
     instructions: str
     ingredients: dict
-    # thumbnail: str
+    thumbnail: str
 
 
 class RecipeOut(RecipeIn):
-    # id: str
     name: str
     category: str
     area: str
     instructions: str
     ingredients: dict
-    # thumbnail: str
+    thumbnail: str
+
+
+class RecipeOutList(RecipeIn):
+    id: str
+    name: str
+    category: str
+    area: str
+    instructions: str
+    ingredients: dict
+    thumbnail: str
 
 
 class Recipes(BaseModel):
-    recipes: List[RecipeOut]
+    recipes: List[RecipeOutList]
 
 
 class RecipeName(BaseModel):
     name: str
 
 
-class RecipeNameForm(BaseModel):
-    name: str
-
-
 class PantryItemIn(BaseModel):
     name: str
     recipes: List
+    user_id: str
 
 
 class PantryItemOut(PantryItemIn):
     id: str
     name: str
     recipes: List
+    user_id: str
 
 
 class PantryItems(BaseModel):
@@ -94,3 +95,7 @@ class IngredientOut(IngredientIn):
 
 class Ingredients(BaseModel):
     ingredients: List[IngredientOut]
+
+
+class DeleteStatus(BaseModel):
+    status: bool

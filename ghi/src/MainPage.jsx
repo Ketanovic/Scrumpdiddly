@@ -1,16 +1,66 @@
 import Search from "./Search";
 import ListRecipes from "./Recipes/Recipes";
+import scrumdiddly from "./CSS/Images/scrumdiddly.png";
+import React, { useState, useEffect } from "react";
 
 function MainPage() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+
+  const fetchUserData = async () => {
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}/token`, {
+      credentials: "include",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      if (data !== null) {
+        setUsername(data.account.username);
+        setLoggedIn(true);
+      }
+    }
+  };
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
   return (
-    <div className="px-4 py-5 my-5 text-center">
-      <h1 className="display-5 fw-bold">Scrummy</h1>
-      <div className="col-lg-6 mx-auto">
-        <p className="lead mb-4">
-          The premiere solution for making dinner at home easier!
-        </p>
-        <Search />
-        <ListRecipes />
+    <div className="center page-wrap">
+      <div className="bg-img">
+        <img src={scrumdiddly} className="logo" alt="a nice logo" />
+        <h1>
+          className="lead mb-4" style=
+          {{
+            fontSize: "25px",
+            padding: "10px",
+            color: "rgba(249, 248, 245, 0.8)",
+            display: "inline-block",
+          }}
+          <p>The premiere solution for making dinner at home easier! </p>
+          <Search />
+          <ListRecipes />
+        </h1>
+        {!loggedIn && (
+          <h2
+            style={{
+              padding: "10px",
+              color: "rgba(247, 244, 236, 0.8)",
+              display: "inline-block",
+            }}
+          >
+            Welcome To Scrumdiddly!
+          </h2>
+        )}
+        {loggedIn && (
+          <h3
+            style={{
+              padding: "10px",
+              color: "rgba(247, 244, 236, 0.8)",
+              display: "inline-block",
+            }}
+          >
+            Hello, {username}! Welcome To Scrumdiddly!
+          </h3>
+        )}
       </div>
     </div>
   );

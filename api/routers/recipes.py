@@ -1,25 +1,24 @@
 from fastapi import APIRouter, Depends
-from models import Recipes, RecipeIn, RecipeName
+from models import Recipes, RecipeIn, RecipeName, RecipeOut
 from queries.recipes import RecipeQueries
 
 router = APIRouter()
 
 
-@router.get("/api/recipes/$recipes.name")
-def get_recipe(
+@router.post("/api/recipes/search", response_model=RecipeOut)
+def search_recipe(
     info: RecipeName,
     queries: RecipeQueries = Depends(),
 ):
-    recipe = queries.get(info)
+    return queries.get(info)
 
-    return {
-        "name": recipe["name"],
-        "category": recipe["category"],
-        "area": recipe["area"],
-        "instructions": recipe["instructions"],
-        "ingredients": recipe["ingredients"],
-        # "thumbnail": recipe["thumbnail"],
-    }
+
+@router.get("/api/recipes/{id}", response_model=RecipeOut)
+def get_recipe(
+    id: str,
+    queries: RecipeQueries = Depends(),
+):
+    return queries.get_one(id=id)
 
 
 @router.get("/api/recipes", response_model=Recipes)
