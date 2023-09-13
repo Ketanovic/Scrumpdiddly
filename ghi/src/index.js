@@ -1,8 +1,49 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
+
 import "./CSS/index.css";
 import App from "./App";
+import MainPage from "./MainPage";
+import PantryForm from "./Pantry/PantryItems";
+import LoginForm from "./Login-Register/LoginForm";
+import ListRecipes from "./Recipes/Recipes";
+import RecipeSearch from "./Pantry/RecipeSearch";
+import RecipeDetailPage from "./Recipes/RecipeDetail";
+import Register from "./Login-Register/Register";
 import reportWebVitals from "./reportWebVitals";
+import { store } from "./app/store";
+import { createBrowserRouter } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <MainPage />,
+      },
+      {
+        path: "/pantry",
+        element: <PantryForm />,
+      },
+      {
+        path: "/login",
+        element: <LoginForm />,
+      },
+      {
+        path: "/recipes",
+        element: <ListRecipes />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
