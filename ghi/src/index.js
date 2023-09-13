@@ -5,21 +5,22 @@ import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 
 import "./CSS/index.css";
 import App from "./App";
-import MainPage from "./MainPage";
-import PantryForm from "./Pantry/PantryItems";
+import ErrorNotification from "./ErrorNotification";
 import LoginForm from "./Login-Register/LoginForm";
 import ListRecipes from "./Recipes/Recipes";
+import MainPage from "./MainPage";
+import PantryForm from "./Pantry/PantryItems";
 import RecipeSearch from "./Pantry/RecipeSearch";
 import RecipeDetailPage from "./Recipes/RecipeDetail";
 import Register from "./Login-Register/Register";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./app/store";
-import { createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     element: <App />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorNotification />,
     children: [
       {
         path: "/",
@@ -48,7 +49,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 

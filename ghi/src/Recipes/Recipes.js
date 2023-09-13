@@ -1,59 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Search from "../Components/Search";
+import { useGetAllRecipesQuery } from "../app/apiSlice";
 
 export default function ListRecipes() {
-  const [recipes, setRecipes] = useState([]);
-  const [searchRecipe, setSearchRecipe] = useState("");
-  const [displayedRecipes, setDisplayedRecipes] = useState([]);
+  const searchCriteria = useSelector((state) => state.search.value);
+  const { recipes, error, isLoading } = useGetAllRecipesQuery();
+  console.log({ recipes, error, isLoading });
 
-  const fetchRecipes = async () => {
-    const url = `${process.env.REACT_APP_API_HOST}/api/recipes`;
-    const response = await fetch(url);
-    if (response.ok) {
-      const json = await response.json();
-      setRecipes(json.recipes);
-      setDisplayedRecipes(json.recipes);
-    }
+  if (isLoading) return <>Loading...</>
+
+  // const [recipes, setRecipes] = useState([]);
+
+  // const fetchRecipes = async () => {
+  //   const url = `${process.env.REACT_APP_API_HOST}/api/recipes`;
+  //   const response = await fetch(url);
+  //   if (response.ok) {
+  //     const json = await response.json();
+  //     setRecipes(json.recipes);
+  //   }
+  // };
+
+  const filteredRecipes = () => {
+    if (searchCriteria)
+      return recipes.filter((recipe) =>
+        recipe.name.toLowerCase().includes(searchCriteria.toLowerCase())
+      );
+    return recipes;
   };
 
-  const handleSearch = () => {
-    const filteredRecipes = recipes.filter((rec) =>
-      rec.name.toLowerCase().includes(searchRecipe.toLowerCase())
-    );
-    setDisplayedRecipes(filteredRecipes);
-  };
-
-  useEffect(() => {
-    fetchRecipes();
-  }, []);
+  // useEffect(() => {
+  //   fetchRecipes();
+  // }, []);
 
   return (
     <div className="page-wrap">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSearch();
-        }}
-        className="form-inline my-2 my-lg-0"
-      >
-        <input
-          className="form-control mr-sm-2"
-          type="search"
-          placeholder="Search your favorite dish"
-          value={searchRecipe}
-          onChange={(e) => setSearchRecipe(e.target.value)}
-          aria-label="Search"
-        />
-        <button
-          onClick={handleSearch}
-          className="btn btn-success"
-          type="button"
-        >
-          Search Recipe!
-        </button>
-      </form>
+      <h1>
+        Recipes for{" "}
+        {searchCriteria && (
+          <small className="text-body-secondary">"{searchCriteria}"</small>
+        )}
+      </h1>
+      <Search />
       <div className="row pt-3 ease-up">
-        {displayedRecipes.map((rec) => (
+        {filteredRecipes().map((rec) => (
           <div className="col-4 pb-3 card-glow" key={rec.id}>
             <div className="small-card card-deck mb-3 text-center">
               <img src={rec.thumbnail} className="card-img-top" alt="..." />

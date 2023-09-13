@@ -1,5 +1,6 @@
 import scrumdiddly from "./CSS/Images/scrumdiddly.png";
 import React, { useState, useEffect } from "react";
+import Search from "./Components/Search";
 
 function MainPage() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -58,6 +59,7 @@ function MainPage() {
             Hello, {username}! Welcome To Scrumdiddly!
           </h1>
         )}
+        <Search />
       </div>
     </div>
   );

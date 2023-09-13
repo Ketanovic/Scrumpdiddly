@@ -2,14 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     value: ''
-}
+};
 
 export const searchSlice = createSlice({
     name: 'search',
-    initialState: {
-        value: ''
-    },
-    reducers : {
+    initialState,
+    reducers: {
         reset: (state) => {
             state.value = '';
         },
