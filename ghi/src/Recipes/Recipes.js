@@ -6,33 +6,18 @@ import { useGetAllRecipesQuery } from "../app/apiSlice";
 
 export default function ListRecipes() {
   const searchCriteria = useSelector((state) => state.search.value);
-  const { recipes, error, isLoading } = useGetAllRecipesQuery();
-  console.log({ recipes, error, isLoading });
+  const { data, error, isLoading } = useGetAllRecipesQuery();
+  console.log({ data, error, isLoading });
 
   if (isLoading) return <>Loading...</>
 
-  // const [recipes, setRecipes] = useState([]);
-
-  // const fetchRecipes = async () => {
-  //   const url = `${process.env.REACT_APP_API_HOST}/api/recipes`;
-  //   const response = await fetch(url);
-  //   if (response.ok) {
-  //     const json = await response.json();
-  //     setRecipes(json.recipes);
-  //   }
-  // };
-
   const filteredRecipes = () => {
     if (searchCriteria)
-      return recipes.filter((recipe) =>
-        recipe.name.toLowerCase().includes(searchCriteria.toLowerCase())
+      return data.recipes.filter((recipe) =>
+          recipe.name.toLowerCase().includes(searchCriteria.toLowerCase())
       );
-    return recipes;
+    return data.recipes;
   };
-
-  // useEffect(() => {
-  //   fetchRecipes();
-  // }, []);
 
   return (
     <div className="page-wrap">
