@@ -18,41 +18,45 @@ import { store } from "./app/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
-  {
-    element: <App />,
-    errorElement: <ErrorNotification />,
-    children: [
-      {
-        path: "/",
-        element: <MainPage />,
-      },
-      {
-        path: "/pantry",
-        element: <PantryForm />,
-      },
-      {
-        path: "/login",
-        element: <LoginForm />,
-      },
-      {
-        path: "/recipes",
-        element: <ListRecipes />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      }
-    ],
-  },
+    {
+        element: <App />,
+        errorElement: <ErrorNotification />,
+        children: [
+            {
+                path: "/",
+                element: <MainPage />,
+            },
+            {
+                path: "/pantry",
+                element: <PantryForm />,
+            },
+            {
+                path: "/login",
+                element: <LoginForm />,
+            },
+            {
+                path: "/recipes",
+                element: <ListRecipes />,
+            },
+            {
+                path: "/recipes/:id",
+                element: <RecipeDetailPage />,
+            },
+            {
+                path: "/register",
+                element: <Register />,
+            },
+        ],
+    },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <Provider store={store}>
+            <RouterProvider router={router} />
+        </Provider>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

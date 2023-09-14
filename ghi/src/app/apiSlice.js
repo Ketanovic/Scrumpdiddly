@@ -1,16 +1,20 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const scrumpApi = createApi({
-  reducerPath: "scrumpApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_HOST,
-  }),
-  endpoints: (builder) => ({
-    getAllRecipes: builder.query({
-      query: () => "/api/recipes"
-    //   transformResponse: (response) => response.recipe,
+    reducerPath: "scrumpApi",
+    baseQuery: fetchBaseQuery({
+        baseUrl: process.env.REACT_APP_API_HOST,
     }),
-  }),
+    endpoints: (builder) => ({
+        getAllRecipes: builder.query({
+            query: () => "/api/recipes",
+            credentials: "include",
+        }),
+        getRecipe: builder.query({
+            query: (id) => `/api/recipes/${id}`,
+            credentials: "include",
+        }),
+    }),
 });
 
-export const { useGetAllRecipesQuery } = scrumpApi
+export const { useGetAllRecipesQuery, useGetRecipeQuery } = scrumpApi;

@@ -36,7 +36,7 @@ class RecipeIn(BaseModel):
     category: str
     area: str
     instructions: str
-    ingredients: dict
+    ingredients: list
     thumbnail: str
 
 
@@ -45,7 +45,7 @@ class RecipeOut(RecipeIn):
     category: str
     area: str
     instructions: str
-    ingredients: dict
+    ingredients: list
     thumbnail: str
 
 
@@ -55,7 +55,7 @@ class RecipeOutList(RecipeIn):
     category: str
     area: str
     instructions: str
-    ingredients: dict
+    ingredients: list
     thumbnail: str
 
 

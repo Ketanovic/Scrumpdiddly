@@ -40,11 +40,10 @@ def list_all_recipes():
         data = response.json()
         recipe_list = data["meals"]
         for recipe in recipe_list:
-            ing_dict = {}
             for j in range(len(recipe_list)):
-                ing_list = []
-                measure_list = []
+                ingredients = []
                 for i in range(1, 21):
+                    temp = []
                     recipe = data["meals"][j]
                     if (
                         data["meals"][j]["strIngredient" + str(i)] != ""
@@ -54,7 +53,7 @@ def list_all_recipes():
                         recipe_ingredients = data["meals"][j][
                             "strIngredient" + str(i)
                         ]
-                        ing_list.append(recipe_ingredients)
+                        temp.append(recipe_ingredients)
                     if (
                         data["meals"][j]["strMeasure" + str(i)] != ""
                         and data["meals"][j]["strMeasure" + str(i)] is not None
@@ -62,17 +61,16 @@ def list_all_recipes():
                         recipe_measurements = data["meals"][j][
                             "strMeasure" + str(i)
                         ]
-                        measure_list.append(recipe_measurements)
-                ing_dict = {
-                    ing_list: measure_list
-                    for ing_list, measure_list in zip(ing_list, measure_list)
-                }
+                        temp.append(recipe_measurements)
+                    if temp != [] and temp != [" "]:
+                        ingredients.append(temp)
+                print(ingredients)
                 encoder = {
                     "name": recipe["strMeal"].replace(",", " "),
                     "category": recipe["strCategory"],
                     "area": recipe["strArea"],
                     "instructions": recipe["strInstructions"],
-                    "ingredients": ing_dict,
+                    "ingredients": ingredients,
                     "thumbnail": recipe["strMealThumb"],
                 }
                 queries.create(encoder)
