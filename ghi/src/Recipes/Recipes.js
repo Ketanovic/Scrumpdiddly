@@ -6,7 +6,7 @@ import { useGetAllRecipesQuery } from "../app/apiSlice";
 
 export default function ListRecipes() {
     const searchCriteria = useSelector((state) => state.search.value);
-    const { data, error, isLoading } = useGetAllRecipesQuery();
+    const { data, isLoading } = useGetAllRecipesQuery();
     console.log(data);
 
     if (isLoading) return <>Loading...</>;
