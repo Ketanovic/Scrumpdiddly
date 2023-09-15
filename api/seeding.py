@@ -64,7 +64,6 @@ def list_all_recipes():
                         temp.append(recipe_measurements)
                     if temp != [] and temp != [" "]:
                         ingredients.append(temp)
-                print(ingredients)
                 encoder = {
                     "name": recipe["strMeal"].replace(",", " "),
                     "category": recipe["strCategory"],

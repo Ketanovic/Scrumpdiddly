@@ -37,6 +37,8 @@ body {
 
 .page-wrap {
     padding-top: 100px;
+    padding-left: 150px;
+    padding-right: 150px;
 }
 
 .link {
@@ -100,6 +102,17 @@ nav {
     text-overflow: ellipsis;
 }
 
+.card-fluid {
+    transition: 0.5s;
+    padding: 4px;
+    border-radius: 10px;
+    max-width: 400px;
+    height: 100%;
+    background-color: white;
+    text-overflow: ellipsis;
+    color: black;
+}
+
 .small-card:hover {
     box-shadow: 0 0 10px 2px #4b2f22;
 }
@@ -118,6 +131,10 @@ nav {
 
 div.title-card {
     height: 50px;
+}
+
+.col-md-6 {
+    padding-top: 100px;
 }
 
 img.toggle-button {

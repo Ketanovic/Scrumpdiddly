@@ -19,8 +19,8 @@ export default function RecipeDetailPage() {
                 </div>
                 <div className="col-md-6">
                     <div
-                        className="card"
-                        style={{ maxHeight: "800px", overflowY: "auto" }}
+                        className="card-fluid"
+                        style={{ maxHeight: "900px", overflowY: "auto" }}
                     >
                         <div className="card-body">
                             <h2 className="card-title">{data.name}</h2>
